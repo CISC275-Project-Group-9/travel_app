@@ -7,7 +7,7 @@ function App(): JSX.Element {
             <header className="App-header">
                 <h1>ExplorerPro</h1>
             </header>
-            <p>Team: Benita Abraham</p>
+            <p>Team: Benita Abraham, Sneha Nangelimalil</p>
             <hr></hr>
         </div>
     );
