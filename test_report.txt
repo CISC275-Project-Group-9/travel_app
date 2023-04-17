@@ -26,7 +26,7 @@ FAIL src/App.test.tsx
             [36m</h1>[39m
           [36m</header>[39m
           [36m<p>[39m
-            [0mTeam: Benita Abraham, Sneha Nangelimalil, Joey Casagrande, Samantha Glover, and Christian Munley[0m
+            [0mTeam 9: Benita Abraham, Sneha Nangelimalil, Joey Casagrande, Samantha Glover, and Christian Munley[0m
           [36m</p>[39m
           [36m<hr />[39m
         [36m</div>[39m
@@ -64,5 +64,5 @@ All files       |     100 |      100 |     100 |     100 |
 Test Suites: 1 failed, 1 total
 Tests:       1 failed, 1 total
 Snapshots:   0 total
-Time:        1.49 s
+Time:        1.539 s
 Ran all test suites.
