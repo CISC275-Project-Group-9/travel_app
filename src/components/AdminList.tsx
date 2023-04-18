@@ -2,9 +2,23 @@
 import React, { useState } from "react";
 import { Destination } from "../interfaces/destination";
 
-export function UserList(): JSX.Element {
-    const [centralList] = useState<Destination[]>([]);
+export function AdminList(): JSX.Element {
+    const [centralList, setCentralList] = useState<Destination[]>([]);
     const [itinerary, setItinerary] = useState<Destination[]>([]);
+
+    function newDestinationToList(newDestination: Destination) {
+        if (!centralList.includes(newDestination)) {
+            const newCentralList = [...centralList, newDestination];
+            setCentralList(newCentralList);
+        }
+    }
+
+    function reviewDestination(Destination: Destination) {
+        if (centralList.includes(Destination)) {
+            const newCentralList = [...centralList, Destination];
+            setCentralList(newCentralList);
+        }
+    }
 
     function addDestination(newDestination: Destination) {
         if (!itinerary.includes(newDestination)) {
@@ -29,9 +43,9 @@ export function UserList(): JSX.Element {
 
     return (
         <div>
-            <h3>Itinerary:</h3>
+            <h3>Destinations:</h3>
             <ul>
-                {itinerary.map((destination: Destination) => (
+                {centralList.map((destination: Destination) => (
                     <li key={destination.id}>{destination.name}</li>
                 ))}
             </ul>
