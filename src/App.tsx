@@ -9,6 +9,9 @@ function App(): JSX.Element {
                 <h1>ExplorerPro</h1>
             </header>
             <p>Team 9: Benita Abraham, Sneha Nangelimalil, Joey Casagrande, Samantha Glover, and Christian Munley</p>
+            <hr></hr>
+            <RoleDropdown></RoleDropdown>
+            <hr></hr>
         </div>
     );
 }
