@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/travel_app/static/css/main.ff006b85.css",
-    "main.js": "/travel_app/static/js/main.543ab4d7.js",
+    "main.js": "/travel_app/static/js/main.cb6abf17.js",
     "static/js/787.4ef7427d.chunk.js": "/travel_app/static/js/787.4ef7427d.chunk.js",
     "index.html": "/travel_app/index.html",
     "main.ff006b85.css.map": "/travel_app/static/css/main.ff006b85.css.map",
-    "main.543ab4d7.js.map": "/travel_app/static/js/main.543ab4d7.js.map",
+    "main.cb6abf17.js.map": "/travel_app/static/js/main.cb6abf17.js.map",
     "787.4ef7427d.chunk.js.map": "/travel_app/static/js/787.4ef7427d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ff006b85.css",
-    "static/js/main.543ab4d7.js"
+    "static/js/main.cb6abf17.js"
   ]
 }
