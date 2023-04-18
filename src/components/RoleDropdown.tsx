@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { UserList } from "./UserList";
 import { Form } from 'react-bootstrap';
 
 export function RoleDropdown(): JSX.Element{
@@ -24,7 +25,7 @@ export function RoleDropdown(): JSX.Element{
                     ))}
                 </Form.Select>
             </Form.Group>
-            {roleType === "Basic" ? <span>This is for basic</span> : null}
+            {roleType === "Basic" ? <UserList></UserList> : null}
             {roleType === "Staff" ? <span>This is for staff</span> : null}
             {roleType === "Faculty" ? <span>This is for faculty</span> : null}
         </div>
