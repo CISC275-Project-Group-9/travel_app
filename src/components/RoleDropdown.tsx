@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { UserList } from "./UserList";
-import { Form } from 'react-bootstrap';
+import { Form } from "react-bootstrap";
+import { AdminList } from "./AdminList";
+import { SuperList } from "./SuperList";
 
-export function RoleDropdown(): JSX.Element{
-    const ROLES = [
-        "Basic",
-        "Staff",
-        "Faculty"
-    ];
+export function RoleDropdown(): JSX.Element {
+    const ROLES = ["Basic", "Staff", "Faculty"];
     const DEFAULT_ROLE = ROLES[0];
     const [roleType, setRoleType] = useState<string>(DEFAULT_ROLE);
-    function changeRole(event: React.ChangeEvent<HTMLSelectElement>){
+    function changeRole(event: React.ChangeEvent<HTMLSelectElement>) {
         setRoleType(event.target.value);
     }
     return (
@@ -26,8 +24,8 @@ export function RoleDropdown(): JSX.Element{
                 </Form.Select>
             </Form.Group>
             {roleType === "Basic" ? <UserList></UserList> : null}
-            {roleType === "Staff" ? <span>This is for staff</span> : null}
-            {roleType === "Faculty" ? <span>This is for faculty</span> : null}
+            {roleType === "Staff" ? <AdminList></AdminList> : null}
+            {roleType === "Faculty" ? <SuperList></SuperList> : null}
         </div>
     );
 }

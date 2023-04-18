@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { Destination } from "../interfaces/destination";
 
@@ -42,7 +43,7 @@ export function AdminList(): JSX.Element {
 
     return (
         <div>
-            <h3>Destinations</h3>
+            <h3>Destinations:</h3>
             <ul>
                 {centralList.map((destination: Destination) => (
                     <li key={destination.id}>{destination.name}</li>

@@ -13,7 +13,7 @@ export function UserList(): JSX.Element {
     }
 
     function removeDestination(destination: Destination) {
-        if (itinerary.includes(destination)){
+        if (itinerary.includes(destination)) {
             const id = destination.id;
             const newItinerary = itinerary.filter(
                 (dest: Destination): boolean => dest.id !== id
@@ -28,9 +28,11 @@ export function UserList(): JSX.Element {
 
     return (
         <div>
-            <h3>Itinerary</h3>
+            <h3>Itinerary:</h3>
             <ul>
-                { itinerary.map((destination: Destination) => <li key={destination.id}>{destination.name}</li>) }
+                {itinerary.map((destination: Destination) => (
+                    <li key={destination.id}>{destination.name}</li>
+                ))}
             </ul>
         </div>
     );
