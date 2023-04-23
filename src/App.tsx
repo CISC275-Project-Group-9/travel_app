@@ -1,6 +1,7 @@
 import React from "react";
 import { RoleDropdown } from "./components/RoleDropdown";
-import "./App.css";
+import "./App.css"; 
+import AL from './images/AL.jpeg'
 
 function App(): JSX.Element {
     return (
@@ -12,6 +13,7 @@ function App(): JSX.Element {
             <hr></hr>
             <RoleDropdown></RoleDropdown>
             <hr></hr>
+            <img src={AL} alt="Alabama"></img>
         </div>
     );
 }
