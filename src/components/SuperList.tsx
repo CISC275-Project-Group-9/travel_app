@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { Destination } from "../interfaces/destination";
+import { Button } from "react-bootstrap";
 
 export function SuperList(): JSX.Element {
     const [centralList, setCentralList] = useState<Destination[]>([]);
@@ -49,6 +50,7 @@ export function SuperList(): JSX.Element {
     return (
         <div>
             <h3>Destinations:</h3>
+            <Button>Add Destination</Button>
             <ul>
                 {centralList.map((destination: Destination) => (
                     <li key={destination.id}>{destination.name}</li>
@@ -58,24 +60,17 @@ export function SuperList(): JSX.Element {
                 rel="stylesheet"
                 href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
             ></link>
-            <body>
-                <div className="container">
-                    <div className="panel-group">
-                        <div className="panel panel-default">
-                            <div className="panel-heading">Location</div>
-                            <div className="panel-body">Activities</div>
-                        </div>
-                        <div className="panel panel-default">
-                            <div className="panel-heading">Location</div>
-                            <div className="panel-body">Activities</div>
-                        </div>
-                        <div className="panel panel-default">
-                            <div className="panel-heading">Location</div>
-                            <div className="panel-body">Actvities</div>
-                        </div>
-                    </div>
+            <div className="panel-group">
+                <div className="panel panel-default">
+                    <div className="panel-body">Location</div>
                 </div>
-            </body>
+                <div className="panel panel-default">
+                    <div className="panel-body">Location</div>
+                </div>
+                <div className="panel panel-default">
+                    <div className="panel-body">Location</div>
+                </div>
+            </div>
         </div>
     );
 }
