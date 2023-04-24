@@ -1,0 +1,324 @@
+{
+    "Destinations": [
+        {
+            "id": 1,
+            "name": "USS Alabama Battleship Memorial Park",
+            "description": "A Veterans memorial in Alabama - unique, historic and educational memorial, offering tours of the battleship, a submarine, and various other military equipment.",
+            "image": "AL.jpeg",
+            "location": "AL",
+            "days": 0,
+            "cost": 18,
+            "activities": ["Cathedral of Immaculate Conception", "Mobile Museum", "Conde-Charlotte", "Dauphin street"]
+        },
+        {
+            "id": 2,
+            "name": "Crystal Bridges Museum of American Art",
+            "description": "American art and exhibitions. Stunning architecture. 120 acres of Ozark nature. General admission is always free.",
+            "image": "AR.jpeg",
+            "location": "AR",
+            "days": 0,
+            "cost": 0,
+            "activities": ["Peel Botanical Gardens", "Buckyball", "Walmart museum", "The momentary"]
+        },
+        {
+            "id": 3,
+            "name": "Grand Canyon National Park",
+            "description": "Arizona part with hiking trails, red rock canyons and beautiful views.",
+            "image": "AZ.jpeg",
+            "location": "AZ",
+            "days": 0,
+            "cost": 6,
+            "activities": ["Hopi house", "lookout studio", "Yavapai museum", "Grand Canyon village"]
+        },
+        {
+            "id": 4,
+            "name": "Disneyland",
+            "description": "Theme park featuring rides, shows, shops and numerous other attractions.",
+            "image": "CA.jpeg",
+            "location": "CA",
+            "days": 0,
+            "cost": 104,
+            "activities": ["Knotts Berry Farm, Marconi Museum, skate park, Angel Stadium"]
+        },
+        {
+            "id": 5,
+            "name": "Rocky Mountain National Park",
+            "description": "Colorado park with mountains, lakes, wildlife",
+            "image": "CO.jpeg",
+            "location": "CO",
+            "days": 0,
+            "cost": 30,
+            "activities": ["Emerald lake trail", "Alberta falls", "Sprague lake", "Bear lake"]
+        },
+        {
+            "id": 6,
+            "name": "Foxwoods Resort Casino",
+            "description": "One of the largest casinos in the world",
+            "image": "CT.jpeg",
+            "location": "CT",
+            "days": 0,
+            "cost": 0,
+            "activities": ["Norwich Spa", "Spellbound escapes", "Mashantucket Museum", "USS Nautilus"]
+        },
+        {
+            "id": 7,
+            "name": "Rehobeth Beach",
+            "description": "Boardwalk and beach, rides",
+            "image": "DE.jpeg",
+            "location": "DE",
+            "days": 0,
+            "cost": 0,
+            "activities": ["Boardwalk", "Funland", "gordons pond", "the beach"]
+        },
+        {
+            "id": 8,
+            "name": "Miami",
+            "description": "Southern Floridian city with heavy latin-american culture",
+            "image": "FL.jpeg",
+            "location": "FL",
+            "days": 0,
+            "cost": 0,
+            "activities": ["Miami Beach", "Boardwalk", "Everglades Tour", "City Mall"]
+        },
+        {
+            "id": 9,
+            "name": "Georgia Aquarium",
+            "description": "One of the largest aquariums, located in Atlanta.",
+            "image": "GA.jpeg",
+            "location": "GA",
+            "days": 0,
+            "cost": 48,
+            "activities": ["World of Coke", "Piedmont park", "CFB HOF", "State Farm arena"]
+        },
+        {
+            "id": 10,
+            "name": "The Amana Colonies",
+            "description": "Colonies functioning like they're from the past, made up of seven villages.",
+            "image": "IA.jpeg",
+            "location": "IA",
+            "days": 0,
+            "cost": 0,
+            "activities": ["Clock shop", "Furniture makers", "Brau Haus", "Smokehouse"]
+        },
+        {
+            "id": 11,
+            "name": "Sun Valley Resort",
+            "description": "Ski resort, hiking, mountain biking in the summer, golfing, among the worlds' first ski resort ",
+            "image": "ID.jpeg",
+            "location": "ID",
+            "days": 0,
+            "cost": 231,
+            "activities": ["River tour", "Hot springs", "Alpaca ranch", "potato farm"]
+        },
+        {
+            "id": 12,
+            "name": "Chicago",
+            "description": "Largest city in Illinois, with iconic landmarks and many activities",
+            "image": "IL.jpeg",
+            "location": "IL",
+            "days": 0,
+            "cost": 0,
+            "activities": ["The Willis Tower", "The Bean", "RnR McDonalds"]
+        },
+        {
+            "id": 13,
+            "name": "Indianapolis Speedway",
+            "description": "Home to the famous Indy 500 race",
+            "image": "IN.jpeg",
+            "location": "IN",
+            "days": 0,
+            "cost": 80,
+            "activities": ["Monument circle", "war museum", "Motor speedway museum", "Indy 500"]
+        },
+        {
+            "id": 14,
+            "name": "Wichita",
+            "description": "Largest city in Kansas, home of aviation and entrepeneurship",
+            "image": "KS.jpeg",
+            "location": "KS",
+            "days": 0,
+            "cost": 0,
+            "activities": ["Exploration place", "Sedgwick county zoo", "Botanica"]
+        },
+        {
+            "id": 15,
+            "name": "Churchill Downs",
+            "description": "Home to the Kentucky Derby, one of the most famous horse races in the world, and offers tours and exhibits year-round.",
+            "image": "KY.jpeg",
+            "location": "KY",
+            "days": 0,
+            "cost": 10,
+            "activities": ["Horse Races", "Mammoth Cave park", "Louisville Slugger Factory"]
+        },
+        {
+            "id": 16,
+            "name": "New Orelans",
+            "description": "Famous and largest city in Louisiana, roots in Creole tradition",
+            "image": "LA.jpeg",
+            "location": "LA",
+            "days": 0,
+            "cost": 0,
+            "activities": ["Franch Quarter", "The National WWII Museum", "Jackson Square"]
+        },
+        {
+            "id": 17,
+            "name": "Cape Cod",
+            "description": "Vacation destination with beaches, towns, hiking, etc",
+            "image": "MA.jpeg",
+            "location": "MA",
+            "days": 0,
+            "cost": 0,
+            "activities": ["Heritage Museum", "Pilgrim Monument", "Sandwich Glass Museum"]
+        },
+        {
+            "id": 18,
+            "name": "Assateague Island National Seashore",
+            "description": "Protected area on atlantic coast home to wild horses",
+            "image": "MD.jpeg",
+            "location": "MD",
+            "days": 0,
+            "cost": 10,
+            "activities": ["Frontier Town", "Assateague Lighthouse", "Wildlife refuge"]
+        },
+        {
+            "id": 19,
+            "name": "Camden",
+            "description": "Seaside village known for a beautiful harbor, shops, hiking trails, mountains, and more.",
+            "image": "ME.jpeg",
+            "location": "ME",
+            "days": 0,
+            "cost": 0,
+            "activities": ["Megunticook Lake", "Opera House", "Whale Watching"]
+        },
+        {
+            "id": 20,
+            "name": "Frankenmuth",
+            "description": "A city known for bavarian-style architecture and tourist activites",
+            "image": "MI.jpeg",
+            "location": "MI",
+            "days": 0,
+            "cost": 0,
+            "activities": ["Cheese Haus", "Aerial Park", "Bavarian Belle Boat"]
+        },
+        {
+            "id": 21,
+            "name": "Minneapolis",
+            "description": "One of the MN twin-cities, right next to St.Paul",
+            "image": "MN.jpeg",
+            "location": "MN",
+            "days": 0,
+            "cost": 0,
+            "activities": ["Sculpture garden", "Guthrie theatre", "Minnehaha park", "MI institute of art"]
+        },
+        {
+            "id": 22,
+            "name": "St.Louis",
+            "description": "Missouri city right on the edge of the state",
+            "image": "MO.jpeg",
+            "location": "MO",
+            "days": 0,
+            "cost": 0,
+            "activities": ["The Arch", "Anheiser-Busch",  "Cardinal's Baseball game", "river boat tour"]
+        },
+        {
+            "id": 23,
+            "name": "Atlantic City Boardwalk",
+            "description": "4 mile boardwalk in new jersey that runs along the beach with a variety of entertainment options from rides and casinos to shops and restuarants.",
+            "image": "NJ.jpeg",
+            "location": "NJ",
+            "days": 0,
+            "cost": 0,
+            "activities": ["Casinos" , "Boardwalk", "Piers", "Hard Rock"]
+        },
+        {
+            "id": 24,
+            "name": "Las Vegas Strip",
+            "description": "A famous boulevard with iconic hotes, entertainment venues and casinos, with plenty of activities",
+            "image": "NV.jpeg",
+            "location": "NV",
+            "days": 0,
+            "cost": 0,
+            "activities": ["Grand canyon tour", "Casinos", "City tour", "Hoover dam"]
+        },
+        {
+            "id": 25,
+            "name": "Times Square",
+            "description": "The heart of new york city, a entertainment hub with shops, restuarants, theaters, and plenty of activtites",
+            "image": "NY.jpeg",
+            "location": "NY",
+            "days": 0,
+            "cost": 0,
+            "activities": ["Statue of Liberty", "Central park", "The Met", "Empire State Building"]
+        },
+        {
+            "id": 26,
+            "name": "Philadelphia",
+            "description": "One of the oldest and most historically significant cities in the US",
+            "image": "PA.jpeg",
+            "location": "PA",
+            "days": 0,
+            "cost": 0,
+            "activities": ["Art museum", "Liberty Bell", "Zoo", "Reading Terminal Market"]
+        },
+        {
+            "id": 27,
+            "name": "Myrtle Beach",
+            "description": "A popular vacation destination in South Carolina with miles of beaches, water sports, boardwalks and more.",
+            "image": "SC.jpeg",
+            "location": "SC",
+            "days": 0,
+            "cost": 0,
+            "activities": ["Beach broadway", "Ripley's aquarium", "Beach", "Wax museum"]
+        },
+        {
+            "id": 28,
+            "name": "Mount Rushmore",
+            "description": "A world-famous sculpture carved into a mountain, featuring the founding fathers of the USA.",
+            "image": "SD.jpeg",
+            "location": "SD",
+            "days": 0,
+            "cost": 0,
+            "activities": ["Badlands park", "Custer state park", "crazy horse memorial", "dinosaur park"]
+        },
+        {
+            "id": 29,
+            "name": "Nashville",
+            "description": "A city in tennessee popular for tourism, known as the 'Music City', offering a variety of attractions.",
+            "image": "TN.jpeg",
+            "location": "TN",
+            "days": 0,
+            "cost": 0,
+            "activities": ["Broadway", "Honky Tonks", "Hattie's Hot Chicken", "Grand Ole Opry"]
+        },
+        {
+            "id": 30,
+            "name": "Houston",
+            "description": "Texan-city with a wide variety of fun activities and experiences",
+            "image": "TX.jpeg",
+            "location": "TX",
+            "days": 0,
+            "cost": 0,
+            "activities": ["Space center", "science museum", "Astroworld", "Minute Maid Park (Baseball-Astros)"]
+        },
+        {
+            "id": 31,
+            "name": "The Space Needle",
+            "description": "An iconic observation tower in Seattle, Washington, offering panoramic views, along with dining options and tours.",
+            "image": "WA.jpeg",
+            "location": "WA",
+            "days": 0,
+            "cost": 37,
+            "activities": ["Museum of pop culture", "Pike place market", "Chihuly Garden and Glass", "great wheel"]
+        },
+        {
+            "id": 32,
+            "name": "Yellwostone National Park",
+            "description": "A vast and stunning natural wilderness area home to geysers, wildlife, and more.",
+            "image": "WY.jpeg",
+            "location": "WY",
+            "days": 0,
+            "cost": 35,
+            "activities": ["pictograph cave", "sluice boxes park", "hell creek park", "lone pine park"]
+        }
+    ]
+}
