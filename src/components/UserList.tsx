@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./UserList.css"; 
+import destinationsData from "../data/destinations.json";
 
 import {
   DragDropContext,
@@ -15,24 +16,37 @@ import {
   NotDraggingStyle
 } from "react-beautiful-dnd";
 
-interface Item {
-  id: string;
-  content: string;
-}
+const { DESTINATIONS }: Record<string, Destination[]> =
+    // Typecast the test data that we imported to be a record matching
+    //  strings to the question list
+    destinationsData as Record<string, Destination[]>;
 
-// fake data generator
-const getItems = (count: number): Item[] =>
-  Array.from({ length: count }, (v, k) => k).map(k => ({
-    id: `Destination-${k}`,
-    content: `Destination ${k}`
-  }));
+
+// interface Item {
+//   id: string;
+//   content: string;
+// }
+
+// // fake data generator
+// const getItems = (count: number): Item[] =>
+//   Array.from({ length: count }, (v, k) => k).map(k => ({
+//     id: `Destination-${k}`,
+//     content: `Destination ${k}`
+//   }));
+
+const usaStates: Destination[] = [
+  { location: "DE", name: "Delaware", description: "Dover", id: 1, days: 0, cost: 0, image: "", activities: [] },
+  { location: "MD", name: "Maryland", description: "Annapolis", id: 2, days: 0, cost: 0, image: "", activities: [] },
+  { location: "VA", name: "Virginia", description: "Richmond", id: 3, days: 0, cost: 0, image: "", activities: [] },
+  { location: "PA", name: "Pennsylvania", description: "Harrisburg", id: 4, days: 0, cost: 0, image: "", activities: [] }
+];
 
 // a little function to help us with reordering the result
 const reorder = (
-  list: Item[],
+  list: Destination[],
   startIndex: number,
   endIndex: number
-): Item[] => {
+): Destination[] => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
@@ -53,7 +67,7 @@ const getItemStyle = (
   borderRadius: 5,
 
   // change background colour if dragging
-  background: isDragging ? "#394867" : "#9BA4B5",
+  background: isDragging ? "#6699CC" : "#BDBDBD",
 
   // styles we need to apply on draggables
   ...draggableStyle
@@ -66,8 +80,9 @@ const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
 });
 
 const UserList = (): JSX.Element => {
-    const [centralList, setCentralList] = useState<Item[]>(getItems(5));
-    const [itinerary, setItinerary] = useState<Item[]>(getItems(5));
+    const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
+    const [itinerary, setItinerary] = useState<Destination[]>(DESTINATIONS.splice(0,4));
+    
   
    const onDragEnd = (result: DropResult): void => {
     // dropped outside the lists
@@ -96,7 +111,7 @@ const UserList = (): JSX.Element => {
         setItinerary(newItinerary);
 
         const newCentralList = centralList.filter(
-          (item: Item, index: number) => index !== sourceIndex
+          (item: Destination, index: number) => index !== sourceIndex
         );
         setCentralList(newCentralList);
       } else if (sourceList === "itinerary") {
@@ -105,25 +120,25 @@ const UserList = (): JSX.Element => {
         setCentralList(newCentralList);
 
         const newItinerary = itinerary.filter(
-          (item: Item, index: number) => index !== sourceIndex
+          (item: Destination, index: number) => index !== sourceIndex
         );
         setItinerary(newItinerary);
       }
     }
   };
   
-    function addDestination(newDestination: Item) {
+    function addDestination(newDestination: Destination) {
       if (!itinerary.includes(newDestination)) {
         const newItinerary = [...itinerary, newDestination];
         setItinerary(newItinerary);
       }
     }
   
-    function removeDestination(destination: Item) {
+    function removeDestination(destination: Destination) {
       if (itinerary.includes(destination)) {
         const id = destination.id;
         const newItinerary = itinerary.filter(
-          (dest: Item): boolean => dest.id !== id
+          (dest: Destination): boolean => dest.id !== id
         );
         setItinerary(newItinerary);
       }
@@ -139,7 +154,7 @@ const UserList = (): JSX.Element => {
           <Row>
             <Col>
               <h3>Destinations:</h3>
-              <DragDropContext onDragEnd={onDragEnd}>
+               <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId="droppable">
                   {(provided, snapshot): JSX.Element => (
                     <div
@@ -147,11 +162,11 @@ const UserList = (): JSX.Element => {
                       ref={provided.innerRef}
                       className="container"
                     >
-                      <div className="panel-group">
+                      <div className="panel-group">                        
                         {centralList.map((item, index) => (
                           <Draggable
                             key={item.id}
-                            draggableId={item.id}
+                            draggableId={String(item.id)}
                             index={index}
                           >
                             {(provided, snapshot): JSX.Element => (
@@ -165,10 +180,13 @@ const UserList = (): JSX.Element => {
                                 )}
                                 className="panel panel-default"
                               >
-                                <div className="panel-heading">
-                                  {item.content}
+                                <div>
+                                  <span style={{fontWeight: 'bold'}}>{item.name}</span>
+                                  
                                 </div>
-                                <div className="panel-body">Activities</div>
+                                
+                                <img src={require('../images/' + item.location + '.jpeg')} alt={item.location}></img>
+                                <div>Activities: {item.activities.join(", ")}</div>
                               </div>
                             )}
                           </Draggable>
@@ -179,10 +197,10 @@ const UserList = (): JSX.Element => {
                   )}
                 </Droppable>
               </DragDropContext>
-            </Col>
+            </Col> 
             <Col>
               <h3>My Itinerary:</h3>
-              <DragDropContext onDragEnd={onDragEnd}>
+               <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId="itinerary">
                   {(provided, snapshot): JSX.Element => (
                     <div
@@ -194,7 +212,7 @@ const UserList = (): JSX.Element => {
                         {itinerary.map((item, index) => (
                           <Draggable
                             key={item.id}
-                            draggableId={item.id}
+                            draggableId={String(item.id)}
                             index={index}
                           >
                             {(provided, snapshot): JSX.Element => (
@@ -208,10 +226,12 @@ const UserList = (): JSX.Element => {
                                 )}
                                 className="panel panel-default"
                               >
-                                <div className="panel-heading">
-                                  {item.content}
+                                <div>
+                                  <span style={{fontWeight: 'bold'}}>{item.name}</span>
                                 </div>
-                                <div className="panel-body">Activities</div>
+                                
+                                <img src={require('../images/' + item.location + '.jpeg')} alt={item.location}></img>
+                                <div>Activities: {item.activities.join(", ")}</div>
                               </div>
                             )}
                           </Draggable>
