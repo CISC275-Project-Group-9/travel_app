@@ -39,11 +39,11 @@ function App(): JSX.Element {
         <div className="App">
             <header className="App-header">
                 <h1>ExplorerPro</h1>
-            </header>
-            <p>
+                <p style={{fontSize: "16px" }}>
                 Team 9: Benita Abraham, Sneha Nangelimalil, Joey Casagrande,
                 Samantha Glover, and Christian Munley
             </p>
+            </header>
             <hr></hr>
             <RoleDropdown></RoleDropdown>
             <hr></hr>
