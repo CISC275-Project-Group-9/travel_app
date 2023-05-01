@@ -15,6 +15,7 @@ import {
   DropResult,
   NotDraggingStyle
 } from "react-beautiful-dnd";
+import { Form } from "react-bootstrap";
 
 const { DESTINATIONS }: Record<string, Destination[]> =
     // Typecast the test data that we imported to be a record matching
@@ -34,12 +35,6 @@ const { DESTINATIONS }: Record<string, Destination[]> =
 //     content: `Destination ${k}`
 //   }));
 
-const usaStates: Destination[] = [
-  { location: "DE", name: "Delaware", description: "Dover", id: 1, days: 0, cost: 0, image: "", activities: [] },
-  { location: "MD", name: "Maryland", description: "Annapolis", id: 2, days: 0, cost: 0, image: "", activities: [] },
-  { location: "VA", name: "Virginia", description: "Richmond", id: 3, days: 0, cost: 0, image: "", activities: [] },
-  { location: "PA", name: "Pennsylvania", description: "Harrisburg", id: 4, days: 0, cost: 0, image: "", activities: [] }
-];
 
 // a little function to help us with reordering the result
 const reorder = (
@@ -81,7 +76,8 @@ const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
 
 const UserList = (): JSX.Element => {
     const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
-    const [itinerary, setItinerary] = useState<Destination[]>(DESTINATIONS.splice(0,4));
+    const startItinerary: Destination[] = DESTINATIONS.splice(0,4)
+    const [itinerary, setItinerary] = useState<Destination[]>(startItinerary);
     
   
    const onDragEnd = (result: DropResult): void => {
@@ -147,6 +143,15 @@ const UserList = (): JSX.Element => {
     function clearItinerary() {
       setItinerary([]);
     }
+
+    function setDays(event: React.ChangeEvent<HTMLInputElement>, destId: number) {
+      const newItinerary = itinerary.map((destination: Destination): Destination => (
+        destination.id === destId) ? 
+        ({...destination, days: event.target.valueAsNumber}): 
+        {...destination}
+        );
+      setItinerary(newItinerary)
+    }
   
     return (
       <div>
@@ -180,13 +185,18 @@ const UserList = (): JSX.Element => {
                                 )}
                                 className="panel panel-default"
                               >
-                                <div>
-                                  <span style={{fontWeight: 'bold'}}>{item.name}</span>
-                                  
-                                </div>
+                                <Row>
+                                  <Col xs={5}>                                      
+                                      <img src={require('../images/' + item.image)} alt={item.location}></img>
+                                  </Col>
+                                  <Col xs={7}>
+                                    <span style={{fontWeight: 'bold', fontSize: 18, color: "#212A3E", display: "flex", justifyContent:'left', textAlign: "left"}}>{item.name}, {item.location}</span>
+                                    <span style={{display: "flex", justifyContent:'left', textAlign: "left", fontStyle: "italic"}}>{item.description}</span>
+                                    <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Activities: {item.activities.join(", ")}</span>
+                                    <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Cost: ${item.days}</span>
+                                  </Col>
+                                </Row>
                                 
-                                <img src={require('../images/' + item.location + '.jpeg')} alt={item.location}></img>
-                                <div>Activities: {item.activities.join(", ")}</div>
                               </div>
                             )}
                           </Draggable>
@@ -226,12 +236,31 @@ const UserList = (): JSX.Element => {
                                 )}
                                 className="panel panel-default"
                               >
-                                <div>
-                                  <span style={{fontWeight: 'bold'}}>{item.name}</span>
-                                </div>
-                                
-                                <img src={require('../images/' + item.location + '.jpeg')} alt={item.location}></img>
-                                <div>Activities: {item.activities.join(", ")}</div>
+                                <Row>
+                                  <Col xs={5}>                                      
+                                      <img src={require('../images/' + item.image)} alt={item.location}></img>
+                                  </Col>
+                                  <Col xs={7}>
+                                    <span style={{fontWeight: 'bold', fontSize: 18, color: "#212A3E", display: "flex", justifyContent:'left'}}>{item.name}, {item.location}</span>
+                                    <span style={{display: "flex", justifyContent:'left', textAlign: "left", fontStyle: "italic"}}>{item.description}</span>
+                                    <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Activities: {item.activities.join(", ")}</span>
+                                    <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Cost: ${item.cost}</span>
+                                    <Form.Group controlId="formChangeDuration">
+                                      <Form.Label  style={{display: "inline-block", float: "left", paddingRight: 10}}>Length of Stay: 
+                                      </Form.Label>
+                                      <Form.Control
+                                        style={{width: 70, height: 25}}
+                                        type="number"
+                                        defaultValue={item.days}
+                                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                          setDays(event, item.id)}
+                                      />
+                                    </Form.Group>
+                                  </Col>
+                                </Row>
+                                <Row>
+                                  
+                                </Row>
                               </div>
                             )}
                           </Draggable>
