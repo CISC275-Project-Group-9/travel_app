@@ -9,10 +9,6 @@ export function SuperList(): JSX.Element {
     const [itinerary, setItinerary] = useState<Destination[]>([]);
     const [userList, setUsers] = useState<Destination[]>([]);
 
-    function seeUsers() {
-        setUsers(userList);
-    }
-
     function newDestinationToList(newDestination: Destination) {
         if (!centralList.includes(newDestination)) {
             const newCentralList = [...centralList, newDestination];
@@ -51,8 +47,7 @@ export function SuperList(): JSX.Element {
     return (
         <div>
             <h3>Destinations:</h3>
-            <AddForm></AddForm>
-            <Button>Add Destination</Button>
+            <AddForm onSubmit={newDestinationToList}></AddForm>
             <ul>
                 {centralList.map((destination: Destination) => (
                     <li key={destination.id}>{destination.name}</li>
