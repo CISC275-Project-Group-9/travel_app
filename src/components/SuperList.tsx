@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Destination } from "../interfaces/destination";
 import { Button } from "react-bootstrap";
+import { AddForm } from "./AddForm";
 
 export function SuperList(): JSX.Element {
     const [centralList, setCentralList] = useState<Destination[]>([]);
@@ -50,6 +51,7 @@ export function SuperList(): JSX.Element {
     return (
         <div>
             <h3>Destinations:</h3>
+            <AddForm></AddForm>
             <Button>Add Destination</Button>
             <ul>
                 {centralList.map((destination: Destination) => (
