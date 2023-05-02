@@ -57,7 +57,7 @@ export function AddForm({
           Activities:
           <input
             type="text"
-            name="activity"
+            name="activities"
             value={destination.activities}
             onChange={handleChange}
           />
