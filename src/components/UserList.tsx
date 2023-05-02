@@ -61,7 +61,7 @@ const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
 
 const UserList = (): JSX.Element => {
     const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
-    const startItinerary: Destination[] = DESTINATIONS.splice(0,4)
+    const startItinerary: Destination[] = DESTINATIONS.splice(0,1)
     const [itinerary, setItinerary] = useState<Destination[]>(startItinerary);
     
    const onDragEnd = (result: DropResult): void => {
@@ -141,9 +141,9 @@ const UserList = (): JSX.Element => {
       <div>
         <Container>
           <Row>
-              <h3>Destinations:</h3>
                <DragDropContext onDragEnd={onDragEnd}>
                <Col>
+               <h3>Destinations:</h3>
                 <Droppable droppableId="central-list">
                   {(provided, snapshot): JSX.Element => (
                     <div

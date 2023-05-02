@@ -38,47 +38,12 @@ function App(): JSX.Element {
     return (
         <div className="App">
             <header className="App-header">
-                <h1>ExplorerPro</h1>
-                <p style={{fontSize: "16px" }}>
-                Team 9: Benita Abraham, Sneha Nangelimalil, Joey Casagrande,
-                Samantha Glover, and Christian Munley
-            </p>
+                <h1 className="title">ExplorerPro</h1>
             </header>
-            <hr></hr>
             <RoleDropdown></RoleDropdown>
-            <hr></hr>
-            {/* <img src={AL} alt="Alabama"></img>
-            <img src={AR} alt="Arkansas"></img>
-            <img src={AZ} alt="Arizona"></img>
-            <img src={CA} alt="California"></img>
-            <img src={CO} alt="Colorado"></img>
-            <img src={CT} alt="Connecticut"></img>
-            <img src={DE} alt="Delaware"></img>
-            <img src={FL} alt="Florida"></img>
-            <img src={GA} alt="Georgia"></img>
-            <img src={IA} alt="Iowa"></img>
-            <img src={ID} alt="Idaho"></img>
-            <img src={IL} alt="Illinois"></img>
-            <img src={IN} alt="Indiana"></img>
-            <img src={KS} alt="Kansas"></img>
-            <img src={KY} alt="Kentucky"></img>
-            <img src={LA} alt="Louisiana"></img>
-            <img src={MA} alt="Massachusetts"></img>
-            <img src={MD} alt="Maryland"></img>
-            <img src={ME} alt="Maine"></img>
-            <img src={MI} alt="Michigan"></img>
-            <img src={MN} alt="Minnesota"></img>
-            <img src={MO} alt="Missouri"></img>
-            <img src={NJ} alt="New Jersey"></img>
-            <img src={NV} alt="Nevada"></img>
-            <img src={NY} alt="New York"></img>
-            <img src={PA} alt="Pennsylvania"></img>
-            <img src={SC} alt="South Carolina"></img>
-            <img src={SD} alt="South Dakota"></img>
-            <img src={TN} alt="Tennessee"></img>
-            <img src={TX} alt="Texas"></img>
-            <img src={WA} alt="Washington"></img>
-            <img src={WY} alt="Wyoming"></img> */}
+            <footer className="App-footer">Team 9: Benita Abraham, Sneha Nangelimalil, Joey Casagrande,
+                Samantha Glover, and Christian Munley
+            </footer>
         </div>
     );
 }
