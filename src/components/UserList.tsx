@@ -61,8 +61,7 @@ const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
 
 const UserList = (): JSX.Element => {
     const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
-    const startItinerary: Destination[] = DESTINATIONS.splice(0,1)
-    const [itinerary, setItinerary] = useState<Destination[]>(startItinerary);
+    const [itinerary, setItinerary] = useState<Destination[]>([]);
     
    const onDragEnd = (result: DropResult): void => {
   
@@ -129,11 +128,11 @@ const UserList = (): JSX.Element => {
     }
 
     function setDays(event: React.ChangeEvent<HTMLInputElement>, destId: number) {
-      const newItinerary = itinerary.map((destination: Destination): Destination => (
-        destination.id === destId) ? 
-        ({...destination, days: event.target.valueAsNumber}): 
-        {...destination}
-        );
+      const newItinerary: Destination[] = [...itinerary];
+      const findTarget = itinerary.findIndex((destination: Destination): boolean => destination.id === destId);
+      const oldDest: Destination = {...newItinerary[findTarget]};
+      const newDest: Destination = {...oldDest, days: event.target.valueAsNumber};
+      newItinerary.splice(findTarget, 1, newDest);
       setItinerary(newItinerary)
     }
   
@@ -177,7 +176,7 @@ const UserList = (): JSX.Element => {
                                     <span style={{fontWeight: 'bold', fontSize: 18, color: "#212A3E", display: "flex", justifyContent:'left', textAlign: "left"}}>{item.name}, {item.location}</span>
                                     <span style={{display: "flex", justifyContent:'left', textAlign: "left", fontStyle: "italic"}}>{item.description}</span>
                                     <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Activities: {item.activities.join(", ")}</span>
-                                    <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Cost: ${item.days}</span>
+                                    <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Cost: ${item.cost}</span>
                                   </Col>
                                 </Row>
                                 
