@@ -15,33 +15,13 @@ import {
   DropResult,
   NotDraggingStyle
 } from "react-beautiful-dnd";
+import { Form } from "react-bootstrap";
 
 const { DESTINATIONS }: Record<string, Destination[]> =
     // Typecast the test data that we imported to be a record matching
     //  strings to the question list
     destinationsData as Record<string, Destination[]>;
 
-
-// interface Item {
-//   id: string;
-//   content: string;
-// }
-
-// // fake data generator
-// const getItems = (count: number): Item[] =>
-//   Array.from({ length: count }, (v, k) => k).map(k => ({
-//     id: `Destination-${k}`,
-//     content: `Destination ${k}`
-//   }));
-
-const usaStates: Destination[] = [
-  { location: "DE", name: "Delaware", description: "Dover", id: 1, days: 0, cost: 0, image: "", activities: [] },
-  { location: "MD", name: "Maryland", description: "Annapolis", id: 2, days: 0, cost: 0, image: "", activities: [] },
-  { location: "VA", name: "Virginia", description: "Richmond", id: 3, days: 0, cost: 0, image: "", activities: [] },
-  { location: "PA", name: "Pennsylvania", description: "Harrisburg", id: 4, days: 0, cost: 0, image: "", activities: [] }
-];
-
-// a little function to help us with reordering the result
 const reorder = (
   list: Destination[],
   startIndex: number,
@@ -81,50 +61,50 @@ const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
 
 const UserList = (): JSX.Element => {
     const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
-    const [itinerary, setItinerary] = useState<Destination[]>(DESTINATIONS.splice(0,4));
+    const startItinerary: Destination[] = DESTINATIONS.splice(0,4)
+    const [itinerary, setItinerary] = useState<Destination[]>(startItinerary);
     
-  
    const onDragEnd = (result: DropResult): void => {
-    // dropped outside the lists
-    if (!result.destination) {
-      return;
-    }
-
-    const sourceList = result.source.droppableId;
-    const destinationList = result.destination.droppableId;
-    const sourceIndex = result.source.index;
-    const destinationIndex = result.destination.index;
-
-    // dropped within the same list
-    if (sourceList === destinationList) {
-      if (sourceList === "droppable") {
-        const items = reorder(centralList, sourceIndex, destinationIndex);
-        setCentralList(items);
-      } else if (sourceList === "itinerary") {
-        const items = reorder(itinerary, sourceIndex, destinationIndex);
-        setItinerary(items);
+  
+      if (!result.destination) {
+        return;
       }
-    } else {
-      if (sourceList === "droppable") {
-        const draggedItem = centralList[sourceIndex];
-        const newItinerary = [...itinerary, draggedItem];
-        setItinerary(newItinerary);
-
-        const newCentralList = centralList.filter(
-          (item: Destination, index: number) => index !== sourceIndex
-        );
-        setCentralList(newCentralList);
-      } else if (sourceList === "itinerary") {
-        const draggedItem = itinerary[sourceIndex];
-        const newCentralList = [...centralList, draggedItem];
-        setCentralList(newCentralList);
-
-        const newItinerary = itinerary.filter(
-          (item: Destination, index: number) => index !== sourceIndex
-        );
-        setItinerary(newItinerary);
+      
+      if (result.destination.droppableId === result.source.droppableId) {
+        if (result.destination.droppableId === "central-list") {
+          const items = reorder(
+            centralList,
+            result.source.index,
+            result.destination.index
+          );
+          setCentralList(items);
+        } else if (result.destination.droppableId === "itinerary") {
+          const items = reorder(
+            itinerary,
+            result.source.index,
+            result.destination.index
+          );
+          setItinerary(items);
+        }
+      } else { // dropped in a different list
+        if (result.destination.droppableId === "itinerary") {
+          const item = centralList[result.source.index];
+          const newItinerary = [...itinerary]; 
+          newItinerary.splice(result.destination.index, 0, item);
+          setItinerary(newItinerary);
+          const newCentralList = [...centralList]; 
+          newCentralList.splice(result.source.index, 1);
+          setCentralList(newCentralList);
+        } else if (result.destination.droppableId === "central-list") {
+          const item = itinerary[result.source.index];
+          const newCentralList = [...centralList]; 
+          newCentralList.splice(result.destination.index, 0, item);
+          setCentralList(newCentralList);
+          const newItinerary = [...itinerary]; 
+          newItinerary.splice(result.source.index, 1);
+          setItinerary(newItinerary);
+        }
       }
-    }
   };
   
     function addDestination(newDestination: Destination) {
@@ -147,15 +127,24 @@ const UserList = (): JSX.Element => {
     function clearItinerary() {
       setItinerary([]);
     }
+
+    function setDays(event: React.ChangeEvent<HTMLInputElement>, destId: number) {
+      const newItinerary = itinerary.map((destination: Destination): Destination => (
+        destination.id === destId) ? 
+        ({...destination, days: event.target.valueAsNumber}): 
+        {...destination}
+        );
+      setItinerary(newItinerary)
+    }
   
     return (
       <div>
         <Container>
           <Row>
-            <Col>
               <h3>Destinations:</h3>
                <DragDropContext onDragEnd={onDragEnd}>
-                <Droppable droppableId="droppable">
+               <Col>
+                <Droppable droppableId="central-list">
                   {(provided, snapshot): JSX.Element => (
                     <div
                       {...provided.droppableProps}
@@ -180,13 +169,18 @@ const UserList = (): JSX.Element => {
                                 )}
                                 className="panel panel-default"
                               >
-                                <div>
-                                  <span style={{fontWeight: 'bold'}}>{item.name}</span>
-                                  
-                                </div>
+                                <Row>
+                                  <Col xs={5}>                                      
+                                      <img src={require('../images/' + item.image)} alt={item.location}></img>
+                                  </Col>
+                                  <Col xs={7}>
+                                    <span style={{fontWeight: 'bold', fontSize: 18, color: "#212A3E", display: "flex", justifyContent:'left', textAlign: "left"}}>{item.name}, {item.location}</span>
+                                    <span style={{display: "flex", justifyContent:'left', textAlign: "left", fontStyle: "italic"}}>{item.description}</span>
+                                    <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Activities: {item.activities.join(", ")}</span>
+                                    <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Cost: ${item.days}</span>
+                                  </Col>
+                                </Row>
                                 
-                                <img src={require('../images/' + item.location + '.jpeg')} alt={item.location}></img>
-                                <div>Activities: {item.activities.join(", ")}</div>
                               </div>
                             )}
                           </Draggable>
@@ -196,11 +190,9 @@ const UserList = (): JSX.Element => {
                     </div>
                   )}
                 </Droppable>
-              </DragDropContext>
             </Col> 
             <Col>
               <h3>My Itinerary:</h3>
-               <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId="itinerary">
                   {(provided, snapshot): JSX.Element => (
                     <div
@@ -226,12 +218,31 @@ const UserList = (): JSX.Element => {
                                 )}
                                 className="panel panel-default"
                               >
-                                <div>
-                                  <span style={{fontWeight: 'bold'}}>{item.name}</span>
-                                </div>
-                                
-                                <img src={require('../images/' + item.location + '.jpeg')} alt={item.location}></img>
-                                <div>Activities: {item.activities.join(", ")}</div>
+                                <Row>
+                                  <Col xs={5}>                                      
+                                      <img src={require('../images/' + item.image)} alt={item.location}></img>
+                                  </Col>
+                                  <Col xs={7}>
+                                    <span style={{fontWeight: 'bold', fontSize: 18, color: "#212A3E", display: "flex", justifyContent:'left'}}>{item.name}, {item.location}</span>
+                                    <span style={{display: "flex", justifyContent:'left', textAlign: "left", fontStyle: "italic"}}>{item.description}</span>
+                                    <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Activities: {item.activities.join(", ")}</span>
+                                    <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Cost: ${item.cost}</span>
+                                    <Form.Group controlId="formChangeDuration">
+                                      <Form.Label  style={{display: "inline-block", float: "left", paddingRight: 10}}>Length of Stay: 
+                                      </Form.Label>
+                                      <Form.Control
+                                        style={{width: 70, height: 25}}
+                                        type="number"
+                                        defaultValue={item.days}
+                                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                          setDays(event, item.id)}
+                                      />
+                                    </Form.Group>
+                                  </Col>
+                                </Row>
+                                <Row>
+                                  
+                                </Row>
                               </div>
                             )}
                           </Draggable>
@@ -241,8 +252,8 @@ const UserList = (): JSX.Element => {
                     </div>
                   )}
                 </Droppable>
+                </Col>
               </DragDropContext>
-            </Col>
           </Row>
         </Container>
       </div>
