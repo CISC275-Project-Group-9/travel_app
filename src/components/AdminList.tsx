@@ -130,7 +130,7 @@ export function AdminList(): JSX.Element {
                                     <span style={{fontWeight: 'bold', fontSize: 18, color: "#212A3E", display: "flex", justifyContent:'left', textAlign: "left"}}>{item.name}, {item.location}</span>
                                     <span style={{display: "flex", justifyContent:'left', textAlign: "left", fontStyle: "italic"}}>{item.description}</span>
                                     <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Activities: {item.activities.join(", ")}</span>
-                                    <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Cost: ${item.days}</span>
+                                    <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Cost: ${item.cost}</span>
                                   </Col>
                                 </Row>
                                 
