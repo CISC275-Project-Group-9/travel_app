@@ -54,6 +54,39 @@ export function AddForm({
       </div>
       <div>
         <label>
+          Description:
+          <input
+            type="text"
+            name="description"
+            value={destination.description}
+            onChange={handleChange}
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Location:
+          <input
+            type="text"
+            name="location"
+            value={destination.location}
+            onChange={handleChange}
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Cost:
+          <input
+            type="text"
+            name="cost"
+            value={destination.cost}
+            onChange={handleChange}
+          />
+        </label>
+      </div>
+      <div>
+        <label>
           Activities:
           <input
             type="text"
