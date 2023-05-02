@@ -7,6 +7,15 @@
   .dropdown-label {
     font-size: 1.2em;
     margin-bottom: 0.5em;
+    font-weight: bold;
+  }
+ 
+  .roleButton {
+    background-color: whitesmoke;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
   }
   
   .list-container {
@@ -14,5 +23,8 @@
     padding: 2em;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-bottom: 1em;
+    background-color: whitesmoke;
+    
   }
   

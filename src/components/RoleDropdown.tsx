@@ -16,6 +16,7 @@ export function RoleDropdown(): JSX.Element {
   
     return (
       <div className="role-dropdown">
+        <div className="roleButton">
         <div className="dropdown-label">Choose your role:</div>
         <Form.Group controlId="roleSelect">
           <Form.Select value={roleType} onChange={changeRole}>
@@ -26,6 +27,7 @@ export function RoleDropdown(): JSX.Element {
             ))}
           </Form.Select>
         </Form.Group>
+        </div>
         <div className="list-container">
           {roleType === "Basic" ? <UserList></UserList> : null}
           {roleType === "Staff" ? <AdminList></AdminList> : null}
