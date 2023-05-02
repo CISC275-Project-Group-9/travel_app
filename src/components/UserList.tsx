@@ -62,9 +62,15 @@ const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
 const UserList = (): JSX.Element => {
     const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
     const [itinerary, setItinerary] = useState<Destination[]>([]);
+    const [initialPrice, setInitialPrice] = useState<number>(0);
     
    const onDragEnd = (result: DropResult): void => {
-  
+      
+    // Change price
+      const newInitialPriceList = itinerary.map((acc, curr) => acc.cost, 0);
+      const newInitialPrice = newInitialPriceList.reduce((acc, curr) => acc+curr, 0);
+      setInitialPrice(newInitialPrice);
+
       if (!result.destination) {
         return;
       }
@@ -105,6 +111,7 @@ const UserList = (): JSX.Element => {
         }
       }
   };
+  
   
     function addDestination(newDestination: Destination) {
       if (!itinerary.includes(newDestination)) {
@@ -191,6 +198,7 @@ const UserList = (): JSX.Element => {
                 </Droppable>
             </Col> 
             <Col>
+            <h3>Initial Price: {initialPrice} </h3>
               <h3>My Itinerary:</h3>
                 <Droppable droppableId="itinerary">
                   {(provided, snapshot): JSX.Element => (
