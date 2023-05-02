@@ -1,24 +1,12 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { Destination } from "../interfaces/destination";
-import { useSessionStorage } from "../hooks/useSessionStorage";
 
 export function AddForm({
   onSubmit,
 }: {
   onSubmit: (newDestination: Destination) => void;
 }) {
-  const initialValues = {
-    id: 0,
-    name: "",
-    description: "",
-    image: "",
-    location: "",
-    days: 0,
-    cost: 0,
-    activities: [] as string[],
-  };
-
   const [destination, setDestination] = useState<Destination>({
     id: 0,
     name: "",
