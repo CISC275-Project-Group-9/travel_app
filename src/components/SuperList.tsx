@@ -2,15 +2,12 @@
 import React, { useState } from "react";
 import { Destination } from "../interfaces/destination";
 import { Button } from "react-bootstrap";
+import { AddForm } from "./AddForm";
 
 export function SuperList(): JSX.Element {
     const [centralList, setCentralList] = useState<Destination[]>([]);
     const [itinerary, setItinerary] = useState<Destination[]>([]);
     const [userList, setUsers] = useState<Destination[]>([]);
-
-    function seeUsers() {
-        setUsers(userList);
-    }
 
     function newDestinationToList(newDestination: Destination) {
         if (!centralList.includes(newDestination)) {
@@ -50,7 +47,7 @@ export function SuperList(): JSX.Element {
     return (
         <div>
             <h3>Destinations:</h3>
-            <Button>Add Destination</Button>
+            <AddForm onSubmit={newDestinationToList}></AddForm>
             <ul>
                 {centralList.map((destination: Destination) => (
                     <li key={destination.id}>{destination.name}</li>
