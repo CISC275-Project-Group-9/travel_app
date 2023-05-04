@@ -12,7 +12,7 @@ export function RoleDropdown(): JSX.Element {
   const DEFAULT_ROLE = ROLES[0];
   const [roleType, setRoleType] = useState<string>(DEFAULT_ROLE);
   const [userList, setUserList] = useState<Destination[]>(DESTINATIONS);
-  const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
+  const [centralList] = useState<Destination[]>(DESTINATIONS);
 
   function changeRole(event: React.ChangeEvent<HTMLSelectElement>) {
     setRoleType(event.target.value);

@@ -21,7 +21,16 @@ export function DestItem({
   days,
   cost,
   activities,
-}: Destination): JSX.Element {
+}: {
+    id: number, 
+    name: string, 
+    description: string, 
+    image: string, 
+    location: string, 
+    days: number, 
+    cost: number, 
+    activities: string[]
+}): JSX.Element {
     const grid = 8;
 
     const getItemStyle = (
@@ -44,9 +53,9 @@ export function DestItem({
         })
     });
 
-    const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
+    const [centralList] = useState<Destination[]>(DESTINATIONS);
     const [itinerary, setItinerary] = useState<Destination[]>([]);
-    const [initialPrice, setInitialPrice] = useState<number>(0);
+    const [initialPrice] = useState<number>(0);
 
     function setDays(event: React.ChangeEvent<HTMLInputElement>, destId: number) {
         const newItinerary: Destination[] = [...itinerary];

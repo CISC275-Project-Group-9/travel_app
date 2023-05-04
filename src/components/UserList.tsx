@@ -33,7 +33,7 @@ export function UserList({
 
   function addDestToList(id: number){
     const addedDest = centralList.find((dest: Destination) => dest.id === id);
-    if (addedDest != undefined){
+    if (addedDest !== undefined){
       setUserList([...userList, addedDest]);
       setPrice(totalPrice + addedDest.cost);
     } 
