@@ -1,38 +1,26 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { Destination } from "../interfaces/destination";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import "./UserList.css";
-import destinationsData from "../data/destinations.json";
 import { useDrop } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
 import { DestItem } from "./DestItem";
 
-interface userListProps {
-  userList: Destination[];
-  setUserList: (newList: Destination[]) => void;
-  centralList: Destination[];
-}
-
-export function UserList({
-  userList, 
-  setUserList,
-  centralList
-}: userListProps): JSX.Element {
+export function UserList(): JSX.Element {
+  const [userList, setUserList] = useState<Destination[]>([])
   const [totalPrice, setPrice] = useState<number>(0);
 
-  const [{isOver}, drop] = useDrop({
+  /*
+  const [{isOver}, drop] = useDrop(() => ({
     accept: "dest", 
     drop: (destination: Destination) => addDestToList(destination.id),
     collect: (monitor) => ({
       isOver: !!monitor.isOver()
     })
-  });
+  }));
+  */
 
   function addDestToList(id: number){
-    const addedDest = centralList.find((dest: Destination) => dest.id === id);
+    const addedDest = userList.find((dest: Destination) => dest.id === id);
     if (addedDest !== undefined){
       setUserList([...userList, addedDest]);
       setPrice(totalPrice + addedDest.cost);
@@ -44,20 +32,23 @@ export function UserList({
   };
 
   return (
-    <div ref={drop}>
-      {userList.map((dest: Destination) => 
-        <DestItem
-          id={dest.id}
-          key={dest.id}
-          name={dest.name}
-          description={dest.description}
-          image={dest.name}
-          location={dest.location}
-          cost={dest.cost}
-          days={dest.days}
-          activities={dest.activities}
-        ></DestItem>
-      )}
+    //<div ref={drop}>
+    <div>
+       {userList.map((dest: Destination) => {
+          return (
+            <DestItem
+              id={dest.id}
+              key={dest.id}
+              name={dest.name}
+              description={dest.description}
+              image={dest.name}
+              location={dest.location}
+              cost={dest.cost}
+              days={dest.days}
+              activities={dest.activities}
+            ></DestItem>
+          );
+      })} 
     </div>
   )
 }

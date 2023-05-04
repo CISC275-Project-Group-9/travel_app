@@ -33,6 +33,7 @@ export function DestItem({
 }): JSX.Element {
     const grid = 8;
 
+    /*
     const getItemStyle = (
         isDragging: boolean,
       ): React.CSSProperties => ({
@@ -45,13 +46,17 @@ export function DestItem({
         // change background colour if dragging
         background: isDragging ? "#6699CC" : "#BDBDBD",
       });
-    const [{ isDragging }, drag] = useDrag({
+    */
+
+    /*
+    const [{ isDragging }, drag] = useDrag(() => ({
         type: "destination",
         item: {id: id}, 
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging()
         })
-    });
+    }));
+    */
 
     const [centralList] = useState<Destination[]>(DESTINATIONS);
     const [itinerary, setItinerary] = useState<Destination[]>([]);
@@ -67,13 +72,29 @@ export function DestItem({
     }
 
     return (
-        <div ref={drag} style={getItemStyle(isDragging)}>
+        <div className="panel-group">
+            <Row>
+                <Col xs={5}>                                      
+                    <img src={require('../images/' + image)} alt={location}></img>
+                </Col>
+                <Col xs={7}>
+                    <span style={{fontWeight: 'bold', fontSize: 18, color: "#212A3E", display: "flex", justifyContent:'left', textAlign: "left"}}>{name}, {location}</span>
+                    <span style={{display: "flex", justifyContent:'left', textAlign: "left", fontStyle: "italic"}}>{description}</span>
+                    <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Activities: {activities.join(", ")}</span>
+                    <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Cost: ${cost}</span>
+                </Col>
+            </Row>
+        </div>
+
+        //<div ref={drag} style={getItemStyle(isDragging)}>
+        /*
+        <div>
             <Container>
                 <Row>
                     <Col>
                     <h3>Destinations:</h3>
                     <div className="panel-group">
-                        {centralList.map((item, index) => (
+                        {centralList.map((item) => (
                             <div className="panel panel-default">
                                 <Row>
                                     <Col xs={5}>                                      
@@ -94,7 +115,7 @@ export function DestItem({
                     <h3>Initial Price: {initialPrice} </h3>
                     <h3>My Itinerary:</h3>
                         <div className="panel-group">
-                            {itinerary.map((item, index) => (
+                            {itinerary.map((item) => (
                                 <div className="panel panel-default">
                                     <Row>
                                         <Col xs={5}>                                      
@@ -127,5 +148,6 @@ export function DestItem({
                 </Row>
             </Container>
         </div>
+        */
         );
     };

@@ -33,12 +33,7 @@ export function RoleDropdown(): JSX.Element {
         </Form.Group>
       </div>
       <div className="list-container">
-        {roleType === "Basic" ? 
-          <UserList
-              userList={userList}
-              setUserList={setUserList}
-              centralList={centralList}
-          ></UserList> : null}
+        {roleType === "Basic" ? <UserList></UserList> : null}
         {roleType === "Staff" ? <AdminList></AdminList> : null}
         {roleType === "Faculty" ? <SuperList></SuperList> : null}
       </div>
