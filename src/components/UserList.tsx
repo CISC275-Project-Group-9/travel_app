@@ -4,11 +4,24 @@ import { Destination } from "../interfaces/destination";
 import "./UserList.css";
 import { useDrop } from "react-dnd";
 import { DestItem } from "./DestItem";
+import destinationsData from "../data/destinations.json"
 
 export function UserList(): JSX.Element {
+  const { DESTINATIONS }: Record<string, Destination[]> =
+    // Typecast the test data that we imported to be a record matching
+    //  strings to the question list
+    destinationsData as Record<string, Destination[]>;
+
+  const testDest: Destination[] = [{id: 1, name: "test", location: "test", description: "test", image: "test", cost: 0, days: 2, activities: ["test, test1"]}];
   const [userList, setUserList] = useState<Destination[]>([])
   const [totalPrice, setPrice] = useState<number>(0);
+  const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
 
+  const addDestination = (destination: Destination) => {
+    setUserList([...userList, destination]);
+  }
+
+  
   /*
   const [{isOver}, drop] = useDrop(() => ({
     accept: "dest", 
@@ -19,6 +32,7 @@ export function UserList(): JSX.Element {
   }));
   */
 
+  /*
   function addDestToList(id: number){
     const addedDest = userList.find((dest: Destination) => dest.id === id);
     if (addedDest !== undefined){
@@ -30,18 +44,20 @@ export function UserList(): JSX.Element {
       setPrice(0);
     }
   };
+  */
 
   return (
     //<div ref={drop}>
     <div>
-       {userList.map((dest: Destination) => {
+      <h3>Destinations:</h3>
+       {centralList.map((dest: Destination) => {
           return (
             <DestItem
               id={dest.id}
               key={dest.id}
               name={dest.name}
               description={dest.description}
-              image={dest.name}
+              image={dest.image}
               location={dest.location}
               cost={dest.cost}
               days={dest.days}

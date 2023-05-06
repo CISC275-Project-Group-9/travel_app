@@ -29,7 +29,7 @@ export function DestItem({
     location: string, 
     days: number, 
     cost: number, 
-    activities: string[]
+    activities: string[], 
 }): JSX.Element {
     const grid = 8;
 
@@ -72,19 +72,21 @@ export function DestItem({
     }
 
     return (
-        <div className="panel-group">
-            <Row>
-                <Col xs={5}>                                      
-                    <img src={require('../images/' + image)} alt={location}></img>
-                </Col>
-                <Col xs={7}>
-                    <span style={{fontWeight: 'bold', fontSize: 18, color: "#212A3E", display: "flex", justifyContent:'left', textAlign: "left"}}>{name}, {location}</span>
-                    <span style={{display: "flex", justifyContent:'left', textAlign: "left", fontStyle: "italic"}}>{description}</span>
-                    <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Activities: {activities.join(", ")}</span>
-                    <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Cost: ${cost}</span>
-                </Col>
-            </Row>
-        </div>
+        <Col>
+                <div className="panel panel-default">
+                    <Row>
+                        <Col xs={5}>                                      
+                            <img src={require('../images/' + image)} alt={location}></img>
+                        </Col>
+                        <Col xs={7}>
+                            <span style={{fontWeight: 'bold', fontSize: 18, color: "#212A3E", display: "flex", justifyContent:'left', textAlign: "left"}}>{name}, {location}</span>
+                            <span style={{display: "flex", justifyContent:'left', textAlign: "left", fontStyle: "italic"}}>{description}</span>
+                            <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Activities: {activities.join(", ")}</span>
+                            <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Cost: ${cost}</span>
+                        </Col>
+                    </Row>
+                </div>       
+        </Col>
 
         //<div ref={drag} style={getItemStyle(isDragging)}>
         /*
