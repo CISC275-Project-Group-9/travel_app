@@ -2,39 +2,40 @@
 import React, { useState } from "react";
 import { Destination } from "../interfaces/destination";
 import "./UserList.css";
-import { useDrop } from "react-dnd";
+import { useDrop, useDrag } from "react-dnd";
 import { DestItem } from "./DestItem";
 import destinationsData from "../data/destinations.json"
 
 export function UserList(): JSX.Element {
   const { DESTINATIONS }: Record<string, Destination[]> =
-    // Typecast the test data that we imported to be a record matching
-    //  strings to the question list
-    destinationsData as Record<string, Destination[]>;
+      // Typecast the test data that we imported to be a record matching
+      //  strings to the question list
+      destinationsData as Record<string, Destination[]>;
 
-  const testDest: Destination[] = [{id: 1, name: "test", location: "test", description: "test", image: "test", cost: 0, days: 2, activities: ["test, test1"]}];
+  const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
   const [userList, setUserList] = useState<Destination[]>([])
   const [totalPrice, setPrice] = useState<number>(0);
-  const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
 
   const addDestination = (destination: Destination) => {
     setUserList([...userList, destination]);
   }
 
+  const handleDrop = (destination: Destination) => {
+    addDestToList(destination.id);
+  }
   
   /*
   const [{isOver}, drop] = useDrop(() => ({
-    accept: "dest", 
+    accept: "destItem", 
     drop: (destination: Destination) => addDestToList(destination.id),
     collect: (monitor) => ({
       isOver: !!monitor.isOver()
     })
   }));
   */
-
-  /*
+  
   function addDestToList(id: number){
-    const addedDest = userList.find((dest: Destination) => dest.id === id);
+    const addedDest = centralList.find((dest: Destination) => dest.id === id);
     if (addedDest !== undefined){
       setUserList([...userList, addedDest]);
       setPrice(totalPrice + addedDest.cost);
@@ -44,27 +45,34 @@ export function UserList(): JSX.Element {
       setPrice(0);
     }
   };
-  */
 
   return (
-    //<div ref={drop}>
     <div>
-      <h3>Destinations:</h3>
-       {centralList.map((dest: Destination) => {
-          return (
-            <DestItem
-              id={dest.id}
-              key={dest.id}
-              name={dest.name}
-              description={dest.description}
-              image={dest.image}
-              location={dest.location}
-              cost={dest.cost}
-              days={dest.days}
-              activities={dest.activities}
-            ></DestItem>
-          );
-      })} 
+        <div className="column-left">
+          <h3>Destinations:</h3>
+          <div className="panel panel-default">
+            {centralList.map((dest: Destination) => {
+                return (
+                  <DestItem
+                    id={dest.id}
+                    key={dest.id}
+                    name={dest.name}
+                    description={dest.description}
+                    image={dest.image}
+                    location={dest.location}
+                    cost={dest.cost}
+                    days={dest.days}
+                    activities={dest.activities}
+                  ></DestItem>
+                );
+            })}
+            </div> 
+        </div>
+        <div className="column-right">
+          <h3>Initial Price: {totalPrice} </h3>
+          <h3>Itinerary:</h3>
+          
+        </div>
     </div>
   )
 }

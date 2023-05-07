@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Destination } from "../interfaces/destination";
 import { useDrag } from "react-dnd";
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import destinationsData from "../data/destinations.json";
-import { Form } from "react-bootstrap";
 
 export const { DESTINATIONS }: Record<string, Destination[]> =
         // Typecast the test data that we imported to be a record matching
@@ -48,15 +46,13 @@ export function DestItem({
       });
     */
 
-    /*
-    const [{ isDragging }, drag] = useDrag(() => ({
-        type: "destination",
-        item: {id: id}, 
+    const [{ isDragging }, drag] = useDrag({
+        type: "dest-item",
         collect: (monitor) => ({
-            isDragging: !!monitor.isDragging()
+            isDragging: monitor.isDragging()
         })
-    }));
-    */
+    })
+    
 
     const [centralList] = useState<Destination[]>(DESTINATIONS);
     const [itinerary, setItinerary] = useState<Destination[]>([]);
@@ -73,7 +69,7 @@ export function DestItem({
 
     return (
         <Col>
-                <div className="panel panel-default">
+                <div ref={drag}>
                     <Row>
                         <Col xs={5}>                                      
                             <img src={require('../images/' + image)} alt={location}></img>
