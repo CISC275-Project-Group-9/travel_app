@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Destination } from "../interfaces/destination";
 import "./UserList.css";
 import { useDrop } from "react-dnd";
@@ -14,10 +14,22 @@ export function UserList(): JSX.Element {
         //  strings to the question list
         destinationsData as Record<string, Destination[]>;
 
-    const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
-    const [displayList, setDisplayList] = useState<Destination[]>(DESTINATIONS);
-    const [totalPrice, setPrice] = useState<number>(0);
-    const [itinerary, setItinerary] = useState<Destination[]>([]);
+        const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
+        const [displayList, setDisplayList] = useState<Destination[]>(DESTINATIONS); 
+        const [totalPrice, setPrice] = useState<number>(0); 
+        const [itinerary, setItinerary] = useState<Destination[]>([]); 
+        const [totalDays, setTotalDays] = useState<number>(0); 
+        
+        function updateDisplayVals() { 
+          const newInitialPriceList = itinerary.map((dest) => dest.cost, 0); 
+          const newInitialPrice = newInitialPriceList.reduce((dest, cost) => dest+cost, 0); 
+          setPrice(newInitialPrice); 
+          const newTotalDaysList = itinerary.map((dest) => dest.days, 0); 
+          const newTotalDays = newTotalDaysList.reduce((dest, days) => dest+days, 0); 
+          setTotalDays(newTotalDays); 
+        } 
+        
+        useEffect(() => { updateDisplayVals(); });
 
     function addDestToItinerary(name: string) {
         console.log(name);
@@ -107,7 +119,8 @@ export function UserList(): JSX.Element {
                 ref={drop}
                 style={{ backgroundColor: isOver ? "#6699CC" : "whitesmoke" }}
             >
-                <h3>Total Price: {totalPrice} </h3>
+                <h5>Total Price: ${totalPrice} </h5>
+                <h5>Total Days: {totalDays} </h5>
                 <h3>Itinerary:</h3>
                 {itinerary.map((dest: Destination, index) => {
                     return (
