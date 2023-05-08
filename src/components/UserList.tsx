@@ -4,34 +4,39 @@ import { Destination } from "../interfaces/destination";
 import "./UserList.css";
 import { useDrop, useDrag } from "react-dnd";
 import { DestItem } from "./DestItem";
-import destinationsData from "../data/destinations.json"
+import destinationsData from "../data/destinations.json";
 import { isNamedExports } from "typescript";
+import { Button } from "react-bootstrap";
+import { priceFilter, FilterForm } from "./FilterForm";
 
 export function UserList(): JSX.Element {
-  const { DESTINATIONS }: Record<string, Destination[]> =
-      // Typecast the test data that we imported to be a record matching
-      //  strings to the question list
-      destinationsData as Record<string, Destination[]>;
+    const { DESTINATIONS }: Record<string, Destination[]> =
+        // Typecast the test data that we imported to be a record matching
+        //  strings to the question list
+        destinationsData as Record<string, Destination[]>;
 
-  const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
-  const [totalPrice, setPrice] = useState<number>(0);
-  const [itinerary, setItinerary] = useState<Destination[]>([]);
+    const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
+    const [displayList, setDisplayList] = useState<Destination[]>(DESTINATIONS);
+    const [totalPrice, setPrice] = useState<number>(0);
+    const [itinerary, setItinerary] = useState<Destination[]>([]);
 
-  function addDestToItinerary(name: string){
-    console.log(name);
-    const addedDest = centralList.filter((dest: Destination) => name === dest.name);
-    setItinerary((itinerary) => [...itinerary, addedDest[0]]);
-  }
+    function addDestToItinerary(name: string) {
+        console.log(name);
+        const addedDest = centralList.filter(
+            (dest: Destination) => name === dest.name
+        );
+        setItinerary((itinerary) => [...itinerary, addedDest[0]]);
+    }
 
-  const [{isOver}, drop] = useDrop({
-    accept: "destItem", 
-    drop: (item: Destination) => addDestToItinerary(item.name),
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
-    }),
-  });
+    const [{ isOver }, drop] = useDrop({
+        accept: "destItem",
+        drop: (item: Destination) => addDestToItinerary(item.name),
+        collect: (monitor) => ({
+            isOver: !!monitor.isOver()
+        })
+    });
 
-  /*
+    /*
   const [{ isDragging }, drag] = useDrag({
     type: "destItem",
     collect: (monitor) => ({
@@ -39,69 +44,93 @@ export function UserList(): JSX.Element {
     })
 })
 */
-  
 
-  function removeDestination(destination: Destination) {
-    if (itinerary.includes(destination)) {
-      const id = destination.id;
-      const newItinerary = itinerary.filter(
-        (dest: Destination): boolean => dest.id !== id
-      );
-      setItinerary(newItinerary);
+    function filterByPrice(newPrices: priceFilter) {
+        const newCentralList = [...centralList];
+        setDisplayList(
+            newCentralList.filter(
+                (dest: Destination): boolean =>
+                    dest.cost > newPrices.min && dest.cost < newPrices.max
+            )
+        );
     }
-  }
 
-  function clearItinerary() {
-    setItinerary([]);
-  }
+    function reset() {
+        setDisplayList(centralList);
+    }
 
-  return (
-    <div>
-        <div className="column-left">
-          <h3>Destinations:</h3>
-          <div className="panel panel-default">
-            {centralList.map((dest: Destination) => {
-                return (
-                  <div key={dest.id}>
-                    <DestItem
-                      id={dest.id}
-                      key={dest.id}
-                      name={dest.name}
-                      description={dest.description}
-                      image={dest.image}
-                      location={dest.location}
-                      cost={dest.cost}
-                      days={dest.days}
-                      activities={dest.activities}
-                    ></DestItem>
-                  </div>
-                );
-            })}
-            </div> 
-        </div>
-        <div className="column-right" ref={drop} style={{backgroundColor: isOver ? "#6699CC" : "#BDBDBD"}}>
-          <h3>Total Price: {totalPrice} </h3>
-          <h3>Itinerary:</h3>
-            {itinerary.map((dest: Destination) => {
-              return (
-                <div key={dest.id}>
-                  <DestItem
-                      id={dest.id}
-                      key={dest.id}
-                      name={dest.name}
-                      description={dest.description}
-                      image={dest.image}
-                      location={dest.location}
-                      cost={dest.cost}
-                      days={dest.days}
-                      activities={dest.activities}
-                    ></DestItem>
+    function removeDestination(destination: Destination) {
+        if (itinerary.includes(destination)) {
+            const id = destination.id;
+            const newItinerary = itinerary.filter(
+                (dest: Destination): boolean => dest.id !== id
+            );
+            setItinerary(newItinerary);
+        }
+    }
+
+    function clearItinerary() {
+        setItinerary([]);
+    }
+
+    return (
+        <div>
+            <div className="column-left">
+                <h3>Destinations:</h3>
+                <br></br>
+                <FilterForm onSubmit={filterByPrice}></FilterForm>
+                <Button type="submit" onClick={reset}>
+                    Reset
+                </Button>
+                <br></br>
+                <br></br>
+                <div className="panel panel-default">
+                    {displayList.map((dest: Destination) => {
+                        return (
+                            <div key={dest.id}>
+                                <DestItem
+                                    id={dest.id}
+                                    key={dest.id}
+                                    name={dest.name}
+                                    description={dest.description}
+                                    image={dest.image}
+                                    location={dest.location}
+                                    cost={dest.cost}
+                                    days={dest.days}
+                                    activities={dest.activities}
+                                ></DestItem>
+                            </div>
+                        );
+                    })}
                 </div>
-              );
-            })}
+            </div>
+            <div
+                className="column-right"
+                ref={drop}
+                style={{ backgroundColor: isOver ? "#6699CC" : "#BDBDBD" }}
+            >
+                <h3>Total Price: {totalPrice} </h3>
+                <h3>Itinerary:</h3>
+                {itinerary.map((dest: Destination) => {
+                    return (
+                        <div key={dest.id}>
+                            <DestItem
+                                id={dest.id}
+                                key={dest.id}
+                                name={dest.name}
+                                description={dest.description}
+                                image={dest.image}
+                                location={dest.location}
+                                cost={dest.cost}
+                                days={dest.days}
+                                activities={dest.activities}
+                            ></DestItem>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
-    </div>
-  )
+    );
 }
 
 /* import {
