@@ -5,6 +5,7 @@ import "./UserList.css";
 import { useDrop, useDrag } from "react-dnd";
 import { DestItem } from "./DestItem";
 import destinationsData from "../data/destinations.json"
+import { isNamedExports } from "typescript";
 
 export function UserList(): JSX.Element {
   const { DESTINATIONS }: Record<string, Destination[]> =
@@ -13,53 +14,45 @@ export function UserList(): JSX.Element {
       destinationsData as Record<string, Destination[]>;
 
   const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
-  const [userList, setUserList] = useState<Destination[]>([])
   const [totalPrice, setPrice] = useState<number>(0);
+  const [itinerary, setItinerary] = useState<Destination[]>([]);
 
-  function addDestToList(destination: Destination){
-    const addedDest = centralList.find((dest: Destination) => dest.id === destination.id);
-    if (addedDest !== undefined){
-      setUserList([...userList, addedDest]);
-      setPrice(totalPrice + addedDest.cost);
-    }
-    else {
-      setUserList([]);
-      setPrice(0);
-    }
+  function addDestToItinerary(name: string){
+    console.log(name);
+    const addedDest = centralList.filter((dest: Destination) => name === dest.name);
+    setItinerary((itinerary) => [...itinerary, addedDest[0]]);
   }
-  const [{isOver}, drop] = useDrop(() => ({
+
+  const [{isOver}, drop] = useDrop({
     accept: "destItem", 
-    drop: (item: Destination, monitor) => {
-      if (monitor.didDrop()) {
-        return;
-      }
-      addDestToList(item);
-    },
+    drop: (item: Destination) => addDestToItinerary(item.name),
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
     }),
-  }));
+  });
 
+  /*
   const [{ isDragging }, drag] = useDrag({
     type: "destItem",
     collect: (monitor) => ({
         isDragging: monitor.isDragging()
     })
 })
+*/
   
 
   function removeDestination(destination: Destination) {
-    if (userList.includes(destination)) {
+    if (itinerary.includes(destination)) {
       const id = destination.id;
-      const newItinerary = userList.filter(
+      const newItinerary = itinerary.filter(
         (dest: Destination): boolean => dest.id !== id
       );
-      setUserList(newItinerary);
+      setItinerary(newItinerary);
     }
   }
 
   function clearItinerary() {
-    setUserList([]);
+    setItinerary([]);
   }
 
   return (
@@ -69,7 +62,7 @@ export function UserList(): JSX.Element {
           <div className="panel panel-default">
             {centralList.map((dest: Destination) => {
                 return (
-                  <div key={dest.id} ref={drag}>
+                  <div key={dest.id}>
                     <DestItem
                       id={dest.id}
                       key={dest.id}
@@ -89,9 +82,9 @@ export function UserList(): JSX.Element {
         <div className="column-right" ref={drop}>
           <h3>Initial Price: {totalPrice} </h3>
           <h3>Itinerary:</h3>
-          {userList.map((dest: Destination) => {
+          {itinerary.map((dest: Destination) => {
             return (
-              <div key={dest.id} ref={drop}>
+              <div key={dest.id}>
                 <DestItem
                     id={dest.id}
                     key={dest.id}
