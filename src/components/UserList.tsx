@@ -2,11 +2,10 @@
 import React, { useState } from "react";
 import { Destination } from "../interfaces/destination";
 import "./UserList.css";
-import { useDrop, useDrag } from "react-dnd";
+import { useDrop } from "react-dnd";
 import { DestItem } from "./DestItem";
 import destinationsData from "../data/destinations.json"
-import { isNamedExports } from "typescript";
-import { Form } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 
 export function UserList(): JSX.Element {
   const { DESTINATIONS }: Record<string, Destination[]> =
@@ -40,16 +39,6 @@ export function UserList(): JSX.Element {
       isOver: !!monitor.isOver(),
     }),
   });
-
-  /*
-  const [{ isDragging }, drag] = useDrag({
-    type: "destItem",
-    collect: (monitor) => ({
-        isDragging: monitor.isDragging()
-    })
-})
-*/
-  
 
   function removeDestination(destination: Destination) {
     if (itinerary.includes(destination)) {
@@ -120,6 +109,7 @@ export function UserList(): JSX.Element {
                 </div>
               );
             })}
+          {itinerary.length !== 0 ? <Button onClick={clearItinerary}>Remove All</Button> : null}
         </div>
     </div>
   )
