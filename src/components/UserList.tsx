@@ -6,7 +6,6 @@ import { useDrop } from "react-dnd";
 import { DestItem } from "./DestItem";
 import destinationsData from "../data/destinations.json"
 import { Form, Button } from "react-bootstrap";
-import { idText } from "typescript";
 
 export function UserList(): JSX.Element {
   const { DESTINATIONS }: Record<string, Destination[]> =
