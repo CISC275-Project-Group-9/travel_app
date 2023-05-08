@@ -10,7 +10,7 @@ export function CentralList(): JSX.Element {
       //  strings to the question list
       destinationsData as Record<string, Destination[]>;
 
-    const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
+    const [centralList] = useState<Destination[]>(DESTINATIONS);
 
     return (
         <div>
