@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Destination } from "../interfaces/destination";
 import { useDrag } from "react-dnd";
 import Row from "react-bootstrap/Row";
@@ -44,8 +44,20 @@ export function DestItem({
         background: isDragging ? "#6699CC" : "#BDBDBD",
       });
 
+    const [dest] = useState<Destination>({
+        id, 
+        name, 
+        description, 
+        image, 
+        location, 
+        days, 
+        cost, 
+        activities
+    });
+
     const [{ isDragging }, drag] = useDrag({
-        type: "dest-item",
+        type: "destItem",
+        item: {name: dest.name},
         collect: (monitor) => ({
             isDragging: monitor.isDragging()
         })
