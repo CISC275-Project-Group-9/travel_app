@@ -79,26 +79,26 @@ export function UserList(): JSX.Element {
             })}
             </div> 
         </div>
-        <div className="column-right" ref={drop}>
-          <h3>Initial Price: {totalPrice} </h3>
+        <div className="column-right" ref={drop} style={{backgroundColor: isOver ? "#6699CC" : "#BDBDBD"}}>
+          <h3>Total Price: {totalPrice} </h3>
           <h3>Itinerary:</h3>
-          {itinerary.map((dest: Destination) => {
-            return (
-              <div key={dest.id}>
-                <DestItem
-                    id={dest.id}
-                    key={dest.id}
-                    name={dest.name}
-                    description={dest.description}
-                    image={dest.image}
-                    location={dest.location}
-                    cost={dest.cost}
-                    days={dest.days}
-                    activities={dest.activities}
-                  ></DestItem>
-              </div>
-            );
-          })}
+            {itinerary.map((dest: Destination) => {
+              return (
+                <div key={dest.id}>
+                  <DestItem
+                      id={dest.id}
+                      key={dest.id}
+                      name={dest.name}
+                      description={dest.description}
+                      image={dest.image}
+                      location={dest.location}
+                      cost={dest.cost}
+                      days={dest.days}
+                      activities={dest.activities}
+                    ></DestItem>
+                </div>
+              );
+            })}
         </div>
     </div>
   )
