@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Destination } from "../interfaces/destination";
 import { useDrag } from "react-dnd";
 import Row from "react-bootstrap/Row";
@@ -50,20 +50,6 @@ export function DestItem({
             isDragging: monitor.isDragging()
         })
     })
-    
-
-    const [centralList] = useState<Destination[]>(DESTINATIONS);
-    const [itinerary, setItinerary] = useState<Destination[]>([]);
-    const [initialPrice] = useState<number>(0);
-
-    function setDays(event: React.ChangeEvent<HTMLInputElement>, destId: number) {
-        const newItinerary: Destination[] = [...itinerary];
-        const findTarget = itinerary.findIndex((destination: Destination): boolean => destination.id === destId);
-        const oldDest: Destination = {...newItinerary[findTarget]};
-        const newDest: Destination = {...oldDest, days: event.target.valueAsNumber};
-        newItinerary.splice(findTarget, 1, newDest);
-        setItinerary(newItinerary)
-    }
 
     return (
         <Col>
