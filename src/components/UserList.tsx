@@ -1,13 +1,117 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { Destination } from "../interfaces/destination";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import "./UserList.css"; 
-import destinationsData from "../data/destinations.json";
+import "./UserList.css";
+import { useDrop, useDrag } from "react-dnd";
+import { DestItem } from "./DestItem";
+import destinationsData from "../data/destinations.json"
 
-import {
+export function UserList(): JSX.Element {
+  const { DESTINATIONS }: Record<string, Destination[]> =
+      // Typecast the test data that we imported to be a record matching
+      //  strings to the question list
+      destinationsData as Record<string, Destination[]>;
+
+  const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
+  const [userList, setUserList] = useState<Destination[]>([])
+  const [totalPrice, setPrice] = useState<number>(0);
+
+  function addDestToList(destination: Destination){
+    const addedDest = centralList.find((dest: Destination) => dest.id === destination.id);
+    if (addedDest !== undefined){
+      setUserList([...userList, addedDest]);
+      setPrice(totalPrice + addedDest.cost);
+    }
+    else {
+      setUserList([]);
+      setPrice(0);
+    }
+  }
+  const [{isOver}, drop] = useDrop(() => ({
+    accept: "destItem", 
+    drop: (item: Destination, monitor) => {
+      if (monitor.didDrop()) {
+        return;
+      }
+      addDestToList(item);
+    },
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    }),
+  }));
+
+  const [{ isDragging }, drag] = useDrag({
+    type: "destItem",
+    collect: (monitor) => ({
+        isDragging: monitor.isDragging()
+    })
+})
+  
+
+  function removeDestination(destination: Destination) {
+    if (userList.includes(destination)) {
+      const id = destination.id;
+      const newItinerary = userList.filter(
+        (dest: Destination): boolean => dest.id !== id
+      );
+      setUserList(newItinerary);
+    }
+  }
+
+  function clearItinerary() {
+    setUserList([]);
+  }
+
+  return (
+    <div>
+        <div className="column-left">
+          <h3>Destinations:</h3>
+          <div className="panel panel-default">
+            {centralList.map((dest: Destination) => {
+                return (
+                  <div key={dest.id} ref={drag}>
+                    <DestItem
+                      id={dest.id}
+                      key={dest.id}
+                      name={dest.name}
+                      description={dest.description}
+                      image={dest.image}
+                      location={dest.location}
+                      cost={dest.cost}
+                      days={dest.days}
+                      activities={dest.activities}
+                    ></DestItem>
+                  </div>
+                );
+            })}
+            </div> 
+        </div>
+        <div className="column-right" ref={drop}>
+          <h3>Initial Price: {totalPrice} </h3>
+          <h3>Itinerary:</h3>
+          {userList.map((dest: Destination) => {
+            return (
+              <div key={dest.id} ref={drop}>
+                <DestItem
+                    id={dest.id}
+                    key={dest.id}
+                    name={dest.name}
+                    description={dest.description}
+                    image={dest.image}
+                    location={dest.location}
+                    cost={dest.cost}
+                    days={dest.days}
+                    activities={dest.activities}
+                  ></DestItem>
+              </div>
+            );
+          })}
+        </div>
+    </div>
+  )
+}
+
+/* import {
   DragDropContext,
   Draggable,
   DraggingStyle,
@@ -267,4 +371,4 @@ const UserList = (): JSX.Element => {
     );
   };
   
-  export default UserList;
+  export default UserList; */
