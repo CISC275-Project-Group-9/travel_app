@@ -16,35 +16,51 @@ export function UserList(): JSX.Element {
   const [userList, setUserList] = useState<Destination[]>([])
   const [totalPrice, setPrice] = useState<number>(0);
 
-  const addDestination = (destination: Destination) => {
-    setUserList([...userList, destination]);
-  }
-
-  const handleDrop = (destination: Destination) => {
-    addDestToList(destination.id);
-  }
-  
-  /*
-  const [{isOver}, drop] = useDrop(() => ({
-    accept: "destItem", 
-    drop: (destination: Destination) => addDestToList(destination.id),
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver()
-    })
-  }));
-  */
-  
-  function addDestToList(id: number){
-    const addedDest = centralList.find((dest: Destination) => dest.id === id);
+  function addDestToList(destination: Destination){
+    const addedDest = centralList.find((dest: Destination) => dest.id === destination.id);
     if (addedDest !== undefined){
       setUserList([...userList, addedDest]);
       setPrice(totalPrice + addedDest.cost);
-    } 
+    }
     else {
       setUserList([]);
       setPrice(0);
     }
-  };
+  }
+  const [{isOver}, drop] = useDrop(() => ({
+    accept: "destItem", 
+    drop: (item: Destination, monitor) => {
+      if (monitor.didDrop()) {
+        return;
+      }
+      addDestToList(item);
+    },
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    }),
+  }));
+
+  const [{ isDragging }, drag] = useDrag({
+    type: "destItem",
+    collect: (monitor) => ({
+        isDragging: monitor.isDragging()
+    })
+})
+  
+
+  function removeDestination(destination: Destination) {
+    if (userList.includes(destination)) {
+      const id = destination.id;
+      const newItinerary = userList.filter(
+        (dest: Destination): boolean => dest.id !== id
+      );
+      setUserList(newItinerary);
+    }
+  }
+
+  function clearItinerary() {
+    setUserList([]);
+  }
 
   return (
     <div>
@@ -53,7 +69,30 @@ export function UserList(): JSX.Element {
           <div className="panel panel-default">
             {centralList.map((dest: Destination) => {
                 return (
-                  <DestItem
+                  <div key={dest.id} ref={drag}>
+                    <DestItem
+                      id={dest.id}
+                      key={dest.id}
+                      name={dest.name}
+                      description={dest.description}
+                      image={dest.image}
+                      location={dest.location}
+                      cost={dest.cost}
+                      days={dest.days}
+                      activities={dest.activities}
+                    ></DestItem>
+                  </div>
+                );
+            })}
+            </div> 
+        </div>
+        <div className="column-right" ref={drop}>
+          <h3>Initial Price: {totalPrice} </h3>
+          <h3>Itinerary:</h3>
+          {userList.map((dest: Destination) => {
+            return (
+              <div key={dest.id} ref={drop}>
+                <DestItem
                     id={dest.id}
                     key={dest.id}
                     name={dest.name}
@@ -64,14 +103,9 @@ export function UserList(): JSX.Element {
                     days={dest.days}
                     activities={dest.activities}
                   ></DestItem>
-                );
-            })}
-            </div> 
-        </div>
-        <div className="column-right">
-          <h3>Initial Price: {totalPrice} </h3>
-          <h3>Itinerary:</h3>
-          
+              </div>
+            );
+          })}
         </div>
     </div>
   )

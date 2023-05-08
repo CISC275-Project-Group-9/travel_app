@@ -31,7 +31,6 @@ export function DestItem({
 }): JSX.Element {
     const grid = 8;
 
-    /*
     const getItemStyle = (
         isDragging: boolean,
       ): React.CSSProperties => ({
@@ -44,7 +43,6 @@ export function DestItem({
         // change background colour if dragging
         background: isDragging ? "#6699CC" : "#BDBDBD",
       });
-    */
 
     const [{ isDragging }, drag] = useDrag({
         type: "dest-item",
@@ -69,7 +67,7 @@ export function DestItem({
 
     return (
         <Col>
-                <div ref={drag}>
+                <div ref={drag} style={getItemStyle(isDragging)}>
                     <Row>
                         <Col xs={5}>                                      
                             <img src={require('../images/' + image)} alt={location}></img>
