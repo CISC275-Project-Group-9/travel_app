@@ -6,6 +6,7 @@ import { useDrop } from "react-dnd";
 import { DestItem } from "./DestItem";
 import destinationsData from "../data/destinations.json"
 import { Form, Button } from "react-bootstrap";
+import { idText } from "typescript";
 
 export function UserList(): JSX.Element {
   const { DESTINATIONS }: Record<string, Destination[]> =
@@ -40,15 +41,17 @@ export function UserList(): JSX.Element {
     }),
   });
 
-  function removeDestination(destination: Destination) {
-    if (itinerary.includes(destination)) {
-      const id = destination.id;
-      const newItinerary = itinerary.filter(
-        (dest: Destination): boolean => dest.id !== id
-      );
+  
+  function removeDestination(id: number) {
+    console.log("button clicked");
+    const index = itinerary.findIndex((dest: Destination) => dest.id === id);
+    if (index !== -1){
+      const newItinerary = [...itinerary];
+      newItinerary.splice(index, 1);
       setItinerary(newItinerary);
     }
   }
+
 
   function clearItinerary() {
     setItinerary([]);
@@ -81,9 +84,9 @@ export function UserList(): JSX.Element {
         <div className="column-right panel panel-default" ref={drop} style={{backgroundColor: isOver ? "#6699CC" : "whitesmoke"}}>
           <h3>Total Price: {totalPrice} </h3>
           <h3>Itinerary:</h3>
-            {itinerary.map((dest: Destination) => {
+            {itinerary.map((dest: Destination, index) => {
               return (
-                <div key={dest.id}>
+                <div key={index}>
                   <DestItem
                       id={dest.id}
                       key={dest.id}
@@ -105,6 +108,7 @@ export function UserList(): JSX.Element {
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                           setDays(event, dest.id)}
                       />
+                      <button onClick={() => removeDestination(dest.id)}>❌</button>
                     </Form.Group>
                 </div>
               );
