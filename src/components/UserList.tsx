@@ -6,6 +6,7 @@ import { useDrop, useDrag } from "react-dnd";
 import { DestItem } from "./DestItem";
 import destinationsData from "../data/destinations.json"
 import { isNamedExports } from "typescript";
+import { Form } from "react-bootstrap";
 
 export function UserList(): JSX.Element {
   const { DESTINATIONS }: Record<string, Destination[]> =
@@ -21,6 +22,15 @@ export function UserList(): JSX.Element {
     console.log(name);
     const addedDest = centralList.filter((dest: Destination) => name === dest.name);
     setItinerary((itinerary) => [...itinerary, addedDest[0]]);
+  }
+
+  function setDays(event: React.ChangeEvent<HTMLInputElement>, destId: number) {
+    const newItinerary: Destination[] = [...itinerary];
+    const findTarget = itinerary.findIndex((destination: Destination): boolean => destination.id === destId);
+    const oldDest: Destination = {...newItinerary[findTarget]};
+    const newDest: Destination = {...oldDest, days: event.target.valueAsNumber};
+    newItinerary.splice(findTarget, 1, newDest);
+    setItinerary(newItinerary)
   }
 
   const [{isOver}, drop] = useDrop({
@@ -79,7 +89,7 @@ export function UserList(): JSX.Element {
             })}
             </div> 
         </div>
-        <div className="column-right" ref={drop} style={{backgroundColor: isOver ? "#6699CC" : "#BDBDBD"}}>
+        <div className="column-right panel panel-default" ref={drop} style={{backgroundColor: isOver ? "#6699CC" : "whitesmoke"}}>
           <h3>Total Price: {totalPrice} </h3>
           <h3>Itinerary:</h3>
             {itinerary.map((dest: Destination) => {
@@ -96,6 +106,17 @@ export function UserList(): JSX.Element {
                       days={dest.days}
                       activities={dest.activities}
                     ></DestItem>
+                    <Form.Group controlId="formChangeDuration">
+                      <Form.Label  style={{display: "inline-block", float: "none", paddingRight: 10, backgroundColor:  "#BDBDBD"}}>Length of Stay: 
+                      </Form.Label>
+                      <Form.Control
+                        style={{display: "inline-block", width: 70, height: 25, float: "none"}}
+                        type="number"
+                        defaultValue={dest.days}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                          setDays(event, dest.id)}
+                      />
+                    </Form.Group>
                 </div>
               );
             })}
