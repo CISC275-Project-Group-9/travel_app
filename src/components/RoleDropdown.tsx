@@ -4,8 +4,6 @@ import { Form } from "react-bootstrap";
 import { AdminList } from "./AdminList";
 import { SuperList } from "./SuperList";
 import "./RoleDropdown.css";
-import { Destination } from "../interfaces/destination";
-import { DESTINATIONS } from "./DestItem";
 
 export function RoleDropdown(): JSX.Element {
   const ROLES = ["Basic", "Staff", "Faculty"];
