@@ -16,10 +16,8 @@ export function UserList({centralList, setCentralList, itinerary, setItinerary}:
     //  strings to the question list
     destinationsData as Record<string, Destination[]>;
 
-  // const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
   const [displayList, setDisplayList] = useState<Destination[]>(centralList);
   const [totalPrice, setPrice] = useState<number>(0);
-  // const [itinerary, setItinerary] = useState<Destination[]>([]);
   const [totalDays, setTotalDays] = useState<number>(0);
 
   function updateDisplayVals() {
@@ -46,7 +44,6 @@ export function UserList({centralList, setCentralList, itinerary, setItinerary}:
     const addedDest = centralList.filter(
       (dest: Destination) => name === dest.name
     );
-    // setItinerary((itinerary) => [...itinerary, addedDest[0]]);
     setItinerary([...itinerary, addedDest[0]]);
   }
 
