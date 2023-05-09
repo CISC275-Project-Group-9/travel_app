@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { Destination } from "../interfaces/destination";
 
+function randomInt(min: number, max: number): number {
+  let result: number = Math.floor(Math.random() * (max - min + 1)) + min
+  console.log(result)
+  return result;
+}
 
 export function AddForm({
   onSubmit,
@@ -9,7 +14,7 @@ export function AddForm({
   onSubmit: (newDestination: Destination) => void;
 }) {
   const [destination, setDestination] = useState<Destination>({
-    id: 35,
+    id: randomInt(35,100),
     name: "",
     description: "",
     image: "ZZ.jpeg",
@@ -31,7 +36,7 @@ export function AddForm({
     event.preventDefault();
     onSubmit(destination);
     setDestination({
-      id: 35,
+      id: randomInt(35,100),
       name: "",
       description: "",
       image: "",
@@ -108,59 +113,3 @@ export function AddForm({
     </form>
   );
 }
-
-/* export function AddForm({
-    handleClose, 
-    addDestination
-} : {
-    handleClose: () => void;
-    addDestination: (newDestination: Destination) => void;
-})  {
-    const [destName, setDestName] = useState<string>("");
-    const [destActivities, setActivities] = useState<string[]>([]);
-    const [price, setPrice] = useState<number>(0);
-
-    function saveChanges(){
-        addDestination({
-            id: 0, 
-            name: destName, 
-            description: "", 
-            image: "",
-            location: "", 
-            days: 0, 
-            cost: price, 
-            activities: destActivities
-        });
-        handleClose();
-    }
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const name = event.target.name;
-        const value = event.target.value;
-        setInput(values => ({...values, [name]: value}))
-    }
-
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>){
-        event.preventDefault();
-        onsubmit(inputs);
-        setInput
-    }
-
-    return <div>
-        <form onSubmit={handleSubmit}>
-
-
-
-
-
-        </form>
-        <Form.Group controlId="formAddDest">
-            <Form.Label>Destination Name:</Form.Label>
-            <Form.Control value = {name} onChange={updateName}></Form.Control>
-            <Form.Label>Activities:</Form.Label>
-            <Form.Control value = {activities} onChange={updateActivities}></Form.Control>
-            <Form.Label>Price:</Form.Label>
-            <Form.Control type="number" value= {price} onChange={updatePrice}></Form.Control>
-        </Form.Group>
-    </div>
-} */

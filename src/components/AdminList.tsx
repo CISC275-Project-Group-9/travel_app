@@ -9,14 +9,14 @@ import "./UserList.css";
 import { CentralListProps } from "../interfaces/props";
 import destinationsData from "../data/destinations.json";
 
-import {
-  DragDropContext,
-  Draggable,
-  DraggingStyle,
-  Droppable,
-  DropResult,
-  NotDraggingStyle
-} from "react-beautiful-dnd";
+// import {
+//   DragDropContext,
+//   Draggable,
+//   DraggingStyle,
+//   Droppable,
+//   DropResult,
+//   NotDraggingStyle
+// } from "react-beautiful-dnd";
 import { Form, FormGroup } from "react-bootstrap";
 import { DestItem } from "./DestItem";
 
@@ -29,7 +29,6 @@ const grid = 8;
 
 const getItemStyle = (
   isDragging: boolean,
-  draggableStyle: DraggingStyle | NotDraggingStyle | undefined
 ): React.CSSProperties => ({
   // some basic styles to make the items look a bit nicer
   userSelect: "none",
@@ -41,7 +40,6 @@ const getItemStyle = (
   background: isDragging ? "#6699CC" : "#BDBDBD",
 
   // styles we need to apply on draggables
-  ...draggableStyle
 });
 
 const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({

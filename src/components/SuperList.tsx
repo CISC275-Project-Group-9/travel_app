@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import { Destination } from "../interfaces/destination";
 import { Button } from "react-bootstrap";
 import { AddForm } from "./AddForm";
+import { useDrag } from "react-dnd";
 import { CentralListProps } from "../interfaces/props";
+import { DestItem } from "./DestItem";
 
 export function SuperList({centralList, setCentralList} : CentralListProps): JSX.Element {
     // const [centralList, setCentralList] = useState<Destination[]>([]);
@@ -45,29 +47,48 @@ export function SuperList({centralList, setCentralList} : CentralListProps): JSX
         setItinerary([]);
     }
 
+    const grid = 8;
+
+    const getItemStyle = (
+        isDragging: boolean,
+      ): React.CSSProperties => ({
+        // some basic styles to make the items look a bit nicer
+        userSelect: "none",
+        padding: grid * 2,
+        margin: `${grid}px ${grid}px 0 0`,
+        borderRadius: 5,
+      
+        // change background colour if dragging
+        background: isDragging ? "#6699CC" : "#BDBDBD",
+      });
+  
+      const [{ isDragging }, drag] = useDrag({
+        type: "destItem",
+        collect: (monitor) => ({
+            isDragging: monitor.isDragging()
+        })
+    })
+
     return (
         <div>
             <h3>Destinations:</h3>
             <AddForm onSubmit={newDestinationToList}></AddForm>
-            <ul>
-                {centralList.map((destination: Destination) => (
-                    <li key={destination.id}>{destination.name}</li>
-                ))}
-            </ul>
-            <link
-                rel="stylesheet"
-                href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-            ></link>
-            <div className="panel-group">
-                <div className="panel panel-default">
-                    <div className="panel-body">Location</div>
-                </div>
-                <div className="panel panel-default">
-                    <div className="panel-body">Location</div>
-                </div>
-                <div className="panel panel-default">
-                    <div className="panel-body">Location</div>
-                </div>
+            <div>
+                {centralList.map((dest: Destination) => {
+                    return (
+                        <DestItem
+                        id={dest.id}
+                        key={dest.id}
+                        name={dest.name}
+                        description={dest.description}
+                        image={dest.image}
+                        location={dest.location}
+                        cost={dest.cost}
+                        days={dest.days}
+                        activities={dest.activities}
+                        ></DestItem>
+                    );
+                })}
             </div>
         </div>
     );
