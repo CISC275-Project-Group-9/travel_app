@@ -63,7 +63,7 @@ export function UserList({centralList, setCentralList, itinerary, setItinerary}:
     setDisplayList(
       newCentralList.filter(
         (dest: Destination): boolean =>
-          dest.cost > newPrices.min && dest.cost < newPrices.max
+          dest.cost >= newPrices.min && dest.cost <= newPrices.max
       )
     );
   }

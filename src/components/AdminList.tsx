@@ -115,7 +115,7 @@ export function AdminList({centralList, setCentralList} : CentralListProps): JSX
             setEditMode(event.target.checked)}/>
           <div className="panel panel-default">
               {centralList.map((dest: Destination) => {
-                return (editMode ? 
+                return (!editMode ? 
                   <div key={dest.id}>
                     <DestItem
                         id={dest.id}
