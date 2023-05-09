@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { Destination } from "../interfaces/destination";
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -25,18 +24,6 @@ const { DESTINATIONS }: Record<string, Destination[]> =
     // Typecast the test data that we imported to be a record matching
     //  strings to the question list
     destinationsData as Record<string, Destination[]>;
-
-const reorder = (
-  list: Destination[],
-  startIndex: number,
-  endIndex: number
-): Destination[] => {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
-
-  return result;
-};
 
 const grid = 8;
 
@@ -97,19 +84,7 @@ export function AdminList(): JSX.Element {
     //         setCentralList(newCentralList);
     //     }
     // }
-    const onDragEnd = (result: DropResult): void => {
-  
-        if (!result.destination) {
-          return;
-        }
 
-        const items = reorder(
-            centralList,
-            result.source.index,
-            result.destination.index
-          );
-          setCentralList(items);
-    };
     const getItemStyle = (
       isDragging: boolean,
     ): React.CSSProperties => ({
@@ -176,114 +151,9 @@ export function AdminList(): JSX.Element {
                       <Form.Control defaultValue={dest.activities} name="activities" onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                               editDestination(event, dest.id)} />
                     </Form.Group>
-                  </div>
-                  // </Row>
-                  )
-                  // return (
-                    
-                    // {!editMode ? 
-                      // <div key={dest.id}>
-                      //     <DestItem
-                      //         id={dest.id}
-                      //         key={dest.id}
-                      //         name={dest.name}
-                      //         description={dest.description}
-                      //         image={dest.image}
-                      //         location={dest.location}
-                      //         cost={dest.cost}
-                      //         days={dest.days}
-                      //         activities={dest.activities}
-                      //     ></DestItem>
-                      // </div>
-                    // :
-                    // }
-                  // );
+                  </div>)
               })}
           </div>
       </div>
   );
-
-    // return (
-    //     <div>
-    //     <Container>
-    //       <Row>
-    //         <h3>Destinations:</h3>
-    //         <p style={{margin: 0}}>Change Edit Mode</p>
-    //         <Form.Check
-    //           type="switch"
-    //           id="editModeSwitch"
-    //           checked={editMode}
-    //           onChange={(event: React.ChangeEvent<HTMLInputElement>) => 
-    //           setEditMode(event.target.checked)}/>
-    //            <DragDropContext onDragEnd={onDragEnd}>
-    //            <Col>
-    //             <Droppable droppableId="central-list">
-    //               {(provided, snapshot): JSX.Element => (
-    //                 <div
-    //                   {...provided.droppableProps}
-    //                   ref={provided.innerRef}
-    //                   className="container"
-    //                 >
-    //                   <div className="panel-group">                        
-    //                     {centralList.map((item, index) => (
-    //                       <Draggable
-    //                         key={item.id}
-    //                         draggableId={String(item.id)}
-    //                         index={index}
-    //                       >
-    //                         {(provided, snapshot): JSX.Element => (
-    //                           <div
-    //                             ref={provided.innerRef}
-    //                             {...provided.draggableProps}
-    //                             {...provided.dragHandleProps}
-    //                             style={getItemStyle(
-    //                               snapshot.isDragging,
-    //                               provided.draggableProps.style
-    //                             )}
-    //                             className="panel panel-default"
-    //                           >{!editMode ? <Row>
-    //                             <Col xs={5}>                                      
-    //                                 <img src={require('../images/' + item.image)} alt={item.location}></img>
-    //                             </Col>
-    //                             <Col xs={7}>
-    //                               <span style={{fontWeight: 'bold', fontSize: 18, color: "#212A3E", display: "flex", justifyContent:'left', textAlign: "left"}}>{item.name}, {item.location}</span>
-    //                               <span style={{display: "flex", justifyContent:'left', textAlign: "left", fontStyle: "italic"}}>{item.description}</span>
-    //                               <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Activities: {item.activities.join(", ")}</span>
-    //                               <span style={{display: "flex", justifyContent:'left', textAlign: "left"}}>Cost: ${item.cost}</span>
-                                  
-    //                             </Col>
-    //                           </Row>: 
-    //                           <Form.Group controlId="editDestination">
-    //                             <Form.Label style={{display: "inline-block", float: "left", paddingRight: 10}}>Name</Form.Label>
-    //                             <Form.Control defaultValue={item.name} name="name" onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-    //                                     editDestination(event, item.id)} />
-    //                             <Form.Label style={{display: "inline-block", float: "left", paddingRight: 10}}>Description</Form.Label>
-    //                             <Form.Control defaultValue={item.description} name="description" onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-    //                                     editDestination(event, item.id)} />
-    //                             <Form.Label style={{display: "inline-block", float: "left", paddingRight: 10}}>Location</Form.Label>
-    //                             <Form.Control defaultValue={item.location} name="location" onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-    //                                     editDestination(event, item.id)} />
-    //                             <Form.Label style={{display: "inline-block", float: "left", paddingRight: 10}}>Cost</Form.Label>
-    //                             <Form.Control defaultValue={item.cost} name="cost" type="number" onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-    //                                     editDestination(event, item.id)} />
-    //                             <Form.Label style={{display: "inline-block", float: "left", paddingRight: 10}}>Activities</Form.Label>
-    //                             <Form.Control defaultValue={item.activities} name="activities" onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-    //                                     editDestination(event, item.id)} />
-    //                           </Form.Group>
-    //                           }
-    //                           </div>
-    //                         )}
-    //                       </Draggable>
-    //                     ))}
-    //                     {provided.placeholder}
-    //                   </div>
-    //                 </div>
-    //               )}
-    //             </Droppable>
-    //         </Col> 
-    //           </DragDropContext>
-    //       </Row>
-    //     </Container>
-    //   </div>
-    // );
 }
