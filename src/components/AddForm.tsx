@@ -53,10 +53,11 @@ export function AddForm({
 
   return (
     <form onSubmit={handleSubmit}>
+  <div style={{ width: "40%", display: "flex", flexDirection: "column", alignItems: "flex-end", justifyContent: "center", margin: "auto" }}>
       <div>
         <label>
           Name:
-          <input
+          <input style={{ marginLeft: "10px" }}
             type="text"
             name="name"
             value={destination.name}
@@ -67,7 +68,7 @@ export function AddForm({
       <div>
         <label>
           Description:
-          <input
+          <input style={{ marginLeft: "10px" }}
             type="text"
             name="description"
             value={destination.description}
@@ -78,7 +79,7 @@ export function AddForm({
       <div>
         <label>
           Location:
-          <input
+          <input style={{ marginLeft: "10px" }}
             type="text"
             name="location"
             value={destination.location}
@@ -89,7 +90,7 @@ export function AddForm({
       <div>
         <label>
           Cost:
-          <input
+          <input style={{ marginLeft: "10px" }}
             type="text"
             name="cost"
             value={destination.cost}
@@ -100,13 +101,14 @@ export function AddForm({
       <div>
         <label>
           Activities:
-          <input
+          <input style={{ marginLeft: "10px" }}
             type="text"
             name="activities"
             value={destination.activities}
             onChange={handleChange}
           />
         </label>
+      </div>
       </div>
       <br></br>
       <Button type="submit">
