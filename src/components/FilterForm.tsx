@@ -52,12 +52,14 @@ export function FilterForm({
                                     paddingRight: 10
                                 }}
                             >
-                                Min:
+                                Min:  
                                 <input
                                     type="number"
                                     name="min"
                                     value={newPrices.min}
                                     onChange={handleChange}
+                                    style={{ width: "70%", marginLeft: "10px" }}
+
                                 />
                             </Form.Label>
                         </Form.Group>
@@ -77,12 +79,15 @@ export function FilterForm({
                                     name="max"
                                     value={newPrices.max}
                                     onChange={handleChange}
+                                    style={{ width: "70%", marginLeft: "10px"  }}
                                 />
                             </Form.Label>
                         </Form.Group>
                     </Col>
                     <Col>
+                    <div style={{ textAlign: "right" }}>
                         <Button type="submit">Filter</Button>
+                    </div>
                     </Col>
                 </Row>
             </form>
