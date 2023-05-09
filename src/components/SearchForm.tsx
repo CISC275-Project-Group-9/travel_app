@@ -54,6 +54,7 @@ export function SearchForm({
                                     onChange={handleChange}
                                     style={{
                                         width: "100%",
+                                        minWidth: "100px"
                                     }}
                                 />
                             </Form.Label>
@@ -61,7 +62,7 @@ export function SearchForm({
                     </Col>
                     <Col></Col>
                     <Col>
-                    <div style={{ textAlign: "right" }}>
+                    <div style={{ textAlign: "right", minWidth: "50px" }}>
                         <Button type="submit">Search</Button>
                     </div>
                     </Col>

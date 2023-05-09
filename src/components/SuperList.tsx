@@ -1,16 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from "react";
 import { Destination } from "../interfaces/destination";
-import { Button } from "react-bootstrap";
 import { AddForm } from "./AddForm";
-import { useDrag } from "react-dnd";
 import { CentralListProps } from "../interfaces/props";
 import { DestItem } from "./DestItem";
 
 export function SuperList({centralList, setCentralList} : CentralListProps): JSX.Element {
-    // const [centralList, setCentralList] = useState<Destination[]>([]);
-    const [itinerary, setItinerary] = useState<Destination[]>([]);
-    const [userList, setUsers] = useState<Destination[]>([]);
 
     function newDestinationToList(newDestination: Destination) {
         if (!centralList.includes(newDestination)) {
@@ -18,56 +11,6 @@ export function SuperList({centralList, setCentralList} : CentralListProps): JSX
             setCentralList(newCentralList);
         }
     }
-
-    function reviewDestination(Destination: Destination) {
-        if (centralList.includes(Destination)) {
-            const newCentralList = [...centralList, Destination];
-            setCentralList(newCentralList);
-        }
-    }
-
-    function addDestination(newDestination: Destination) {
-        if (!itinerary.includes(newDestination)) {
-            const newItinerary = [...itinerary, newDestination];
-            setItinerary(newItinerary);
-        }
-    }
-
-    function removeDestination(destination: Destination) {
-        if (itinerary.includes(destination)) {
-            const id = destination.id;
-            const newItinerary = itinerary.filter(
-                (dest: Destination): boolean => dest.id !== id
-            );
-            setItinerary(newItinerary);
-        }
-    }
-
-    function clearItinerary() {
-        setItinerary([]);
-    }
-
-    const grid = 8;
-
-    const getItemStyle = (
-        isDragging: boolean,
-      ): React.CSSProperties => ({
-        // some basic styles to make the items look a bit nicer
-        userSelect: "none",
-        padding: grid * 2,
-        margin: `${grid}px ${grid}px 0 0`,
-        borderRadius: 5,
-      
-        // change background colour if dragging
-        background: isDragging ? "#6699CC" : "#BDBDBD",
-      });
-  
-      const [{ isDragging }, drag] = useDrag({
-        type: "destItem",
-        collect: (monitor) => ({
-            isDragging: monitor.isDragging()
-        })
-    })
 
     return (
         <div>

@@ -58,7 +58,7 @@ export function FilterForm({
                                     name="min"
                                     value={newPrices.min}
                                     onChange={handleChange}
-                                    style={{ width: "70%", marginLeft: "10px" }}
+                                    style={{ width: "70%", marginLeft: "10px", minWidth: "100px" }}
 
                                 />
                             </Form.Label>
@@ -79,7 +79,7 @@ export function FilterForm({
                                     name="max"
                                     value={newPrices.max}
                                     onChange={handleChange}
-                                    style={{ width: "70%", marginLeft: "10px"  }}
+                                    style={{ width: "70%", marginLeft: "10px", minWidth: "100px" }}
                                 />
                             </Form.Label>
                         </Form.Group>
