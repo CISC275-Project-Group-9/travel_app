@@ -4,11 +4,21 @@ import { Form } from "react-bootstrap";
 import { AdminList } from "./AdminList";
 import { SuperList } from "./SuperList";
 import "./RoleDropdown.css";
+import destinationsData from "../data/destinations.json"
+import { Destination } from "../interfaces/destination";
+
+
+const { DESTINATIONS }: Record<string, Destination[]> =
+      // Typecast the test data that we imported to be a record matching
+      //  strings to the question list
+      destinationsData as Record<string, Destination[]>;
 
 export function RoleDropdown(): JSX.Element {
   const ROLES = ["Basic", "Staff", "Faculty"];
   const DEFAULT_ROLE = ROLES[0];
   const [roleType, setRoleType] = useState<string>(DEFAULT_ROLE);
+  const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
+  const [itinerary, setItinerary] = useState<Destination[]>([]);
 
   function changeRole(event: React.ChangeEvent<HTMLSelectElement>) {
     setRoleType(event.target.value);
@@ -29,9 +39,9 @@ export function RoleDropdown(): JSX.Element {
         </Form.Group>
       </div>
       <div className="list-container">
-        {roleType === "Basic" ? <UserList></UserList> : null}
-        {roleType === "Staff" ? <AdminList></AdminList> : null}
-        {roleType === "Faculty" ? <SuperList></SuperList> : null}
+        {roleType === "Basic" ? <UserList centralList={centralList} setCentralList={setCentralList} itinerary={itinerary} setItinerary={setItinerary}></UserList> : null}
+        {roleType === "Staff" ? <AdminList centralList={centralList} setCentralList={setCentralList}></AdminList> : null}
+        {roleType === "Faculty" ? <SuperList centralList={centralList} setCentralList={setCentralList}></SuperList> : null}
       </div>
     </div>
   );

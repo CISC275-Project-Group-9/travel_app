@@ -8,17 +8,18 @@ import destinationsData from "../data/destinations.json";
 import { Button, Form, FormGroup } from "react-bootstrap";
 import { priceFilter, FilterForm } from "./FilterForm";
 import { SearchFilter, SearchForm } from "./SearchForm";
+import { UserListProps } from "../interfaces/props";
 
-export function UserList(): JSX.Element {
+export function UserList({centralList, setCentralList, itinerary, setItinerary}: UserListProps): JSX.Element {
   const { DESTINATIONS }: Record<string, Destination[]> =
     // Typecast the test data that we imported to be a record matching
     //  strings to the question list
     destinationsData as Record<string, Destination[]>;
 
-  const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
-  const [displayList, setDisplayList] = useState<Destination[]>(DESTINATIONS);
+  // const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
+  const [displayList, setDisplayList] = useState<Destination[]>(centralList);
   const [totalPrice, setPrice] = useState<number>(0);
-  const [itinerary, setItinerary] = useState<Destination[]>([]);
+  // const [itinerary, setItinerary] = useState<Destination[]>([]);
   const [totalDays, setTotalDays] = useState<number>(0);
 
   function updateDisplayVals() {
@@ -45,7 +46,8 @@ export function UserList(): JSX.Element {
     const addedDest = centralList.filter(
       (dest: Destination) => name === dest.name
     );
-    setItinerary((itinerary) => [...itinerary, addedDest[0]]);
+    // setItinerary((itinerary) => [...itinerary, addedDest[0]]);
+    setItinerary([...itinerary, addedDest[0]]);
   }
 
   const [{ isOver }, drop] = useDrop({
@@ -61,7 +63,7 @@ export function UserList(): JSX.Element {
     setDisplayList(
       newCentralList.filter(
         (dest: Destination): boolean =>
-          dest.cost > newPrices.min && dest.cost < newPrices.max
+          dest.cost >= newPrices.min && dest.cost <= newPrices.max
       )
     );
   }
