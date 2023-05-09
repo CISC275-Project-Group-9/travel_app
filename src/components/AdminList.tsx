@@ -1,52 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { Destination } from "../interfaces/destination";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import { useDrag } from "react-dnd";
 import "./UserList.css"; 
 import { CentralListProps } from "../interfaces/props";
-import destinationsData from "../data/destinations.json";
-
-// import {
-//   DragDropContext,
-//   Draggable,
-//   DraggingStyle,
-//   Droppable,
-//   DropResult,
-//   NotDraggingStyle
-// } from "react-beautiful-dnd";
-import { Form, FormGroup } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { DestItem } from "./DestItem";
 
-const { DESTINATIONS }: Record<string, Destination[]> =
-    // Typecast the test data that we imported to be a record matching
-    //  strings to the question list
-    destinationsData as Record<string, Destination[]>;
 
 const grid = 8;
-
-const getItemStyle = (
-  isDragging: boolean,
-): React.CSSProperties => ({
-  // some basic styles to make the items look a bit nicer
-  userSelect: "none",
-  padding: grid * 2,
-  margin: `0 0 ${grid}px 0`,
-  borderRadius: 5,
-
-  // change background colour if dragging
-  background: isDragging ? "#6699CC" : "#BDBDBD",
-
-  // styles we need to apply on draggables
-});
-
-const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
-  background: isDraggingOver ? "lightblue" : "lightgrey",
-  padding: grid,
-  width: 250
-});
 
 export function AdminList({centralList, setCentralList} : CentralListProps): JSX.Element {
     // const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
@@ -67,21 +28,6 @@ export function AdminList({centralList, setCentralList} : CentralListProps): JSX
       newCentralList.splice(findTarget, 1, newDest);
       setCentralList(newCentralList)
     }
-
-    
-    // function newDestinationToList(newDestination: Destination) {
-    //     if (!centralList.includes(newDestination)) {
-    //         const newCentralList = [...centralList, newDestination];
-    //         setCentralList(newCentralList);
-    //     }
-    // }
-
-    // function reviewDestination(Destination: Destination) {
-    //     if (centralList.includes(Destination)) {
-    //         const newCentralList = [...centralList, Destination];
-    //         setCentralList(newCentralList);
-    //     }
-    // }
 
     const getItemStyle = (
       isDragging: boolean,
@@ -130,9 +76,8 @@ export function AdminList({centralList, setCentralList} : CentralListProps): JSX
                     ></DestItem>
                   </div> 
                   : 
-                  // <Row>
                   <div className="panel panel-default" style={getItemStyle(isDragging)}>
-                    <Form.Group controlId="editDestination" style={{width: 1000}}>
+                    <Form.Group controlId="editDestination" style={{width: "75%"}}>
                       <Form.Label style={{display: "inline-block", float: "left", paddingRight: 10}}>Name</Form.Label>
                       <Form.Control defaultValue={dest.name} name="name" onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                               editDestination(event, dest.id)} />

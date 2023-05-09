@@ -175,7 +175,6 @@ export function UserList({centralList, setCentralList, itinerary, setItinerary}:
           <h5>Total Price: ${totalPrice} </h5>
           <h5>Total Days: {totalDays} </h5>
         </div>
-        {/* <div style={{backgroundColor: isOver ? "#6699CC" : "whitesmoke"}}/>  */}
         {itinerary.length === 0 ? (
           <p
             style={{
@@ -240,7 +239,6 @@ export function UserList({centralList, setCentralList, itinerary, setItinerary}:
             );
           })
         )}
-        {/* </div> */}
         {itinerary.length !== 0 ? (
           <Button onClick={clearItinerary}>Remove All</Button>
         ) : null}

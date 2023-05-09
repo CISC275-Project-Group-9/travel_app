@@ -13,11 +13,12 @@ export function AddForm({
 }: {
   onSubmit: (newDestination: Destination) => void;
 }) {
+  const [idNum, setIdNum] = useState<number>(40);
   const [destination, setDestination] = useState<Destination>({
-    id: randomInt(35,100),
+    id: idNum,
     name: "",
     description: "",
-    image: "ZZ.jpeg",
+    image: "panda.JPG",
     location: "",
     days: 0,
     cost: 0,
@@ -35,11 +36,12 @@ export function AddForm({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmit(destination);
+    setIdNum(idNum + 1);
     setDestination({
       id: randomInt(35,100),
       name: "",
       description: "",
-      image: "",
+      image: "panda.JPG",
       location: "",
       days: 0,
       cost: 0,
