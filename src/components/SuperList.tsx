@@ -3,9 +3,10 @@ import React, { useState } from "react";
 import { Destination } from "../interfaces/destination";
 import { Button } from "react-bootstrap";
 import { AddForm } from "./AddForm";
+import { CentralListProps } from "../interfaces/props";
 
-export function SuperList(): JSX.Element {
-    const [centralList, setCentralList] = useState<Destination[]>([]);
+export function SuperList({centralList, setCentralList} : CentralListProps): JSX.Element {
+    // const [centralList, setCentralList] = useState<Destination[]>([]);
     const [itinerary, setItinerary] = useState<Destination[]>([]);
     const [userList, setUsers] = useState<Destination[]>([]);
 

@@ -40,8 +40,8 @@ export function RoleDropdown(): JSX.Element {
       </div>
       <div className="list-container">
         {roleType === "Basic" ? <UserList centralList={centralList} setCentralList={setCentralList} itinerary={itinerary} setItinerary={setItinerary}></UserList> : null}
-        {roleType === "Staff" ? <AdminList></AdminList> : null}
-        {roleType === "Faculty" ? <SuperList></SuperList> : null}
+        {roleType === "Staff" ? <AdminList centralList={centralList} setCentralList={setCentralList}></AdminList> : null}
+        {roleType === "Faculty" ? <SuperList centralList={centralList} setCentralList={setCentralList}></SuperList> : null}
       </div>
     </div>
   );

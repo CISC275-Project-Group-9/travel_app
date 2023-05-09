@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useDrag } from "react-dnd";
 import "./UserList.css"; 
-
+import { CentralListProps } from "../interfaces/props";
 import destinationsData from "../data/destinations.json";
 
 import {
@@ -50,15 +50,15 @@ const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
   width: 250
 });
 
-export function AdminList(): JSX.Element {
-    const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
+export function AdminList({centralList, setCentralList} : CentralListProps): JSX.Element {
+    // const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
     const [editMode, setEditMode] = useState<boolean>(false);
 
 
     function editDestination(event: React.ChangeEvent<HTMLInputElement>, destId: number) {
-      const newItinerary: Destination[] = [...centralList];
+      const newCentralList: Destination[] = [...centralList];
       const findTarget = centralList.findIndex((destination: Destination): boolean => destination.id === destId);
-      const oldDest: Destination = {...newItinerary[findTarget]};
+      const oldDest: Destination = {...newCentralList[findTarget]};
       let newDest: Destination;
       if(event.target.name === "activities"){
         newDest = { ...oldDest, [event.target.name]: event.target.value.split(",") };
@@ -66,8 +66,8 @@ export function AdminList(): JSX.Element {
         newDest = { ...oldDest, [event.target.name]: event.target.value };
       }
       console.log("here" + event.target.name + " value: " + event.target.value)
-      newItinerary.splice(findTarget, 1, newDest);
-      setCentralList(newItinerary)
+      newCentralList.splice(findTarget, 1, newDest);
+      setCentralList(newCentralList)
     }
 
     

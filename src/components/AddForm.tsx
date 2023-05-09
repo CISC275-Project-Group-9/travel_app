@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { Destination } from "../interfaces/destination";
 
+
 export function AddForm({
   onSubmit,
 }: {
   onSubmit: (newDestination: Destination) => void;
 }) {
   const [destination, setDestination] = useState<Destination>({
-    id: 0,
+    id: 35,
     name: "",
     description: "",
-    image: "",
+    image: "ZZ.jpeg",
     location: "",
     days: 0,
     cost: 0,
@@ -19,14 +20,18 @@ export function AddForm({
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDestination({ ...destination, [event.target.name]: event.target.value });
+    if(event.target.name === "activities"){
+      setDestination({ ...destination, [event.target.name]: event.target.value.split(",") });
+    } else {
+      setDestination({ ...destination, [event.target.name]: event.target.value });
+    }
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmit(destination);
     setDestination({
-      id: 0,
+      id: 35,
       name: "",
       description: "",
       image: "",

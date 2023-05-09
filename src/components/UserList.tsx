@@ -17,7 +17,7 @@ export function UserList({centralList, setCentralList, itinerary, setItinerary}:
     destinationsData as Record<string, Destination[]>;
 
   // const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
-  const [displayList, setDisplayList] = useState<Destination[]>(DESTINATIONS);
+  const [displayList, setDisplayList] = useState<Destination[]>(centralList);
   const [totalPrice, setPrice] = useState<number>(0);
   // const [itinerary, setItinerary] = useState<Destination[]>([]);
   const [totalDays, setTotalDays] = useState<number>(0);
