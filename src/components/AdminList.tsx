@@ -28,7 +28,12 @@ export function AdminList({
         ...oldDest,
         [event.target.name]: event.target.value.split(","),
       };
-    } else {
+    } else if (event.target.name === "cost"){
+      newDest = {
+        ...oldDest,
+        [event.target.name]: event.target.valueAsNumber,
+      };
+    }else {
       newDest = { ...oldDest, [event.target.name]: event.target.value };
     }
     console.log("here" + event.target.name + " value: " + event.target.value);

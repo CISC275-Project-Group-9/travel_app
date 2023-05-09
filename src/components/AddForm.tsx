@@ -28,9 +28,15 @@ export function AddForm({
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if(event.target.name === "activities"){
       setDestination({ ...destination, [event.target.name]: event.target.value.split(",") });
-    } else {
+    } else if (event.target.name === "cost"){
+      setDestination({
+        ...destination,
+        [event.target.name]: event.target.valueAsNumber,
+      });
+    }else {
       setDestination({ ...destination, [event.target.name]: event.target.value });
     }
+
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -91,7 +97,7 @@ export function AddForm({
         <label>
           Cost:
           <input style={{ marginLeft: "10px" }}
-            type="text"
+            type="number"
             name="cost"
             value={destination.cost}
             onChange={handleChange}
