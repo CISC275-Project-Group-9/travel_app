@@ -21,11 +21,11 @@ export function AdminList({
     event: React.ChangeEvent<HTMLInputElement>,
     destId: number
   ) {
-    const newCentralList: Destination[] = [...centralList];
-    const findTarget = centralList.findIndex(
+    const newSharedList: Destination[] = [...sharedList];
+    const findTarget = sharedList.findIndex(
       (destination: Destination): boolean => destination.id === destId
     );
-    const oldDest: Destination = { ...newCentralList[findTarget] };
+    const oldDest: Destination = { ...newSharedList[findTarget] };
     let newDest: Destination;
     if (event.target.name === "activities") {
       newDest = {
@@ -41,8 +41,8 @@ export function AdminList({
       newDest = { ...oldDest, [event.target.name]: event.target.value };
     }
     console.log("here" + event.target.name + " value: " + event.target.value);
-    newCentralList.splice(findTarget, 1, newDest);
-    setCentralList(newCentralList);
+    newSharedList.splice(findTarget, 1, newDest);
+    setSharedList(newSharedList);
   }
 
   function addDestToShared(name: string) {
@@ -76,15 +76,9 @@ export function AdminList({
   return (
     <><div className="column-left">
       <h3>Destinations:</h3>
-      <p style={{ margin: 0 }}>Change Edit Mode</p>
-      <Form.Check
-        type="switch"
-        id="editModeSwitch"
-        checked={editMode}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setEditMode(event.target.checked)} />
       <div className="panel panel-default">
         {centralList.map((dest: Destination) => {
-          return !editMode ? (
+          return (
             <div key={dest.id}>
               <DestItem
                 id={dest.id}
@@ -98,94 +92,20 @@ export function AdminList({
                 activities={dest.activities}
               ></DestItem>
             </div>
-          ) : (
-            <div
-              className="panel panel-default"
-              style={{
-                userSelect: "none",
-                padding: grid * 2,
-                margin: `${grid}px ${grid}px 0 0`,
-                borderRadius: 5,
-                background: "#6699CC",
-              }}
-            >
-              <Form.Group controlId="editDestination" style={{ width: "75%" }}>
-                <Form.Label
-                  style={{
-                    display: "inline-block",
-                    float: "left",
-                    paddingRight: 10,
-                  }}
-                >
-                  Name
-                </Form.Label>
-                <Form.Control
-                  defaultValue={dest.name}
-                  name="name"
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => editDestination(event, dest.id)} />
-                <Form.Label
-                  style={{
-                    display: "inline-block",
-                    float: "left",
-                    paddingRight: 10,
-                  }}
-                >
-                  Description
-                </Form.Label>
-                <Form.Control
-                  defaultValue={dest.description}
-                  name="description"
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => editDestination(event, dest.id)} />
-                <Form.Label
-                  style={{
-                    display: "inline-block",
-                    float: "left",
-                    paddingRight: 10,
-                  }}
-                >
-                  Location
-                </Form.Label>
-                <Form.Control
-                  defaultValue={dest.location}
-                  name="location"
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => editDestination(event, dest.id)} />
-                <Form.Label
-                  style={{
-                    display: "inline-block",
-                    float: "left",
-                    paddingRight: 10,
-                  }}
-                >
-                  Cost
-                </Form.Label>
-                <Form.Control
-                  defaultValue={dest.cost}
-                  name="cost"
-                  type="number"
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => editDestination(event, dest.id)} />
-                <Form.Label
-                  style={{
-                    display: "inline-block",
-                    float: "left",
-                    paddingRight: 10,
-                  }}
-                >
-                  Activities
-                </Form.Label>
-                <Form.Control
-                  defaultValue={dest.activities}
-                  name="activities"
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => editDestination(event, dest.id)} />
-              </Form.Group>
-            </div>
           );
         })}
       </div>
     </div><div className="column-right" ref={drop}>
+    <p style={{ margin: 0 }}>Change Edit Mode</p>
+      <Form.Check
+        type="switch"
+        id="editModeSwitch"
+        checked={editMode}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setEditMode(event.target.checked)} />
         <h3>Shared List:</h3>
         <div className="panel panel-default">
           {sharedList.map((dest: Destination) => {
-            return (
+            return !editMode ? (
               <div key={dest.id}>
                 <DestItem
                   id={dest.id}
@@ -206,7 +126,87 @@ export function AdminList({
                             </Button>
                         </FormGroup>
               </div>
-            ) ; 
+            ): (
+              <div
+                className="panel panel-default"
+                style={{
+                  userSelect: "none",
+                  padding: grid * 2,
+                  margin: `${grid}px ${grid}px 0 0`,
+                  borderRadius: 5,
+                  background: "#6699CC",
+                }}
+              >
+                <Form.Group controlId="editDestination" style={{ width: "75%" }}>
+                  <Form.Label
+                    style={{
+                      display: "inline-block",
+                      float: "left",
+                      paddingRight: 10,
+                    }}
+                  >
+                    Name
+                  </Form.Label>
+                  <Form.Control
+                    defaultValue={dest.name}
+                    name="name"
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => editDestination(event, dest.id)} />
+                  <Form.Label
+                    style={{
+                      display: "inline-block",
+                      float: "left",
+                      paddingRight: 10,
+                    }}
+                  >
+                    Description
+                  </Form.Label>
+                  <Form.Control
+                    defaultValue={dest.description}
+                    name="description"
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => editDestination(event, dest.id)} />
+                  <Form.Label
+                    style={{
+                      display: "inline-block",
+                      float: "left",
+                      paddingRight: 10,
+                    }}
+                  >
+                    Location
+                  </Form.Label>
+                  <Form.Control
+                    defaultValue={dest.location}
+                    name="location"
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => editDestination(event, dest.id)} />
+                  <Form.Label
+                    style={{
+                      display: "inline-block",
+                      float: "left",
+                      paddingRight: 10,
+                    }}
+                  >
+                    Cost
+                  </Form.Label>
+                  <Form.Control
+                    defaultValue={dest.cost}
+                    name="cost"
+                    type="number"
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => editDestination(event, dest.id)} />
+                  <Form.Label
+                    style={{
+                      display: "inline-block",
+                      float: "left",
+                      paddingRight: 10,
+                    }}
+                  >
+                    Activities
+                  </Form.Label>
+                  <Form.Control
+                    defaultValue={dest.activities}
+                    name="activities"
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => editDestination(event, dest.id)} />
+                </Form.Group>
+              </div>
+            );
           })}
         </div>
       </div></>
