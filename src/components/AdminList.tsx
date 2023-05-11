@@ -4,7 +4,6 @@ import "./UserList.css";
 import { CentralListProps } from "../interfaces/props";
 import { DestItem } from "./DestItem";
 import { useDrop } from "react-dnd";
-import destinationsData from "../data/destinations.json";
 import { Button, Form, FormGroup } from "react-bootstrap";
 
 const grid = 8;
@@ -15,10 +14,6 @@ export function AdminList({
   sharedList,
   setSharedList
 }: CentralListProps): JSX.Element {
-  const { DESTINATIONS }: Record<string, Destination[]> =
-      // Typecast the test data that we imported to be a record matching
-      //  strings to the question list
-      destinationsData as Record<string, Destination[]>;
 
   const [editMode, setEditMode] = useState<boolean>(false);
 
@@ -58,7 +53,7 @@ export function AdminList({
       setSharedList([...sharedList, addedDest[0]]);
   }
 
-  const [{ isOver }, drop] = useDrop({
+  const [, drop] = useDrop({
       accept: "destItem",
       drop: (item: Destination) => addDestToShared(item.name),
       collect: (monitor) => ({

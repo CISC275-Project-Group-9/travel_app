@@ -1,13 +1,10 @@
 import { AddForm } from "./AddForm";
-import React, { useState } from "react";
 import { Destination } from "../interfaces/destination";
 import "./UserList.css";
 import { CentralListProps } from "../interfaces/props";
-import { Button, Form, FormGroup } from "react-bootstrap";
+import { Button, FormGroup } from "react-bootstrap";
 import { DestItem } from "./DestItem";
 import { useDrop } from "react-dnd";
-import destinationsData from "../data/destinations.json";
-
 
 export function SuperList({centralList, setCentralList, sharedList, setSharedList} : CentralListProps): JSX.Element {
 
@@ -26,7 +23,7 @@ export function SuperList({centralList, setCentralList, sharedList, setSharedLis
         setSharedList([...sharedList, addedDest[0]]);
     }
   
-    const [{ isOver }, drop] = useDrop({
+    const [, drop] = useDrop({
         accept: "destItem",
         drop: (item: Destination) => addDestToShared(item.name),
         collect: (monitor) => ({
