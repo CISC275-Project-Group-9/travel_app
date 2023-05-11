@@ -3,7 +3,6 @@ import { UserList } from "./UserList";
 import { Form } from "react-bootstrap";
 import { AdminList } from "./AdminList";
 import { SuperList } from "./SuperList";
-import { SharedList } from "./SharedList";
 import "./RoleDropdown.css";
 import destinationsData from "../data/destinations.json"
 import { Destination } from "../interfaces/destination";

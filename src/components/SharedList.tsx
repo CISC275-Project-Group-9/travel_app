@@ -5,7 +5,7 @@ import { DestItem } from "./DestItem";
 
 export function SharedList(): JSX.Element {
 
-    const [sharedList, setSharedList] = useState<Destination[]>([]);
+    const [sharedList] = useState<Destination[]>([]);
 
 
     return (
