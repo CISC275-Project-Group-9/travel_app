@@ -3,6 +3,7 @@ import { UserList } from "./UserList";
 import { Form } from "react-bootstrap";
 import { AdminList } from "./AdminList";
 import { SuperList } from "./SuperList";
+import { SharedList } from "./SharedList";
 import "./RoleDropdown.css";
 import destinationsData from "../data/destinations.json"
 import { Destination } from "../interfaces/destination";
@@ -19,6 +20,7 @@ export function RoleDropdown(): JSX.Element {
   const [roleType, setRoleType] = useState<string>(DEFAULT_ROLE);
   const [centralList, setCentralList] = useState<Destination[]>(DESTINATIONS);
   const [itinerary, setItinerary] = useState<Destination[]>([]);
+  const [sharedList, setSharedList] = useState<Destination[]>([]);
 
   function changeRole(event: React.ChangeEvent<HTMLSelectElement>) {
     setRoleType(event.target.value);
@@ -40,8 +42,8 @@ export function RoleDropdown(): JSX.Element {
       </div>
       <div className="list-container">
         {roleType === "Basic" ? <UserList centralList={centralList} setCentralList={setCentralList} itinerary={itinerary} setItinerary={setItinerary}></UserList> : null}
-        {roleType === "Staff" ? <AdminList centralList={centralList} setCentralList={setCentralList}></AdminList> : null}
-        {roleType === "Faculty" ? <SuperList centralList={centralList} setCentralList={setCentralList}></SuperList> : null}
+        {roleType === "Staff" ? <AdminList centralList={centralList} setCentralList={setCentralList} sharedList={sharedList} setSharedList={setSharedList}></AdminList> : null}
+        {roleType === "Faculty" ? <SuperList centralList={centralList} setCentralList={setCentralList} sharedList={sharedList} setSharedList={setSharedList}></SuperList> : null}
       </div>
     </div>
   );
