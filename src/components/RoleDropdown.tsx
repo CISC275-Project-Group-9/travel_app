@@ -7,6 +7,7 @@ import "./RoleDropdown.css";
 import destinationsData from "../data/destinations.json";
 import { Destination } from "../interfaces/destination";
 import { AddUserForm } from "./AddUserForm";
+import { DeleteUserForm } from "./DeleteUserForm";
 
 export interface User {
   id: number;
@@ -57,11 +58,18 @@ export function RoleDropdown(): JSX.Element {
     }
   }
 
-  function handleAddUser(event: React.ChangeEvent<HTMLSelectElement>) {
-    setRoleType(users.filter((user: User) => event.target.value === user.name)[0].role);
+  function selectUser(event: React.ChangeEvent<HTMLSelectElement>) {
+    setRoleType(
+      users.filter((user: User) => event.target.value === user.name)[0].role
+    );
     setCurrentUser(
       users.filter((user: User) => event.target.value === user.name)[0]
     );
+  }
+
+  function deleteUser(user: User) {
+    const newUsers = users.filter((u: User) => u.name !== user.name);
+    setUsers(newUsers);
   }
 
   function setItinerary(newItinerary: Destination[]) {
@@ -80,7 +88,7 @@ export function RoleDropdown(): JSX.Element {
       <div className="roleButton">
         <div className="dropdown-label">Choose your user:</div>
         <Form.Group controlId="userSelect">
-          <Form.Select value={currentUser.name} onChange={handleAddUser}>
+          <Form.Select value={currentUser.name} onChange={selectUser}>
             {users.map((user: User) => (
               <option key={user.name} value={user.name}>
                 {user.name}
@@ -93,7 +101,12 @@ export function RoleDropdown(): JSX.Element {
         <h5>Current User: {currentUser.name}</h5>
       </div>
       <div className="addUser">
-        {roleType === "Faculty" && (<AddUserForm onSubmit={addNewUser}></AddUserForm>)}
+        {roleType === "Faculty" && (
+          <>
+            <AddUserForm onSubmit={addNewUser} />
+            <DeleteUserForm onSubmit={deleteUser} users={users} />
+          </>
+        )}{" "}
       </div>
       <div className="list-container">
         {roleType === "Basic" && (

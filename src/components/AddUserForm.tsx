@@ -74,19 +74,9 @@ export function AddUserForm({ onSubmit }: { onSubmit: (u: User) => void }) {
                   display: "inline-block",
                   float: "left",
                   paddingRight: 10,
+                    marginBottom: "0px"
                 }}
-              >
-                Role:
-                {/* <input
-                  type="text"
-                  name="role"
-                  value={user.role}
-                  onChange={handleChange}
-                  style={{
-                    width: "100%",
-                    minWidth: "100px",
-                  }}
-                /> */}
+              >Role:
               </Form.Label>
               <select
                 name="role"
@@ -95,6 +85,7 @@ export function AddUserForm({ onSubmit }: { onSubmit: (u: User) => void }) {
                 style={{
                   width: "100%",
                   minWidth: "100px",
+                  height: "30px",
                 }}
               >
                 <option value="Basic">Basic</option>
