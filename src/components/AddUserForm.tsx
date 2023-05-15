@@ -55,6 +55,7 @@ export function AddUserForm({ onSubmit }: { onSubmit: (u: User) => void }) {
               >
                 Name:
                 <input
+                  data-testid="newUserName"
                   type="text"
                   name="name"
                   value={user.name}
