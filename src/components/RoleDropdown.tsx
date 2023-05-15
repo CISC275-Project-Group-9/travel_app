@@ -93,7 +93,7 @@ export function RoleDropdown(): JSX.Element {
         <h5>Current User: {currentUser.name}</h5>
       </div>
       <div className="addUser">
-        <AddUserForm onSubmit={addNewUser}></AddUserForm>
+        {roleType === "Faculty" && (<AddUserForm onSubmit={addNewUser}></AddUserForm>)}
       </div>
       <div className="list-container">
         {roleType === "Basic" && (
