@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { Destination } from "../interfaces/destination";
 import "./UserList.css";
 import { useDrop } from "react-dnd";
 import { DestItem } from "./DestItem";
-import destinationsData from "../data/destinations.json";
 import { Button, Form, FormGroup } from "react-bootstrap";
 import { priceFilter, FilterForm } from "./FilterForm";
 import { SearchFilter, SearchForm } from "./SearchForm";
@@ -15,14 +13,9 @@ export function UserList({
   centralList,
   setCentralList,
   itinerary,
-    setItinerary,
+  setItinerary,
   currentUser,
 }: UserListProps): JSX.Element {
-  const { DESTINATIONS }: Record<string, Destination[]> =
-    // Typecast the test data that we imported to be a record matching
-    //  strings to the question list
-    destinationsData as Record<string, Destination[]>;
-
   const [displayList, setDisplayList] = useState<Destination[]>(centralList);
   const [totalPrice, setPrice] = useState<number>(0);
   const [totalDays, setTotalDays] = useState<number>(0);

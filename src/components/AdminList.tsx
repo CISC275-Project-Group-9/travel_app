@@ -117,6 +117,7 @@ export function AdminList({
               newCentralList.splice(findTarget, 1, newDest);
             });
             setCentralList(newCentralList);
+            setSharedList([]);
           }}
         >
           Push changes
