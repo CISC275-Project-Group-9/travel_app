@@ -9,7 +9,6 @@ import React, { useState } from "react";
 
 const grid = 8;
 
-
 export function SuperList({
   centralList,
   setCentralList,
@@ -111,6 +110,24 @@ export function SuperList({
             setEditMode(event.target.checked)
           }
         />
+        <Button
+          onClick={() => {
+            const newCentralList = [...centralList];
+            const newSharedList = [...sharedList];
+            newSharedList.forEach((dest: Destination) => {
+              const findTarget = centralList.findIndex(
+                (destination: Destination): boolean =>
+                  destination.id === dest.id
+              );
+              const oldDest: Destination = { ...newCentralList[findTarget] };
+              const newDest: Destination = { ...oldDest, ...dest };
+              newCentralList.splice(findTarget, 1, newDest);
+            });
+            setCentralList(newCentralList);
+          }}
+        >
+          Push changes
+        </Button>
         <h3>Shared List:</h3>
         <div className="panel panel-default">
           {sharedList.map((dest: Destination) => {

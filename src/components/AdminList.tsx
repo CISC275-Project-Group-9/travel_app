@@ -12,9 +12,8 @@ export function AdminList({
   centralList,
   setCentralList,
   sharedList,
-  setSharedList
+  setSharedList,
 }: CentralListProps): JSX.Element {
-
   const [editMode, setEditMode] = useState<boolean>(false);
 
   function editDestination(
@@ -32,12 +31,12 @@ export function AdminList({
         ...oldDest,
         [event.target.name]: event.target.value.split(","),
       };
-    } else if (event.target.name === "cost"){
+    } else if (event.target.name === "cost") {
       newDest = {
         ...oldDest,
         [event.target.name]: event.target.valueAsNumber,
       };
-    }else {
+    } else {
       newDest = { ...oldDest, [event.target.name]: event.target.value };
     }
     console.log("here" + event.target.name + " value: " + event.target.value);
@@ -46,62 +45,82 @@ export function AdminList({
   }
 
   function addDestToShared(name: string) {
-      console.log(name);
-      const addedDest = centralList.filter(
-          (dest: Destination) => name === dest.name
-      );
-      setSharedList([...sharedList, addedDest[0]]);
+    console.log(name);
+    const addedDest = centralList.filter(
+      (dest: Destination) => name === dest.name
+    );
+    setSharedList([...sharedList, addedDest[0]]);
   }
 
   const [, drop] = useDrop({
-      accept: "destItem",
-      drop: (item: Destination) => addDestToShared(item.name),
-      collect: (monitor) => ({
-          isOver: !!monitor.isOver()
-      })
+    accept: "destItem",
+    drop: (item: Destination) => addDestToShared(item.name),
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    }),
   });
 
   function removeDestination(id: number) {
-    const index = sharedList.findIndex(
-        (dest: Destination) => dest.id === id
-    );
+    const index = sharedList.findIndex((dest: Destination) => dest.id === id);
     if (index !== -1) {
-        const newItinerary = [...sharedList];
-        newItinerary.splice(index, 1);
-        setSharedList(newItinerary);
+      const newItinerary = [...sharedList];
+      newItinerary.splice(index, 1);
+      setSharedList(newItinerary);
     }
-}
-
+  }
 
   return (
-    <><div className="column-left">
-      <h3>Destinations:</h3>
-      <div className="panel panel-default">
-        {centralList.map((dest: Destination) => {
-          return (
-            <div key={dest.id}>
-              <DestItem
-                id={dest.id}
-                key={dest.id}
-                name={dest.name}
-                description={dest.description}
-                image={dest.image}
-                location={dest.location}
-                cost={dest.cost}
-                days={dest.days}
-                activities={dest.activities}
-              ></DestItem>
-            </div>
-          );
-        })}
+    <>
+      <div className="column-left">
+        <h3>Destinations:</h3>
+        <div className="panel panel-default">
+          {centralList.map((dest: Destination) => {
+            return (
+              <div key={dest.id}>
+                <DestItem
+                  id={dest.id}
+                  key={dest.id}
+                  name={dest.name}
+                  description={dest.description}
+                  image={dest.image}
+                  location={dest.location}
+                  cost={dest.cost}
+                  days={dest.days}
+                  activities={dest.activities}
+                ></DestItem>
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div><div className="column-right" ref={drop}>
-    <p style={{ margin: 0 }}>Change Edit Mode</p>
-      <Form.Check
-        type="switch"
-        id="editModeSwitch"
-        checked={editMode}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setEditMode(event.target.checked)} />
+      <div className="column-right" ref={drop}>
+        <p style={{ margin: 0 }}>Change Edit Mode</p>
+        <Form.Check
+          type="switch"
+          id="editModeSwitch"
+          checked={editMode}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setEditMode(event.target.checked)
+          }
+        />
+        <Button
+          onClick={() => {
+            const newCentralList = [...centralList];
+            const newSharedList = [...sharedList];
+            newSharedList.forEach((dest: Destination) => {
+              const findTarget = centralList.findIndex(
+                (destination: Destination): boolean =>
+                  destination.id === dest.id
+              );
+              const oldDest: Destination = { ...newCentralList[findTarget] };
+              const newDest: Destination = { ...oldDest, ...dest };
+              newCentralList.splice(findTarget, 1, newDest);
+            });
+            setCentralList(newCentralList);
+          }}
+        >
+          Push changes
+        </Button>
         <h3>Shared List:</h3>
         <div className="panel panel-default">
           {sharedList.map((dest: Destination) => {
@@ -119,14 +138,10 @@ export function AdminList({
                   activities={dest.activities}
                 ></DestItem>
                 <FormGroup controlId="formChangeDuration">
-                            <Button
-                                onClick={() => removeDestination(dest.id)}
-                            >
-                                ❌
-                            </Button>
-                        </FormGroup>
+                  <Button onClick={() => removeDestination(dest.id)}>❌</Button>
+                </FormGroup>
               </div>
-            ): (
+            ) : (
               <div
                 className="panel panel-default"
                 style={{
@@ -137,7 +152,10 @@ export function AdminList({
                   background: "#6699CC",
                 }}
               >
-                <Form.Group controlId="editDestination" style={{ width: "75%" }}>
+                <Form.Group
+                  controlId="editDestination"
+                  style={{ width: "75%" }}
+                >
                   <Form.Label
                     style={{
                       display: "inline-block",
@@ -150,7 +168,10 @@ export function AdminList({
                   <Form.Control
                     defaultValue={dest.name}
                     name="name"
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => editDestination(event, dest.id)} />
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                      editDestination(event, dest.id)
+                    }
+                  />
                   <Form.Label
                     style={{
                       display: "inline-block",
@@ -163,7 +184,10 @@ export function AdminList({
                   <Form.Control
                     defaultValue={dest.description}
                     name="description"
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => editDestination(event, dest.id)} />
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                      editDestination(event, dest.id)
+                    }
+                  />
                   <Form.Label
                     style={{
                       display: "inline-block",
@@ -176,7 +200,10 @@ export function AdminList({
                   <Form.Control
                     defaultValue={dest.location}
                     name="location"
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => editDestination(event, dest.id)} />
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                      editDestination(event, dest.id)
+                    }
+                  />
                   <Form.Label
                     style={{
                       display: "inline-block",
@@ -190,7 +217,10 @@ export function AdminList({
                     defaultValue={dest.cost}
                     name="cost"
                     type="number"
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => editDestination(event, dest.id)} />
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                      editDestination(event, dest.id)
+                    }
+                  />
                   <Form.Label
                     style={{
                       display: "inline-block",
@@ -203,12 +233,16 @@ export function AdminList({
                   <Form.Control
                     defaultValue={dest.activities}
                     name="activities"
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => editDestination(event, dest.id)} />
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                      editDestination(event, dest.id)
+                    }
+                  />
                 </Form.Group>
               </div>
             );
           })}
         </div>
-      </div></>
+      </div>
+    </>
   );
 }
