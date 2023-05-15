@@ -1,5 +1,5 @@
 import { Destination } from "./destination"
-
+import { User } from "../components/RoleDropdown"
 
 export interface CentralListProps {
     centralList: Destination[]
@@ -13,4 +13,5 @@ export interface UserListProps {
     setCentralList: (newCentralList: Destination[]) => void
     itinerary: Destination[]
     setItinerary: (newItinerary: Destination[]) => void
+    currentUser: User
 }
