@@ -124,6 +124,7 @@ export function SuperList({
               newCentralList.splice(findTarget, 1, newDest);
             });
             setCentralList(newCentralList);
+            setSharedList([]);
           }}
         >
           Push changes
