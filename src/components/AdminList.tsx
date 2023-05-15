@@ -45,11 +45,13 @@ export function AdminList({
   }
 
   function addDestToShared(name: string) {
-    console.log(name);
-    const addedDest = centralList.filter(
+    const addedDest = centralList.find(
       (dest: Destination) => name === dest.name
     );
-    setSharedList([...sharedList, addedDest[0]]);
+    if (addedDest && !sharedList.some((dest: Destination) => dest.id === addedDest.id)) {
+      const newDest = { ...addedDest };
+      setSharedList([...sharedList, newDest]);
+    }
   }
 
   const [, drop] = useDrop({
@@ -108,13 +110,15 @@ export function AdminList({
             const newCentralList = [...centralList];
             const newSharedList = [...sharedList];
             newSharedList.forEach((dest: Destination) => {
-              const findTarget = centralList.findIndex(
+              const findTarget = newCentralList.findIndex(
                 (destination: Destination): boolean =>
                   destination.id === dest.id
               );
-              const oldDest: Destination = { ...newCentralList[findTarget] };
-              const newDest: Destination = { ...oldDest, ...dest };
-              newCentralList.splice(findTarget, 1, newDest);
+              if (findTarget !== -1) {
+                const oldDest: Destination = newCentralList[findTarget];
+                const newDest: Destination = { ...dest, id: oldDest.id };
+                newCentralList[findTarget] = newDest;
+              }
             });
             setCentralList(newCentralList);
             setSharedList([]);
