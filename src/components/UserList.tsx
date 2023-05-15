@@ -9,6 +9,7 @@ import { Button, Form, FormGroup } from "react-bootstrap";
 import { priceFilter, FilterForm } from "./FilterForm";
 import { SearchFilter, SearchForm } from "./SearchForm";
 import { UserListProps } from "../interfaces/props";
+import { Sort, SortForm } from "./SortForm";
 
 export function UserList({
   centralList,
@@ -82,6 +83,18 @@ export function UserList({
     );
   }
 
+  function handleSort(sort: Sort) {
+    const newCentralList = [...centralList];
+    if (sort.sortQuery === "State") {
+        newCentralList.sort((a, b) => (a.location > b.location) ? 1 : -1)
+    } else if (sort.sortQuery === "Cost") {
+        newCentralList.sort((a, b) => (a.cost > b.cost) ? 1 : -1)
+    } else if (sort.sortQuery === "CostDesc") {
+        newCentralList.sort((a, b) => (a.cost < b.cost) ? 1 : -1)
+    } 
+    setDisplayList(newCentralList);
+  }
+
   function setDays(event: React.ChangeEvent<HTMLInputElement>, destId: number) {
     const newItinerary: Destination[] = [...itinerary];
     const findTarget = itinerary.findIndex(
@@ -137,6 +150,9 @@ export function UserList({
           <div style={{ paddingBottom: "20px" }}>
             <FilterForm onSubmit={filterByPrice}></FilterForm>
           </div>
+            <div style={{ paddingBottom: "20px" }}>
+                <SortForm onSubmit={handleSort}></SortForm>
+            </div>
           <div style={{ textAlign: "right" }}>
             <Button type="submit" onClick={reset}>
               Reset
