@@ -48,8 +48,11 @@ export function AdminList({
     const addedDest = centralList.filter(
       (dest: Destination) => name === dest.name
     );
-    const newDest = { ...addedDest[0], id: sharedList.length + 1 };
-    setSharedList([...sharedList, newDest]);
+    const newDest = { ...addedDest[0] };
+    if (!sharedList.some((dest: Destination) => dest.id === newDest.id)) {
+      setSharedList([...sharedList, newDest]);
+    }
+    
   }
 
   const [, drop] = useDrop({
