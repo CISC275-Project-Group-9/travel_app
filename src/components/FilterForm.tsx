@@ -34,8 +34,6 @@ export function FilterForm({
         });
     };
 
-    //const notify = () => toast("Business added sucessfully to Browse!");
-
     return (
         <div>
             <form onSubmit={handleSubmit}>
