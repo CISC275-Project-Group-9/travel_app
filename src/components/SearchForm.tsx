@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
-export interface SearchFilter {
-    searchQuery: string;
-}
+import { SearchFilter } from "../interfaces/filterSort";
 
 export function SearchForm({
     onSubmit

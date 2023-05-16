@@ -5,6 +5,11 @@ import { CentralListProps } from "../interfaces/props";
 import { DestItem } from "./DestItem";
 import { useDrop } from "react-dnd";
 import { Button, Form, FormGroup } from "react-bootstrap";
+import { FilterForm } from "./FilterForm";
+import { SearchForm } from "./SearchForm";
+import { SortForm } from "./SortForm";
+import { priceFilter, Sort, SearchFilter } from "../interfaces/filterSort";
+
 
 const grid = 8;
 
@@ -14,6 +19,7 @@ export function AdminList({
   sharedList,
   setSharedList,
 }: CentralListProps): JSX.Element {
+  const [displayList, setDisplayList] = useState<Destination[]>(centralList);
   const [editMode, setEditMode] = useState<boolean>(false);
 
   function editDestination(
@@ -48,7 +54,10 @@ export function AdminList({
     const addedDest = centralList.find(
       (dest: Destination) => name === dest.name
     );
-    if (addedDest && !sharedList.some((dest: Destination) => dest.id === addedDest.id)) {
+    if (
+      addedDest &&
+      !sharedList.some((dest: Destination) => dest.id === addedDest.id)
+    ) {
       const newDest = { ...addedDest };
       setSharedList([...sharedList, newDest]);
     }
@@ -71,12 +80,90 @@ export function AdminList({
     }
   }
 
+  const onClick = async () => {
+    const newCentralList = [...centralList];
+    const newSharedList = [...sharedList];
+    newSharedList.forEach((dest: Destination) => {
+      const findTarget = newCentralList.findIndex(
+        (destination: Destination): boolean => destination.id === dest.id
+      );
+      if (findTarget !== -1) {
+        const oldDest: Destination = newCentralList[findTarget];
+        const newDest: Destination = { ...dest, id: oldDest.id };
+        newCentralList[findTarget] = newDest;
+      }
+    });
+    setCentralList(newCentralList);
+    setSharedList([]);
+  };
+
+  function filterByPrice(newPrices: priceFilter) {
+    const newCentralList = [...centralList];
+    setDisplayList(
+      newCentralList.filter(
+        (dest: Destination): boolean =>
+          dest.cost >= newPrices.min && dest.cost <= newPrices.max
+      )
+    );
+  }
+
+  function filterByLoc(sq: SearchFilter) {
+    const newCentralList = [...centralList];
+    setDisplayList(
+      newCentralList.filter((dest: Destination): boolean =>
+        dest.location.toLowerCase().includes(sq.searchQuery.toLowerCase())
+      )
+    );
+  }
+
+  function handleSort(sort: Sort) {
+    const newCentralList = [...centralList];
+    if (sort.sortQuery === "State") {
+        newCentralList.sort((a, b) => (a.location > b.location) ? 1 : -1)
+    } else if (sort.sortQuery === "Cost") {
+        newCentralList.sort((a, b) => (a.cost > b.cost) ? 1 : -1)
+    } else if (sort.sortQuery === "CostDesc") {
+        newCentralList.sort((a, b) => (a.cost < b.cost) ? 1 : -1)
+    } 
+    setDisplayList(newCentralList);
+  }
+
+  function reset() {
+    setDisplayList(centralList);
+  }
+
   return (
     <>
       <div className="column-left">
         <h3>Destinations:</h3>
+        <br></br>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            backgroundColor: "gray",
+            borderRadius: "10px",
+            padding: "10px",
+            background: "#BDBDBD",
+          }}
+        >
+          <div style={{ paddingBottom: "20px" }}>
+            <SearchForm onSubmit={filterByLoc}></SearchForm>
+          </div>
+          <div style={{ paddingBottom: "20px" }}>
+            <FilterForm onSubmit={filterByPrice}></FilterForm>
+          </div>
+            <div style={{ paddingBottom: "20px" }}>
+                <SortForm onSubmit={handleSort}></SortForm>
+            </div>
+          <div style={{ textAlign: "right" }}>
+            <Button type="submit" onClick={reset}>
+              Reset
+            </Button>
+          </div>
+        </div>
         <div className="panel panel-default">
-          {centralList.map((dest: Destination) => {
+        {displayList.map((dest: Destination) => {
             return (
               <div key={dest.id}>
                 <DestItem
@@ -93,6 +180,25 @@ export function AdminList({
               </div>
             );
           })}
+          {displayList.length === 0 ? (
+            <p
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                borderRadius: "10px",
+                padding: "10px",
+                paddingTop: "100px",
+                paddingBottom: "100px",
+                background: "#BDBDBD",
+                width: "90%",
+                marginLeft: "auto",
+                marginRight: "auto",
+                marginTop: "20px",
+              }}
+            >
+              No destinations matched your search
+            </p>
+          ) : null}
         </div>
       </div>
       <div className="column-right" ref={drop}>
@@ -105,27 +211,7 @@ export function AdminList({
             setEditMode(event.target.checked)
           }
         />
-        <Button
-          onClick={() => {
-            const newCentralList = [...centralList];
-            const newSharedList = [...sharedList];
-            newSharedList.forEach((dest: Destination) => {
-              const findTarget = newCentralList.findIndex(
-                (destination: Destination): boolean =>
-                  destination.id === dest.id
-              );
-              if (findTarget !== -1) {
-                const oldDest: Destination = newCentralList[findTarget];
-                const newDest: Destination = { ...dest, id: oldDest.id };
-                newCentralList[findTarget] = newDest;
-              }
-            });
-            setCentralList(newCentralList);
-            setSharedList([]);
-          }}
-        >
-          Push changes
-        </Button>
+        <Button onClick={onClick}>Push changes</Button>
         <h3>Shared List:</h3>
         <div className="panel panel-default">
           {sharedList.map((dest: Destination) => {
