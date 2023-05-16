@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
-export interface priceFilter {
-    min: number;
-    max: number;
-}
+import { priceFilter } from "../interfaces/filterSort";
 
 export function FilterForm({
     onSubmit

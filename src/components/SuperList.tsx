@@ -6,7 +6,11 @@ import { Button, FormGroup, Form } from "react-bootstrap";
 import { DestItem } from "./DestItem";
 import { useDrop } from "react-dnd";
 import React, { useState } from "react";
-
+import { FilterForm } from "./FilterForm";
+import { SearchForm } from "./SearchForm";
+import { SortForm } from "./SortForm";
+import { priceFilter, Sort, SearchFilter } from "../interfaces/filterSort";
+import { SearchDescForm } from "./SearchDescForm";
 const grid = 8;
 
 export function SuperList({
@@ -15,6 +19,7 @@ export function SuperList({
   sharedList,
   setSharedList,
 }: CentralListProps): JSX.Element {
+  const [displayList, setDisplayList] = useState<Destination[]>(centralList);
   const [editMode, setEditMode] = useState<boolean>(false);
 
   function editDestination(
@@ -77,27 +82,135 @@ export function SuperList({
     }
   }
 
+  function removeDestFromCentral(id: number) {
+    const index = centralList.findIndex((dest: Destination) => dest.id === id);
+    if (index !== -1) {
+      const newCentralList = [...centralList];
+      newCentralList.splice(index, 1);
+      setCentralList(newCentralList);
+    }
+    // doesnt remove from shared or itinerary if its there
+  }
+
+    function filterByPrice(newPrices: priceFilter) {
+    const newCentralList = [...centralList];
+    setDisplayList(
+      newCentralList.filter(
+        (dest: Destination): boolean =>
+          dest.cost >= newPrices.min && dest.cost <= newPrices.max
+      )
+    );
+  }
+
+  function filterByLoc(sq: SearchFilter) {
+    const newCentralList = [...centralList];
+    setDisplayList(
+      newCentralList.filter((dest: Destination): boolean =>
+        dest.location.toLowerCase().includes(sq.searchQuery.toLowerCase())
+      )
+    );
+  }
+
+  function filterByDesc(sq: SearchFilter) {
+    const newCentralList = [...centralList];
+    setDisplayList(
+      newCentralList.filter((dest: Destination): boolean =>
+        dest.description.toLowerCase().includes(sq.searchQuery.toLowerCase())
+      )
+    );
+  }
+
+  function handleSort(sort: Sort) {
+    const newCentralList = [...centralList];
+    if (sort.sortQuery === "State") {
+        newCentralList.sort((a, b) => (a.location > b.location) ? 1 : -1)
+    } else if (sort.sortQuery === "Cost") {
+        newCentralList.sort((a, b) => (a.cost > b.cost) ? 1 : -1)
+    } else if (sort.sortQuery === "CostDesc") {
+        newCentralList.sort((a, b) => (a.cost < b.cost) ? 1 : -1)
+    } 
+    setDisplayList(newCentralList);
+  }
+
+  function reset() {
+    setDisplayList(centralList);
+  }
+
   return (
     <>
       <div className="column-left">
         <h3>Destinations:</h3>
-        <AddForm onSubmit={newDestinationToList}></AddForm>
+        <AddForm onSubmit={newDestinationToList}></AddForm><br></br>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            backgroundColor: "gray",
+            borderRadius: "10px",
+            padding: "10px",
+            background: "#BDBDBD",
+          }}
+        >
+          <div style={{ paddingBottom: "20px" }}>
+            <SearchForm onSubmit={filterByLoc}></SearchForm>
+          </div>
+          <div style={{ paddingBottom: "20px" }}>
+            <SearchDescForm onSubmit={filterByDesc}></SearchDescForm>
+          </div>
+          <div style={{ paddingBottom: "20px" }}>
+            <FilterForm onSubmit={filterByPrice}></FilterForm>
+          </div>
+          <div style={{ paddingBottom: "20px" }}>
+            <SortForm onSubmit={handleSort}></SortForm>
+          </div>
+          <div style={{ textAlign: "right" }}>
+            <Button type="submit" onClick={reset}>
+              Reset
+            </Button>
+          </div>
+        </div>
         <div>
-          {centralList.map((dest: Destination) => {
+          {displayList.map((dest: Destination) => {
             return (
-              <DestItem
-                id={dest.id}
-                key={dest.id}
-                name={dest.name}
-                description={dest.description}
-                image={dest.image}
-                location={dest.location}
-                cost={dest.cost}
-                days={dest.days}
-                activities={dest.activities}
-              ></DestItem>
+              <div key={dest.id}>
+                <DestItem
+                  id={dest.id}
+                  key={dest.id}
+                  name={dest.name}
+                  description={dest.description}
+                  image={dest.image}
+                  location={dest.location}
+                  cost={dest.cost}
+                  days={dest.days}
+                  activities={dest.activities}
+                ></DestItem>
+                <FormGroup controlId="formChangeDuration">
+                  <Button onClick={() => removeDestFromCentral(dest.id)}>
+                    ❌
+                  </Button>
+                </FormGroup>
+              </div>
             );
           })}
+          {displayList.length === 0 ? (
+            <p
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                borderRadius: "10px",
+                padding: "10px",
+                paddingTop: "100px",
+                paddingBottom: "100px",
+                background: "#BDBDBD",
+                width: "90%",
+                marginLeft: "auto",
+                marginRight: "auto",
+                marginTop: "20px",
+              }}
+            >
+              No destinations matched your search
+            </p>
+          ) : null}
         </div>
       </div>
       <div className="column-right" ref={drop}>

@@ -4,15 +4,17 @@ import "./UserList.css";
 import { useDrop } from "react-dnd";
 import { DestItem } from "./DestItem";
 import { Button, Form, FormGroup } from "react-bootstrap";
-import { priceFilter, FilterForm } from "./FilterForm";
-import { SearchFilter, SearchForm } from "./SearchForm";
+import { FilterForm } from "./FilterForm";
+import { SearchForm } from "./SearchForm";
 import { UserListProps } from "../interfaces/props";
 import { Sort, SortForm } from "./SortForm";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import { SortForm } from "./SortForm";
+import { Sort, priceFilter, SearchFilter } from "../interfaces/filterSort";
+import { SearchDescForm } from "./SearchDescForm";
 
 export function UserList({
   centralList,
-  setCentralList,
   itinerary,
   setItinerary,
   currentUser,
@@ -57,6 +59,43 @@ export function UserList({
     }),
   });
 
+  const [{ isOverDisplay }, dropOnDisplay] = useDrop({
+    accept: "destItem",
+    drop: (item: Destination, monitor) => {
+      const draggedItem = monitor.getItem();
+      const draggedIndex = displayList.findIndex(
+        (dest: Destination) => dest.name === draggedItem.name
+      );
+      const { y } = monitor.getDifferenceFromInitialOffset() || { y: 0 };
+      const distanceInPixels = Math.abs(y);
+
+      if (distanceInPixels >= 20) {
+        const direction = y > 0 ? 1 : -1;
+        const droppedIndex = draggedIndex + direction;
+        reorderDisplay(item, draggedIndex, droppedIndex);
+      }
+    },
+    collect: (monitor) => ({
+      isOverDisplay: !!monitor.isOver(),
+    }),
+  });
+
+  const reorderDisplay = (
+    draggedItem: Destination,
+    draggedIndex: number,
+    droppedIndex: number
+  ) => {
+    if (draggedIndex === -1 || droppedIndex === -1) {
+      return;
+    }
+
+    const updatedCentralList = [...centralList];
+    const [removedItem] = updatedCentralList.splice(draggedIndex, 1);
+    updatedCentralList.splice(droppedIndex, 0, removedItem);
+
+    setDisplayList(updatedCentralList);
+  };
+
   function filterByPrice(newPrices: priceFilter) {
     const newCentralList = [...centralList];
     setDisplayList(
@@ -76,15 +115,24 @@ export function UserList({
     );
   }
 
+  function filterByDesc(sq: SearchFilter) {
+    const newCentralList = [...centralList];
+    setDisplayList(
+      newCentralList.filter((dest: Destination): boolean =>
+        dest.description.toLowerCase().includes(sq.searchQuery.toLowerCase())
+      )
+    );
+  }
+
   function handleSort(sort: Sort) {
     const newCentralList = [...centralList];
     if (sort.sortQuery === "State") {
-        newCentralList.sort((a, b) => (a.location > b.location) ? 1 : -1)
+      newCentralList.sort((a, b) => (a.location > b.location ? 1 : -1));
     } else if (sort.sortQuery === "Cost") {
-        newCentralList.sort((a, b) => (a.cost > b.cost) ? 1 : -1)
+      newCentralList.sort((a, b) => (a.cost > b.cost ? 1 : -1));
     } else if (sort.sortQuery === "CostDesc") {
-        newCentralList.sort((a, b) => (a.cost < b.cost) ? 1 : -1)
-    } 
+      newCentralList.sort((a, b) => (a.cost < b.cost ? 1 : -1));
+    }
     setDisplayList(newCentralList);
   }
 
@@ -197,7 +245,7 @@ export function UserList({
           style={{
             display: "flex",
             flexDirection: "column",
-            backgroundColor: "gray",
+            backgroundColor: isOverDisplay ? "gray" : "gray",
             borderRadius: "10px",
             padding: "10px",
             background: "#BDBDBD",
@@ -207,11 +255,14 @@ export function UserList({
             <SearchForm onSubmit={filterByLoc}></SearchForm>
           </div>
           <div style={{ paddingBottom: "20px" }}>
+            <SearchDescForm onSubmit={filterByDesc}></SearchDescForm>
+          </div>
+          <div style={{ paddingBottom: "20px" }}>
             <FilterForm onSubmit={filterByPrice}></FilterForm>
           </div>
-            <div style={{ paddingBottom: "20px" }}>
-                <SortForm onSubmit={handleSort}></SortForm>
-            </div>
+          <div style={{ paddingBottom: "20px" }}>
+            <SortForm onSubmit={handleSort}></SortForm>
+          </div>
           <div style={{ textAlign: "right" }}>
             <Button type="submit" onClick={reset}>
               Reset
@@ -220,7 +271,7 @@ export function UserList({
         </div>
         <br></br>
         <br></br>
-        <div className="panel panel-default">
+        <div className="panel panel-default" ref={dropOnDisplay}>
           {displayList.map((dest: Destination) => {
             return (
               <div key={dest.id}>

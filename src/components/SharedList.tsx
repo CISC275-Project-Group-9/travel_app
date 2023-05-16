@@ -4,9 +4,7 @@ import "./UserList.css";
 import { DestItem } from "./DestItem";
 
 export function SharedList(): JSX.Element {
-
     const [sharedList] = useState<Destination[]>([]);
-
 
     return (
         <div>

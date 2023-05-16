@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { SearchFilter } from "../interfaces/filterSort";
 
-export function SearchForm({
+export function SearchDescForm({
     onSubmit
 }: {
     onSubmit: (sq: SearchFilter) => void;
@@ -33,7 +33,7 @@ export function SearchForm({
             <form onSubmit={handleSubmit}>
                 <Row>
                     <Col>
-                        <h5>Search by State Abbreviation:</h5>
+                        <h5>Filter by Description contains word:</h5>
                     </Col>
                     <Col>
                         <Form.Group controlId="formName">
