@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Destination } from "../interfaces/destination";
 import "./UserList.css";
-import { useDrop, useDrag } from "react-dnd";
+import { useDrop } from "react-dnd";
 import { DestItem } from "./DestItem";
 import { Button, Form, FormGroup } from "react-bootstrap";
 import { priceFilter, FilterForm } from "./FilterForm";
 import { SearchFilter, SearchForm } from "./SearchForm";
 import { UserListProps } from "../interfaces/props";
 import { Sort, SortForm } from "./SortForm";
-import { SortableContainer, SortableElement, SortableHandle } from "react-sortable-hoc";
+import { SortableContainer, SortableElement } from "react-sortable-hoc";
 
 export function UserList({
   centralList,
