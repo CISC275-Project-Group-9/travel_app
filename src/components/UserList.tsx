@@ -164,7 +164,29 @@ export function UserList({
     </div>
   ));
 
+  const SortableList = SortableContainer(
+    ({ itinerary }: { itinerary: Destination[] }) => {
+      return (
+        <div>
+          {itinerary.map((dest: Destination, index) => (
+            <SortableItem
+              key={dest.id}
+              index={index}
+              dest={dest}
+            ></SortableItem>
+          ))}
+        </div>
+      );
+    }
+  );
 
+  const onSortEnd = ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
+    const newItinerary = [...itinerary];
+    const [removed] = newItinerary.splice(oldIndex, 1);
+    newItinerary.splice(newIndex, 0, removed);
+    setItinerary(newItinerary);
+    currentUser.itinerary = newItinerary;
+  };
 
   return (
     <div>
