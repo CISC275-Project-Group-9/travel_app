@@ -5,9 +5,9 @@ import { useDrop } from "react-dnd";
 import { DestItem } from "./DestItem";
 import { Button, Form, FormGroup } from "react-bootstrap";
 import { FilterForm } from "./FilterForm";
-import {  SearchForm } from "./SearchForm";
+import { SearchForm } from "./SearchForm";
 import { UserListProps } from "../interfaces/props";
-import {  SortForm } from "./SortForm";
+import { SortForm } from "./SortForm";
 import { Sort, priceFilter, SearchFilter } from "../interfaces/filterSort";
 
 export function UserList({
@@ -58,6 +58,45 @@ export function UserList({
     }),
   });
 
+  const MIN_PIXELS_TO_MOVE = 20; // Adjust this value based on your requirements
+
+  const [{ isOverCentral }, dropCentral] = useDrop({
+    accept: "destItem",
+    drop: (item: Destination, monitor) => {
+      const draggedItem = monitor.getItem();
+      const draggedIndex = centralList.findIndex(
+        (dest: Destination) => dest.name === draggedItem.name
+      );
+      const { y } = monitor.getDifferenceFromInitialOffset() || { y: 0 };
+      const distanceInPixels = Math.abs(y);
+
+      if (distanceInPixels >= MIN_PIXELS_TO_MOVE) {
+        const direction = y > 0 ? 1 : -1;
+        const droppedIndex = draggedIndex + direction;
+        reorderDisplay(item, draggedIndex, droppedIndex);
+      }
+    },
+    collect: (monitor) => ({
+      isOverCentral: !!monitor.isOver(),
+    }),
+  });
+
+  const reorderDisplay = (
+    draggedItem: Destination,
+    draggedIndex: number,
+    droppedIndex: number
+  ) => {
+    if (draggedIndex === -1 || droppedIndex === -1) {
+      return;
+    }
+
+    const updatedCentralList = [...centralList];
+    const [removedItem] = updatedCentralList.splice(draggedIndex, 1);
+    updatedCentralList.splice(droppedIndex, 0, removedItem);
+
+    setDisplayList(updatedCentralList);
+  };
+
   function filterByPrice(newPrices: priceFilter) {
     const newCentralList = [...centralList];
     setDisplayList(
@@ -80,12 +119,12 @@ export function UserList({
   function handleSort(sort: Sort) {
     const newCentralList = [...centralList];
     if (sort.sortQuery === "State") {
-        newCentralList.sort((a, b) => (a.location > b.location) ? 1 : -1)
+      newCentralList.sort((a, b) => (a.location > b.location ? 1 : -1));
     } else if (sort.sortQuery === "Cost") {
-        newCentralList.sort((a, b) => (a.cost > b.cost) ? 1 : -1)
+      newCentralList.sort((a, b) => (a.cost > b.cost ? 1 : -1));
     } else if (sort.sortQuery === "CostDesc") {
-        newCentralList.sort((a, b) => (a.cost < b.cost) ? 1 : -1)
-    } 
+      newCentralList.sort((a, b) => (a.cost < b.cost ? 1 : -1));
+    }
     setDisplayList(newCentralList);
   }
 
@@ -121,7 +160,7 @@ export function UserList({
   function clearItinerary() {
     currentUser.itinerary = [];
     setItinerary([]);
-}
+  }
 
   return (
     <div>
@@ -144,9 +183,9 @@ export function UserList({
           <div style={{ paddingBottom: "20px" }}>
             <FilterForm onSubmit={filterByPrice}></FilterForm>
           </div>
-            <div style={{ paddingBottom: "20px" }}>
-                <SortForm onSubmit={handleSort}></SortForm>
-            </div>
+          <div style={{ paddingBottom: "20px" }}>
+            <SortForm onSubmit={handleSort}></SortForm>
+          </div>
           <div style={{ textAlign: "right" }}>
             <Button type="submit" onClick={reset}>
               Reset
@@ -155,7 +194,7 @@ export function UserList({
         </div>
         <br></br>
         <br></br>
-        <div className="panel panel-default">
+        <div className="panel panel-default" ref={dropCentral}>
           {displayList.map((dest: Destination) => {
             return (
               <div key={dest.id}>
