@@ -5,39 +5,40 @@
 Browserslist: caniuse-lite is outdated. Please run:
   npx browserslist@latest --update-db
   Why you should do it regularly: https://github.com/browserslist/browserslist#browsers-data-updating
-PASS src/App.test.tsx (5.933 s)
+PASS src/App.test.tsx (6.039 s)
 PASS src/components/tests/RoleDropdown.test.tsx
-------------------------|---------|----------|---------|---------|-------------------------------
-File                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s             
-------------------------|---------|----------|---------|---------|-------------------------------
-All files               |   14.81 |    10.18 |   10.29 |   15.63 |                               
- src                    |     100 |      100 |     100 |     100 |                               
-  App.tsx               |     100 |      100 |     100 |     100 |                               
- src/components         |   15.01 |    10.57 |    9.84 |   15.82 |                               
-  AddForm.tsx           |       0 |        0 |       0 |       0 | 6-60                          
-  AddUserForm.tsx       |       0 |      100 |       0 |       0 | 8-40                          
-  AdminList.tsx         |    1.42 |        0 |       0 |    1.51 | 22-328                        
-  CentralList.tsx       |       0 |      100 |       0 |       0 | 11-18                         
-  DeleteUserForm.tsx    |       0 |      100 |       0 |       0 | 14-67                         
-  DestItem.tsx          |     100 |       50 |     100 |     100 | 44                            
-  FilterForm.tsx        |      50 |      100 |   33.33 |      50 | 18,25-27                      
-  RoleDropdown.tsx      |   35.71 |    42.85 |      20 |   37.03 | 53-82                         
-  SearchForm.tsx        |      50 |      100 |   33.33 |      50 | 17,24-26                      
-  SharedList.tsx        |       0 |      100 |       0 |       0 | 7-12                          
-  SortForm.tsx          |      50 |      100 |   33.33 |      50 | 17,24-26                      
-  SuperList.tsx         |    1.31 |        0 |       0 |     1.4 | 22-346                        
-  UserList.tsx          |   23.43 |    15.38 |   17.24 |   25.86 | 27,33,44-50,55,62-123,237-274 
- src/hooks              |       0 |        0 |       0 |       0 |                               
-  useSessionStorage.tsx |       0 |        0 |       0 |       0 | 4-19                          
- src/interfaces         |       0 |        0 |       0 |       0 |                               
-  destination.ts        |       0 |        0 |       0 |       0 |                               
-  filterSort.ts         |       0 |        0 |       0 |       0 |                               
-  props.ts              |       0 |        0 |       0 |       0 |                               
-  user.ts               |       0 |        0 |       0 |       0 |                               
-------------------------|---------|----------|---------|---------|-------------------------------
+------------------------|---------|----------|---------|---------|-------------------------------------
+File                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                   
+------------------------|---------|----------|---------|---------|-------------------------------------
+All files               |   15.32 |       10 |   10.73 |   16.08 |                                     
+ src                    |     100 |      100 |     100 |     100 |                                     
+  App.tsx               |     100 |      100 |     100 |     100 |                                     
+ src/components         |   15.51 |    10.34 |   10.34 |   16.26 |                                     
+  AddForm.tsx           |       0 |        0 |       0 |       0 | 6-60                                
+  AddUserForm.tsx       |       0 |      100 |       0 |       0 | 8-40                                
+  AdminList.tsx         |    1.36 |        0 |       0 |    1.44 | 23-341                              
+  CentralList.tsx       |       0 |      100 |       0 |       0 | 11-18                               
+  DeleteUserForm.tsx    |       0 |      100 |       0 |       0 | 14-67                               
+  DestItem.tsx          |     100 |       50 |     100 |     100 | 44                                  
+  FilterForm.tsx        |      50 |      100 |   33.33 |      50 | 18,25-27                            
+  RoleDropdown.tsx      |   35.71 |    42.85 |      20 |   37.03 | 53-82                               
+  SearchDescForm.tsx    |      50 |      100 |   33.33 |      50 | 17,24-26                            
+  SearchForm.tsx        |      50 |      100 |   33.33 |      50 | 17,24-26                            
+  SharedList.tsx        |       0 |      100 |       0 |       0 | 7-12                                
+  SortForm.tsx          |      50 |      100 |   33.33 |      50 | 17,24-26                            
+  SuperList.tsx         |    1.26 |        0 |       0 |    1.35 | 22-358                              
+  UserList.tsx          |   21.17 |    13.15 |   17.14 |   22.78 | 27,33,44-50,55,64-74,87-169,286-323 
+ src/hooks              |       0 |        0 |       0 |       0 |                                     
+  useSessionStorage.tsx |       0 |        0 |       0 |       0 | 4-19                                
+ src/interfaces         |       0 |        0 |       0 |       0 |                                     
+  destination.ts        |       0 |        0 |       0 |       0 |                                     
+  filterSort.ts         |       0 |        0 |       0 |       0 |                                     
+  props.ts              |       0 |        0 |       0 |       0 |                                     
+  user.ts               |       0 |        0 |       0 |       0 |                                     
+------------------------|---------|----------|---------|---------|-------------------------------------
 
 Test Suites: 2 passed, 2 total
 Tests:       9 passed, 9 total
 Snapshots:   0 total
-Time:        8.101 s
+Time:        8.153 s
 Ran all test suites.
