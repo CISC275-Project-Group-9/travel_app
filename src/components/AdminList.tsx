@@ -8,6 +8,7 @@ import { Button, Form, FormGroup } from "react-bootstrap";
 import { FilterForm } from "./FilterForm";
 import { SearchForm } from "./SearchForm";
 import { SortForm } from "./SortForm";
+import { SearchDescForm } from "./SearchDescForm";
 import { priceFilter, Sort, SearchFilter } from "../interfaces/filterSort";
 
 
@@ -116,6 +117,15 @@ export function AdminList({
     );
   }
 
+  function filterByDesc(sq: SearchFilter) {
+    const newCentralList = [...centralList];
+    setDisplayList(
+      newCentralList.filter((dest: Destination): boolean =>
+        dest.description.toLowerCase().includes(sq.searchQuery.toLowerCase())
+      )
+    );
+  }
+
   function handleSort(sort: Sort) {
     const newCentralList = [...centralList];
     if (sort.sortQuery === "State") {
@@ -149,6 +159,9 @@ export function AdminList({
         >
           <div style={{ paddingBottom: "20px" }}>
             <SearchForm onSubmit={filterByLoc}></SearchForm>
+          </div>
+          <div style={{ paddingBottom: "20px" }}>
+            <SearchDescForm onSubmit={filterByDesc}></SearchDescForm>
           </div>
           <div style={{ paddingBottom: "20px" }}>
             <FilterForm onSubmit={filterByPrice}></FilterForm>

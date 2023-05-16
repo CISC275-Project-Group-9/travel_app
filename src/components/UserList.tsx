@@ -9,10 +9,10 @@ import { SearchForm } from "./SearchForm";
 import { UserListProps } from "../interfaces/props";
 import { SortForm } from "./SortForm";
 import { Sort, priceFilter, SearchFilter } from "../interfaces/filterSort";
+import { SearchDescForm } from "./SearchDescForm";
 
 export function UserList({
   centralList,
-  setCentralList,
   itinerary,
   setItinerary,
   currentUser,
@@ -58,26 +58,24 @@ export function UserList({
     }),
   });
 
-  const MIN_PIXELS_TO_MOVE = 20; // Adjust this value based on your requirements
-
-  const [{ isOverCentral }, dropCentral] = useDrop({
+  const [{ isOverDisplay }, dropOnDisplay] = useDrop({
     accept: "destItem",
     drop: (item: Destination, monitor) => {
       const draggedItem = monitor.getItem();
-      const draggedIndex = centralList.findIndex(
+      const draggedIndex = displayList.findIndex(
         (dest: Destination) => dest.name === draggedItem.name
       );
       const { y } = monitor.getDifferenceFromInitialOffset() || { y: 0 };
       const distanceInPixels = Math.abs(y);
 
-      if (distanceInPixels >= MIN_PIXELS_TO_MOVE) {
+      if (distanceInPixels >= 20) {
         const direction = y > 0 ? 1 : -1;
         const droppedIndex = draggedIndex + direction;
         reorderDisplay(item, draggedIndex, droppedIndex);
       }
     },
     collect: (monitor) => ({
-      isOverCentral: !!monitor.isOver(),
+      isOverDisplay: !!monitor.isOver(),
     }),
   });
 
@@ -112,6 +110,15 @@ export function UserList({
     setDisplayList(
       newCentralList.filter((dest: Destination): boolean =>
         dest.location.toLowerCase().includes(sq.searchQuery.toLowerCase())
+      )
+    );
+  }
+
+  function filterByDesc(sq: SearchFilter) {
+    const newCentralList = [...centralList];
+    setDisplayList(
+      newCentralList.filter((dest: Destination): boolean =>
+        dest.description.toLowerCase().includes(sq.searchQuery.toLowerCase())
       )
     );
   }
@@ -171,7 +178,7 @@ export function UserList({
           style={{
             display: "flex",
             flexDirection: "column",
-            backgroundColor: "gray",
+            backgroundColor: isOverDisplay ? "gray" : "gray",
             borderRadius: "10px",
             padding: "10px",
             background: "#BDBDBD",
@@ -179,6 +186,9 @@ export function UserList({
         >
           <div style={{ paddingBottom: "20px" }}>
             <SearchForm onSubmit={filterByLoc}></SearchForm>
+          </div>
+          <div style={{ paddingBottom: "20px" }}>
+            <SearchDescForm onSubmit={filterByDesc}></SearchDescForm>
           </div>
           <div style={{ paddingBottom: "20px" }}>
             <FilterForm onSubmit={filterByPrice}></FilterForm>
@@ -194,7 +204,7 @@ export function UserList({
         </div>
         <br></br>
         <br></br>
-        <div className="panel panel-default" ref={dropCentral}>
+        <div className="panel panel-default" ref={dropOnDisplay}>
           {displayList.map((dest: Destination) => {
             return (
               <div key={dest.id}>
