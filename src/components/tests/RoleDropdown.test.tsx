@@ -25,6 +25,15 @@ describe("RoleDropdown Component tests", () => {
         );  
         expect(screen.getByTestId("changeUser")).toBeInTheDocument();    
     });
+    test("Initially 3 options", () => {
+        render(
+            <DndProvider backend={HTML5Backend}>
+                <RoleDropdown />
+            </DndProvider>
+        );
+        const dropdown = screen.getByTestId("changeUser") as HTMLSelectElement  
+        expect(dropdown.options.length).toEqual(3); 
+    })
     test("Default user is 'Default Basic User'", () => {
         render(
             <DndProvider backend={HTML5Backend}>
