@@ -77,6 +77,16 @@ export function SuperList({
     }
   }
 
+  function removeDestFromCentral(id: number) {
+    const index = centralList.findIndex((dest: Destination) => dest.id === id);
+    if (index !== -1) {
+      const newCentralList = [...centralList];
+      newCentralList.splice(index, 1);
+      setCentralList(newCentralList);
+    }
+    // doesnt remove from shared or itinerary if its there
+  }
+
   return (
     <>
       <div className="column-left">
@@ -85,6 +95,7 @@ export function SuperList({
         <div>
           {centralList.map((dest: Destination) => {
             return (
+              <div key={dest.id}>
               <DestItem
                 id={dest.id}
                 key={dest.id}
@@ -96,6 +107,10 @@ export function SuperList({
                 days={dest.days}
                 activities={dest.activities}
               ></DestItem>
+              <FormGroup controlId="formChangeDuration">
+                <Button onClick={() => removeDestFromCentral(dest.id)}>❌</Button>
+              </FormGroup>
+            </div>
             );
           })}
         </div>

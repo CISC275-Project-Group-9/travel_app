@@ -48,7 +48,10 @@ export function AdminList({
     const addedDest = centralList.find(
       (dest: Destination) => name === dest.name
     );
-    if (addedDest && !sharedList.some((dest: Destination) => dest.id === addedDest.id)) {
+    if (
+      addedDest &&
+      !sharedList.some((dest: Destination) => dest.id === addedDest.id)
+    ) {
       const newDest = { ...addedDest };
       setSharedList([...sharedList, newDest]);
     }
@@ -70,6 +73,23 @@ export function AdminList({
       setSharedList(newItinerary);
     }
   }
+
+  const onClick = async () => {
+    const newCentralList = [...centralList];
+    const newSharedList = [...sharedList];
+    newSharedList.forEach((dest: Destination) => {
+      const findTarget = newCentralList.findIndex(
+        (destination: Destination): boolean => destination.id === dest.id
+      );
+      if (findTarget !== -1) {
+        const oldDest: Destination = newCentralList[findTarget];
+        const newDest: Destination = { ...dest, id: oldDest.id };
+        newCentralList[findTarget] = newDest;
+      }
+    });
+    setCentralList(newCentralList);
+    setSharedList([]);
+  };
 
   return (
     <>
@@ -105,27 +125,7 @@ export function AdminList({
             setEditMode(event.target.checked)
           }
         />
-        <Button
-          onClick={() => {
-            const newCentralList = [...centralList];
-            const newSharedList = [...sharedList];
-            newSharedList.forEach((dest: Destination) => {
-              const findTarget = newCentralList.findIndex(
-                (destination: Destination): boolean =>
-                  destination.id === dest.id
-              );
-              if (findTarget !== -1) {
-                const oldDest: Destination = newCentralList[findTarget];
-                const newDest: Destination = { ...dest, id: oldDest.id };
-                newCentralList[findTarget] = newDest;
-              }
-            });
-            setCentralList(newCentralList);
-            setSharedList([]);
-          }}
-        >
-          Push changes
-        </Button>
+        <Button onClick={onClick}>Push changes</Button>
         <h3>Shared List:</h3>
         <div className="panel panel-default">
           {sharedList.map((dest: Destination) => {
