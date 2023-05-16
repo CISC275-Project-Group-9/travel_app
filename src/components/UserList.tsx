@@ -4,10 +4,11 @@ import "./UserList.css";
 import { useDrop } from "react-dnd";
 import { DestItem } from "./DestItem";
 import { Button, Form, FormGroup } from "react-bootstrap";
-import { priceFilter, FilterForm } from "./FilterForm";
-import { SearchFilter, SearchForm } from "./SearchForm";
+import { FilterForm } from "./FilterForm";
+import {  SearchForm } from "./SearchForm";
 import { UserListProps } from "../interfaces/props";
-import { Sort, SortForm } from "./SortForm";
+import {  SortForm } from "./SortForm";
+import { Sort, priceFilter, SearchFilter } from "../interfaces/filterSort";
 
 export function UserList({
   centralList,

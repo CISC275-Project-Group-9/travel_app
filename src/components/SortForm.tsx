@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
-export interface Sort {
-    sortQuery: string;
-}
+import { Sort } from "../interfaces/filterSort";
 
 export function SortForm({
     onSubmit
