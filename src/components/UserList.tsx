@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Destination } from "../interfaces/destination";
 import "./UserList.css";
-import { useDrop } from "react-dnd";
+import { useDrop, useDrag } from "react-dnd";
 import { DestItem } from "./DestItem";
 import { Button, Form, FormGroup } from "react-bootstrap";
 import { priceFilter, FilterForm } from "./FilterForm";
 import { SearchFilter, SearchForm } from "./SearchForm";
 import { UserListProps } from "../interfaces/props";
 import { Sort, SortForm } from "./SortForm";
+import { SortableContainer, SortableElement, SortableHandle } from "react-sortable-hoc";
 
 export function UserList({
   centralList,
@@ -34,9 +35,8 @@ export function UserList({
     );
     setTotalDays(newTotalDays);
   }
-
-  useEffect(() => {
-    updateDisplayVals();
+    useEffect(() => {
+        updateDisplayVals();
   });
 
   function addDestToItinerary(name: string) {
@@ -120,7 +120,51 @@ export function UserList({
   function clearItinerary() {
     currentUser.itinerary = [];
     setItinerary([]);
-}
+  }
+
+  const SortableItem = SortableElement(({ dest }: { dest: Destination }) => (
+    <div key={dest.id} style={{ marginLeft: "30px" }}>
+      <DestItem
+        id={dest.id}
+        key={dest.id}
+        name={dest.name}
+        description={dest.description}
+        image={dest.image}
+        location={dest.location}
+        cost={dest.cost}
+        days={dest.days}
+        activities={dest.activities}
+      ></DestItem>
+      <FormGroup controlId="formChangeDuration">
+        <Form.Label
+          style={{
+            display: "inline-block",
+            float: "none",
+            paddingRight: 10,
+            backgroundColor: "BDBDBD",
+          }}
+        >
+          Length of Stay:
+        </Form.Label>
+        <Form.Control
+          style={{
+            display: "inline-block",
+            width: 75,
+            height: 25,
+            float: "none",
+          }}
+          type="number"
+          defaultValue={dest.days}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setDays(event, dest.id)
+          }
+        ></Form.Control>
+        <button onClick={() => removeDestination(dest.id)}>❌</button>
+      </FormGroup>
+    </div>
+  ));
+
+
 
   return (
     <div>
@@ -232,49 +276,13 @@ export function UserList({
             Drop a place here to get started
           </p>
         ) : (
-          itinerary.map((dest: Destination, index) => {
-            return (
-              <div key={index} style={{ marginLeft: "30px" }}>
-                <DestItem
-                  id={dest.id}
-                  key={dest.id}
-                  name={dest.name}
-                  description={dest.description}
-                  image={dest.image}
-                  location={dest.location}
-                  cost={dest.cost}
-                  days={dest.days}
-                  activities={dest.activities}
-                ></DestItem>
-                <FormGroup controlId="formChangeDuration">
-                  <Form.Label
-                    style={{
-                      display: "inline-block",
-                      float: "none",
-                      paddingRight: 10,
-                      backgroundColor: "BDBDBD",
-                    }}
-                  >
-                    Length of Stay:
-                  </Form.Label>
-                  <Form.Control
-                    style={{
-                      display: "inline-block",
-                      width: 75,
-                      height: 25,
-                      float: "none",
-                    }}
-                    type="number"
-                    defaultValue={dest.days}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                      setDays(event, dest.id)
-                    }
-                  ></Form.Control>
-                  <button onClick={() => removeDestination(dest.id)}>❌</button>
-                </FormGroup>
-              </div>
-            );
-          })
+            <SortableList
+            itinerary={itinerary}
+            onSortEnd={onSortEnd}
+            lockAxis="y"
+            lockToContainerEdges
+            helperClass="sortableHelper"
+          />
         )}
         {itinerary.length !== 0 ? (
           <Button onClick={clearItinerary}>Remove All</Button>
@@ -283,3 +291,4 @@ export function UserList({
     </div>
   );
 }
+          
