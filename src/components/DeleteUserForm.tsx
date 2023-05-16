@@ -54,6 +54,7 @@ export function DeleteUserForm({
                 }}
               ></Form.Label>
               <select
+                data-testid = "deleteUserDropdown"
                 name="user"
                 value={user.name}
                 onChange={handleChange}
