@@ -7,9 +7,8 @@ import { Button, Form, FormGroup } from "react-bootstrap";
 import { FilterForm } from "./FilterForm";
 import { SearchForm } from "./SearchForm";
 import { UserListProps } from "../interfaces/props";
-import { Sort, SortForm } from "./SortForm";
-import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import { SortForm } from "./SortForm";
+import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import { Sort, priceFilter, SearchFilter } from "../interfaces/filterSort";
 import { SearchDescForm } from "./SearchDescForm";
 
