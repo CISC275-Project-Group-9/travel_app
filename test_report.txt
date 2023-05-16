@@ -5,28 +5,150 @@
 Browserslist: caniuse-lite is outdated. Please run:
   npx browserslist@latest --update-db
   Why you should do it regularly: https://github.com/browserslist/browserslist#browsers-data-updating
-PASS src/App.test.tsx (6.039 s)
-PASS src/components/tests/RoleDropdown.test.tsx
+PASS src/components/tests/RoleDropdown.test.tsx (6.958 s)
+PASS src/components/tests/AddUserForm.test.tsx
+PASS src/App.test.tsx
+FAIL src/components/tests/DeleteUserForm.test.tsx
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
+      at node_modules/@jest/core/build/TestScheduler.js:316:17
+      at node_modules/emittery/index.js:260:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:258:23)
+
+FAIL src/components/tests/SearchForm.test.tsx
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
+      at node_modules/@jest/core/build/TestScheduler.js:316:17
+      at node_modules/emittery/index.js:260:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:258:23)
+
+FAIL src/components/tests/SharedList.test.tsx
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
+      at node_modules/@jest/core/build/TestScheduler.js:316:17
+      at node_modules/emittery/index.js:260:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:258:23)
+
+FAIL src/components/tests/FilterForm.test.tsx
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
+      at node_modules/@jest/core/build/TestScheduler.js:316:17
+      at node_modules/emittery/index.js:260:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:258:23)
+
+FAIL src/components/tests/CentralList.test.tsx
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
+      at node_modules/@jest/core/build/TestScheduler.js:316:17
+      at node_modules/emittery/index.js:260:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:258:23)
+
+FAIL src/components/tests/SuperList.test.tsx
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
+      at node_modules/@jest/core/build/TestScheduler.js:316:17
+      at node_modules/emittery/index.js:260:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:258:23)
+
+FAIL src/components/tests/DestItem.test.tsx
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
+      at node_modules/@jest/core/build/TestScheduler.js:316:17
+      at node_modules/emittery/index.js:260:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:258:23)
+
+FAIL src/components/tests/UserList.test.tsx
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
+      at node_modules/@jest/core/build/TestScheduler.js:316:17
+      at node_modules/emittery/index.js:260:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:258:23)
+
+FAIL src/components/tests/SortForm.test.tsx
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
+      at node_modules/@jest/core/build/TestScheduler.js:316:17
+      at node_modules/emittery/index.js:260:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:258:23)
+
+FAIL src/components/tests/AdminList.test.tsx
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
+      at node_modules/@jest/core/build/TestScheduler.js:316:17
+      at node_modules/emittery/index.js:260:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:258:23)
+
+FAIL src/components/tests/AddForm.test.tsx
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
+      at node_modules/@jest/core/build/TestScheduler.js:316:17
+      at node_modules/emittery/index.js:260:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:258:23)
+
 ------------------------|---------|----------|---------|---------|-------------------------------------
 File                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                   
 ------------------------|---------|----------|---------|---------|-------------------------------------
-All files               |   15.32 |       10 |   10.73 |   16.08 |                                     
+All files               |   28.96 |    16.66 |   24.83 |   30.11 |                                     
  src                    |     100 |      100 |     100 |     100 |                                     
   App.tsx               |     100 |      100 |     100 |     100 |                                     
- src/components         |   15.51 |    10.34 |   10.34 |   16.26 |                                     
-  AddForm.tsx           |       0 |        0 |       0 |       0 | 6-60                                
-  AddUserForm.tsx       |       0 |      100 |       0 |       0 | 8-40                                
-  AdminList.tsx         |    1.36 |        0 |       0 |    1.44 | 23-341                              
+ src/components         |   29.59 |    17.24 |   24.82 |   30.72 |                                     
+  AddForm.tsx           |   29.41 |        0 |      25 |   29.41 | 6-8,29-37,43-46                     
+  AddUserForm.tsx       |     100 |      100 |     100 |     100 |                                     
+  AdminList.tsx         |   10.95 |     3.33 |    9.09 |   11.59 | 30-63,69,76-80,85-142,224-341       
   CentralList.tsx       |       0 |      100 |       0 |       0 | 11-18                               
-  DeleteUserForm.tsx    |       0 |      100 |       0 |       0 | 14-67                               
+  DeleteUserForm.tsx    |     100 |      100 |     100 |     100 |                                     
   DestItem.tsx          |     100 |       50 |     100 |     100 | 44                                  
   FilterForm.tsx        |      50 |      100 |   33.33 |      50 | 18,25-27                            
-  RoleDropdown.tsx      |   35.71 |    42.85 |      20 |   37.03 | 53-82                               
+  RoleDropdown.tsx      |   78.57 |    85.71 |      80 |   77.77 | 76-82                               
   SearchDescForm.tsx    |      50 |      100 |   33.33 |      50 | 17,24-26                            
   SearchForm.tsx        |      50 |      100 |   33.33 |      50 | 17,24-26                            
   SharedList.tsx        |       0 |      100 |       0 |       0 | 7-12                                
   SortForm.tsx          |      50 |      100 |   33.33 |      50 | 17,24-26                            
-  SuperList.tsx         |    1.26 |        0 |       0 |    1.35 | 22-358                              
+  SuperList.tsx         |    8.86 |     3.57 |    8.33 |    9.45 | 29-65,70,77-136,188-358             
   UserList.tsx          |   21.17 |    13.15 |   17.14 |   22.78 | 27,33,44-50,55,64-74,87-169,286-323 
  src/hooks              |       0 |        0 |       0 |       0 |                                     
   useSessionStorage.tsx |       0 |        0 |       0 |       0 | 4-19                                
@@ -36,9 +158,8 @@ All files               |   15.32 |       10 |   10.73 |   16.08 |
   props.ts              |       0 |        0 |       0 |       0 |                                     
   user.ts               |       0 |        0 |       0 |       0 |                                     
 ------------------------|---------|----------|---------|---------|-------------------------------------
-
-Test Suites: 2 passed, 2 total
-Tests:       9 passed, 9 total
+Test Suites: 11 failed, 3 passed, 14 total
+Tests:       21 passed, 21 total
 Snapshots:   0 total
-Time:        8.153 s
+Time:        13.343 s
 Ran all test suites.
