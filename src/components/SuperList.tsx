@@ -88,6 +88,7 @@ export function SuperList({
       const newCentralList = [...centralList];
       newCentralList.splice(index, 1);
       setCentralList(newCentralList);
+      setDisplayList(newCentralList);
     }
     // doesnt remove from shared or itinerary if its there
   }
