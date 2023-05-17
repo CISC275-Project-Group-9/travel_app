@@ -54,6 +54,7 @@ export function SuperList({
     if (!centralList.includes(newDestination)) {
       const newCentralList = [...centralList, newDestination];
       setCentralList(newCentralList);
+      setDisplayList(newCentralList);
     }
   }
 
@@ -239,6 +240,7 @@ export function SuperList({
             });
             setCentralList(newCentralList);
             setSharedList([]);
+            setDisplayList(newCentralList);
           }}
         >
           Push changes
