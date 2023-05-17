@@ -65,7 +65,7 @@ export function DestItem({
 
     return (
         <Col>
-                <div data-testid="box" ref={drag} style={getItemStyle(isDragging)}>
+                <div data-testid={"box" + id} ref={drag} style={getItemStyle(isDragging)}>
                     <Row>
                         <Col xs={5}>                                      
                             <img src={require('../images/' + image)} alt={location}></img>
