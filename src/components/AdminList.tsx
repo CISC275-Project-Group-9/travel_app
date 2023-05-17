@@ -96,6 +96,7 @@ export function AdminList({
     });
     setCentralList(newCentralList);
     setSharedList([]);
+    setDisplayList(newCentralList);
   };
 
   function filterByPrice(newPrices: priceFilter) {
