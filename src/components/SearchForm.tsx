@@ -45,6 +45,7 @@ export function SearchForm({
                                 }}
                             >
                                 <input
+                                    data-testid="formName"
                                     type="text"
                                     name="searchQuery"
                                     value={searchFilter.searchQuery}
