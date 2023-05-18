@@ -62,7 +62,7 @@
         },
         {
             "id": 7,
-            "name": "Rehobeth Beach",
+            "name": "Rehoboth Beach",
             "description": "Boardwalk and beach, rides",
             "image": "DE.jpeg",
             "location": "DE",
@@ -152,7 +152,7 @@
         },
         {
             "id": 16,
-            "name": "New Orelans",
+            "name": "New Orleans",
             "description": "Famous and largest city in Louisiana, roots in Creole tradition",
             "image": "LA.jpeg",
             "location": "LA",
@@ -212,7 +212,7 @@
         },
         {
             "id": 22,
-            "name": "St.Louis",
+            "name": "St. Louis",
             "description": "Missouri city right on the edge of the state",
             "image": "MO.jpeg",
             "location": "MO",

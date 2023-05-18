@@ -59,6 +59,7 @@ export function AddUserForm({ onSubmit }: { onSubmit: (u: User) => void }) {
               >
                 Name:
                 <input
+                  data-testid="newUserName"
                   type="text"
                   name="name"
                   value={user.name}
@@ -84,6 +85,7 @@ export function AddUserForm({ onSubmit }: { onSubmit: (u: User) => void }) {
                 Role:
               </Form.Label>
               <select
+                data-testid="role"
                 name="role"
                 value={user.role}
                 onChange={handleRoleChange}

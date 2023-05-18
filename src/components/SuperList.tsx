@@ -54,6 +54,7 @@ export function SuperList({
     if (!centralList.includes(newDestination)) {
       const newCentralList = [...centralList, newDestination];
       setCentralList(newCentralList);
+      setDisplayList(newCentralList);
     }
   }
 
@@ -88,6 +89,7 @@ export function SuperList({
       const newCentralList = [...centralList];
       newCentralList.splice(index, 1);
       setCentralList(newCentralList);
+      setDisplayList(newCentralList);
     }
     // doesnt remove from shared or itinerary if its there
   }
@@ -238,6 +240,7 @@ export function SuperList({
             });
             setCentralList(newCentralList);
             setSharedList([]);
+            setDisplayList(newCentralList);
           }}
         >
           Push changes

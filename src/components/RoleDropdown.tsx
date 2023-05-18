@@ -94,7 +94,7 @@ export function RoleDropdown(): JSX.Element {
       <div className="roleButton">
         <div className="dropdown-label">Choose your user:</div>
         <Form.Group controlId="userSelect">
-          <Form.Select value={currentUser.name} onChange={selectUser}>
+          <Form.Select data-testid={"changeUser"} value={currentUser.name} onChange={selectUser}>
             {users.map((user: User) => (
               <option key={user.name} value={user.name}>
                 {user.name}
