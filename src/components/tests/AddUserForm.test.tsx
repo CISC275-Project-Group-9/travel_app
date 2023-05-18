@@ -5,7 +5,8 @@ import { DndProvider } from "react-dnd";
 import userEvent from "@testing-library/user-event";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { AddUserForm } from "../AddUserForm";
-import { RoleDropdown, User } from "../RoleDropdown";
+import { RoleDropdown } from "../RoleDropdown";
+import { User } from "../../interfaces/user";
 
 describe("AddUserForm Component tests", () => {
     test("There is a name label", () => {
