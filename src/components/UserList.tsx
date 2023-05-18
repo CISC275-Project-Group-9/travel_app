@@ -258,6 +258,7 @@ export function UserList({
   }
 
   // I was trying to use this to edit activities list 
+  /*
   const ActivitiesInput = ({
     activities, onChange,
   }: {
@@ -281,8 +282,10 @@ export function UserList({
         ></input>
     )
   }
+  */
 
   // Trying to use this as well to edit activities list 
+  /*
   const SortableItem = SortableElement(({ dest }: { dest: Destination }) => {
     const handleActChange = (value: string[]) => {
         const updatedDest = { ...dest, activities: value };
@@ -299,6 +302,7 @@ export function UserList({
           }
         }
       };
+  */
 
     return (
         <div key={dest.id} style={{ marginLeft: "30px" }}>
