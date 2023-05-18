@@ -107,7 +107,7 @@ export function RoleDropdown(): JSX.Element {
         <h5>Current User: {currentUser.name}</h5>
       </div>
       <div className="addUser">
-        {/* add user form included here instead of in faculty list */}
+        {/* add user form included here instead of in faculty list: */}
         {roleType === "Faculty" && (
           <>
             <AddUserForm onSubmit={addNewUser} />
@@ -116,7 +116,7 @@ export function RoleDropdown(): JSX.Element {
         )}{" "}
       </div>
       <div className="list-container">
-        {/* display based on user type */}
+        {/* display based on user type: */}
         {roleType === "Basic" && (
           <UserList
             centralList={centralList}

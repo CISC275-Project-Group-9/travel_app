@@ -11,6 +11,7 @@ import { SortForm } from "./SortForm";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import { Sort, priceFilter, SearchFilter } from "../interfaces/filterSort";
 import { SearchDescForm } from "./SearchDescForm";
+import { UserEdit } from "./UserEdit";
 
 // encapsulates main functionality of the app when user role is basic
 export function UserList({
@@ -257,100 +258,47 @@ export function UserList({
     setItinerary(currentUser.itinerary2);
   }
 
-  // I was trying to use this to edit activities list 
-  /*
-  const ActivitiesInput = ({
-    activities, onChange,
-  }: {
-    activities: string[],
-    onChange: (value: string[]) => void;
-  }) => {
-    const [inputValue, setInput] = useState(activities.join(", ")); //Join array elements into string
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setInput(event.target.value);
-    };
-
-    useEffect(() => {
-        onChange(inputValue.split(", "));
-    }, [inputValue, onChange]);
-
-    return (
-        <input 
-            type="text" 
-            value={inputValue} 
-            onChange={handleInputChange}
-        ></input>
-    )
-  }
-  */
-
-  // Trying to use this as well to edit activities list 
   const SortableItem = SortableElement(({ dest }: { dest: Destination }) => (
-    /*
-    const handleActChange = (value: string[]) => {
-        const updatedDest = { ...dest, activities: value };
-        const updatedItinerary = currentUser.currItinerary === 1 ? [...itinerary1] : [...itinerary2];
-        const findIndex = updatedItinerary.findIndex((destination) => destination.id === dest.id);
-        if (findIndex !== -1) {
-          updatedItinerary[findIndex] = updatedDest;
-          if (currentUser.currItinerary === 1) {
-            setItinerary(updatedItinerary);
-            setCurrentUser({ ...currentUser, itinerary1: updatedItinerary });
-          } else {
-            setItinerary(updatedItinerary);
-            setCurrentUser({ ...currentUser, itinerary2: updatedItinerary });
-          }
-        }
-    }
-    */
     <div key={dest.id} style={{ marginLeft: "30px" }}>
-    <DestItem
-      id={dest.id}
-      key={dest.id}
-      name={dest.name}
-      description={dest.description}
-      image={dest.image}
-      location={dest.location}
-      cost={dest.cost}
-      days={dest.days}
-      activities={dest.activities}
-      /* I was trying to add the below code to the activites={} part 
-                editMode ? (
-                        <ActivitiesInput 
-                            activities={dest.activities} 
-                            onChange={handleActChange}></ActivitiesInput>) :
-                    (dest.activities)
-                */
-    ></DestItem>
-    <FormGroup controlId="formChangeDuration">
-      <Form.Label
-        style={{
-          display: "inline-block",
-          float: "none",
-          paddingRight: 10,
-          backgroundColor: "BDBDBD",
-        }}
-      >
-        Length of Stay:
-      </Form.Label>
-      <Form.Control
-        style={{
-          display: "inline-block",
-          width: 75,
-          height: 25,
-          float: "none",
-        }}
-        type="number"
-        defaultValue={dest.days}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-          setDays(event, dest.id)
-        }
-      ></Form.Control>
-      <button onClick={() => removeDestination(dest.id)}>❌</button>
-    </FormGroup>
-  </div>
-));
-
+      <DestItem
+        id={dest.id}
+        key={dest.id}
+        name={dest.name}
+        description={dest.description}
+        image={dest.image}
+        location={dest.location}
+        cost={dest.cost}
+        days={dest.days}
+        activities={dest.activities}
+      ></DestItem>
+      <FormGroup controlId="formChangeDuration">
+        <Form.Label
+          style={{
+            display: "inline-block",
+            float: "none",
+            paddingRight: 10,
+            backgroundColor: "BDBDBD",
+          }}
+        >
+          Length of Stay:
+        </Form.Label>
+        <Form.Control
+          style={{
+            display: "inline-block",
+            width: 75,
+            height: 25,
+            float: "none",
+          }}
+          type="number"
+          defaultValue={dest.days}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setDays(event, dest.id)
+          }
+        ></Form.Control>
+        <button onClick={() => removeDestination(dest.id)}>❌</button>
+      </FormGroup>
+    </div>
+  ));
 
   const SortableList = SortableContainer(
     ({ itinerary }: { itinerary: Destination[] }) => {
@@ -390,6 +338,44 @@ export function UserList({
       currentUser.itinerary2 = newItinerary;
     }
   };
+
+  function editDestination(
+    event: React.ChangeEvent<HTMLInputElement>,
+    destId: number
+  ) {
+    let newItinerary: Destination[];
+    if (currentUser.currItinerary === 1) {
+      newItinerary = [...itinerary1];
+    } else {
+      newItinerary = [...itinerary2];
+    }
+    let findTarget;
+    if (currentUser.currItinerary === 1) {
+      findTarget = itinerary1.findIndex(
+        (destination: Destination): boolean => destination.id === destId
+      );
+    } else {
+      findTarget = itinerary2.findIndex(
+        (destination: Destination): boolean => destination.id === destId
+      );
+    }
+    const oldDest: Destination = { ...newItinerary[findTarget] };
+    let newDest: Destination;
+    if (event.target.name === "activities") {
+      newDest = {
+        ...oldDest,
+        [event.target.name]: event.target.value.split(","),
+      };
+
+      newItinerary.splice(findTarget, 1, newDest);
+      setItinerary(newItinerary);
+      if (currentUser.currItinerary === 1) {
+        currentUser.itinerary1 = newItinerary;
+      } else {
+        currentUser.itinerary2 = newItinerary;
+      }
+    }
+  }
 
   return (
     <div>
@@ -489,16 +475,16 @@ export function UserList({
         >
           <h5>Total Price: ${totalPrice} </h5>
           <h5>Total Days: {totalDays} </h5>
-          <h5>Edit List</h5>
+          <h5>Edit List Items</h5>
           <Form.Check
-          data-testid="switch"
-          type="switch"
-          id="editModeSwitch"
-          checked={editMode}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setEditMode(event.target.checked)
-          }
-        />
+            data-testid="switch"
+            type="switch"
+            id="editModeSwitch"
+            checked={editMode}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setEditMode(event.target.checked)
+            }
+          />
         </div>
         {currItinerary === 1 ? (
           // itinerary 1:
@@ -521,6 +507,25 @@ export function UserList({
             >
               Drop a place here to get started
             </p>
+          ) : editMode ? ( 
+            itinerary1.map((dest: Destination) => {
+              return (
+                <div key={dest.id}>
+                  <UserEdit
+                    id={dest.id}
+                    key={dest.id}
+                    name={dest.name}
+                    description={dest.description}
+                    image={dest.image}
+                    location={dest.location}
+                    cost={dest.cost}
+                    days={dest.days}
+                    activities={dest.activities}
+                    editDestination={editDestination}
+                  ></UserEdit>
+                </div>
+              );
+              })
           ) : (
             <SortableList
               itinerary={itinerary1}
@@ -550,7 +555,28 @@ export function UserList({
           >
             Drop a place here to get started
           </p>
-        ) : (
+        ) : 
+        editMode ? ( 
+          itinerary2.map((dest: Destination) => {
+            return (
+              <div key={dest.id}>
+                <UserEdit
+                  id={dest.id}
+                  key={dest.id}
+                  name={dest.name}
+                  description={dest.description}
+                  image={dest.image}
+                  location={dest.location}
+                  cost={dest.cost}
+                  days={dest.days}
+                  activities={dest.activities}
+                  editDestination={editDestination}
+                ></UserEdit>
+              </div>
+            );
+          })
+        ) :
+        (
           <SortableList
             itinerary={itinerary2}
             onSortEnd={onSortEnd}
