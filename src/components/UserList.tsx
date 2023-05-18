@@ -285,8 +285,8 @@ export function UserList({
   */
 
   // Trying to use this as well to edit activities list 
-  /*
-  const SortableItem = SortableElement(({ dest }: { dest: Destination }) => {
+  const SortableItem = SortableElement(({ dest }: { dest: Destination }) => (
+    /*
     const handleActChange = (value: string[]) => {
         const updatedDest = { ...dest, activities: value };
         const updatedItinerary = currentUser.currItinerary === 1 ? [...itinerary1] : [...itinerary2];
@@ -301,58 +301,56 @@ export function UserList({
             setCurrentUser({ ...currentUser, itinerary2: updatedItinerary });
           }
         }
-      };
-  */
-
-    return (
-        <div key={dest.id} style={{ marginLeft: "30px" }}>
-            <DestItem
-                id={dest.id}
-                key={dest.id}
-                name={dest.name}
-                description={dest.description}
-                image={dest.image}
-                location={dest.location}
-                cost={dest.cost}
-                days={dest.days}
-                activities={dest.activities}
-                /* I was trying to add the below code to the activites={} part 
+    }
+    */
+    <div key={dest.id} style={{ marginLeft: "30px" }}>
+    <DestItem
+      id={dest.id}
+      key={dest.id}
+      name={dest.name}
+      description={dest.description}
+      image={dest.image}
+      location={dest.location}
+      cost={dest.cost}
+      days={dest.days}
+      activities={dest.activities}
+      /* I was trying to add the below code to the activites={} part 
                 editMode ? (
                         <ActivitiesInput 
                             activities={dest.activities} 
                             onChange={handleActChange}></ActivitiesInput>) :
                     (dest.activities)
                 */
-            ></DestItem>
-            <FormGroup controlId="formChangeDuration">
-                <Form.Label
-                style={{
-                    display: "inline-block",
-                    float: "none",
-                    paddingRight: 10,
-                    backgroundColor: "BDBDBD",
-                }}
-                >
-                Length of Stay:
-                </Form.Label>
-                <Form.Control
-                style={{
-                    display: "inline-block",
-                    width: 75,
-                    height: 25,
-                    float: "none",
-                }}
-                type="number"
-                defaultValue={dest.days}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    setDays(event, dest.id)
-                }
-                ></Form.Control>
-                <button onClick={() => removeDestination(dest.id)}>❌</button>
-            </FormGroup>
-        </div>
-    )
-    });
+    ></DestItem>
+    <FormGroup controlId="formChangeDuration">
+      <Form.Label
+        style={{
+          display: "inline-block",
+          float: "none",
+          paddingRight: 10,
+          backgroundColor: "BDBDBD",
+        }}
+      >
+        Length of Stay:
+      </Form.Label>
+      <Form.Control
+        style={{
+          display: "inline-block",
+          width: 75,
+          height: 25,
+          float: "none",
+        }}
+        type="number"
+        defaultValue={dest.days}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+          setDays(event, dest.id)
+        }
+      ></Form.Control>
+      <button onClick={() => removeDestination(dest.id)}>❌</button>
+    </FormGroup>
+  </div>
+));
+
 
   const SortableList = SortableContainer(
     ({ itinerary }: { itinerary: Destination[] }) => {
