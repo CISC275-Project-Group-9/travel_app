@@ -61,7 +61,7 @@ export function SearchDescForm({
                     <Col></Col>
                     <Col>
                     <div style={{ textAlign: "right", minWidth: "50px" }}>
-                        <Button type="submit">Search</Button>
+                        <Button data-testid="searchDesc" type="submit">Search</Button>
                     </div>
                     </Col>
                 </Row>

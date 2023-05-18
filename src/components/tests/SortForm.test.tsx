@@ -60,10 +60,10 @@ describe("SortForm Component tests", () => {
         const dropdown = screen.getByTestId("formQuery");
         fireEvent.change(dropdown, {target: {value: 'State'}})
         expect(dropdown).toHaveValue('State');
-        fireEvent.change(dropdown, {target: {value: 'Cost'}})
-        expect(dropdown).toHaveValue('Cost');
-        fireEvent.change(dropdown, {target: {value: 'CostDesc'}})
-        expect(dropdown).toHaveValue('CostDesc');
+        fireEvent.change(dropdown, {target: {value: 'LowCost'}})
+        expect(dropdown).toHaveValue('LowCost');
+        fireEvent.change(dropdown, {target: {value: 'HighCost'}})
+        expect(dropdown).toHaveValue('HighCost');
     });
     test("There is a Sort button that submits", () => {
         const onSubmit = jest.fn();

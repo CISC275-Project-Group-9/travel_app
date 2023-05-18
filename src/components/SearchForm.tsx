@@ -45,7 +45,7 @@ export function SearchForm({
                                 }}
                             >
                                 <input
-                                    data-testid="formName"
+                                    data-testid="abbrevBox"
                                     type="text"
                                     name="searchQuery"
                                     value={searchFilter.searchQuery}
@@ -61,7 +61,7 @@ export function SearchForm({
                     <Col></Col>
                     <Col>
                     <div style={{ textAlign: "right", minWidth: "50px" }}>
-                        <Button type="submit">Search</Button>
+                        <Button data-testid="searchLoc" type="submit">Search</Button>
                     </div>
                     </Col>
                 </Row>

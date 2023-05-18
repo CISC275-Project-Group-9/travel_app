@@ -91,7 +91,21 @@ describe("RoleDropdown Component tests", () => {
                 <RoleDropdown />
             </DndProvider>
         );
-        expect(screen.getByText(/itinerary/i)).toBeInTheDocument();
-    })
+        expect(screen.getAllByText(/itinerary/i)).toHaveLength(3);
+    });
+    test("User can change itinerary", () => {
+        render(
+            <DndProvider backend={HTML5Backend}>
+                <RoleDropdown />
+            </DndProvider>
+        );
+        const it1button = screen.getByRole("button", {name: "Itinerary 1"})
+        const it2button = screen.getByRole("button", {name: "Itinerary 2"})
+        expect(screen.getByText(/Itinerary 1/)).toBeInTheDocument();
+        userEvent.click(it2button)
+        expect(screen.getByText(/Itinerary 2/)).toBeInTheDocument();
+        userEvent.click(it1button)
+        expect(screen.getByText(/Itinerary 1/)).toBeInTheDocument();
+    });
     
 })

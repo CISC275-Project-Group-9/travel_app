@@ -28,7 +28,7 @@ describe("SearchDescForm Component tests", () => {
         );
         const wordBox = screen.getByTestId("formName");
         userEvent.type(wordBox, "park")
-        expect(screen.getByRole("button", {name: "Search"})).toBeInTheDocument();
+        expect(screen.getByTestId("searchDesc")).toBeInTheDocument();
     });
     test("more sample words of description", () => {
         render(

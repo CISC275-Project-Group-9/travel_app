@@ -29,7 +29,7 @@ describe("AddUserForm Component tests", () => {
                 } } />
             </DndProvider>
         );
-        expect(screen.getByTestId(/name/i)).toBeInTheDocument();
+        expect(screen.getByTestId(/newusername/i)).toBeInTheDocument();
     });
     test("There is a role label", () => {
         render(
@@ -80,7 +80,7 @@ describe("AddUserForm Component tests", () => {
         fireEvent.change(roleDropdown, {target: {value: 'Faculty'}})
         const button = screen.getByRole("button", {name: "Add User"})
         userEvent.click(button)
-        expect(user).toEqual({id: 0, name: "Benita", role: "Faculty", itinerary: []});
+        expect(user).toEqual({id: 0, name: "Benita", role: "Faculty", itinerary1: [], itinerary2: [], currItinerary: 1});
     });
     
 })
