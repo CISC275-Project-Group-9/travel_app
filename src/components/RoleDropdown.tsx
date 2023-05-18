@@ -8,13 +8,7 @@ import destinationsData from "../data/destinations.json";
 import { Destination } from "../interfaces/destination";
 import { AddUserForm } from "./AddUserForm";
 import { DeleteUserForm } from "./DeleteUserForm";
-
-export interface User {
-  id: number;
-  name: string;
-  role: string;
-  itinerary: Destination[];
-}
+import { User } from "../interfaces/user";
 
 const { DESTINATIONS }: Record<string, Destination[]> =
   // Typecast the test data that we imported to be a record matching
@@ -22,6 +16,7 @@ const { DESTINATIONS }: Record<string, Destination[]> =
   destinationsData as Record<string, Destination[]>;
 
 export function RoleDropdown(): JSX.Element {
+  // state hooks
   const ROLES = ["Basic", "Staff", "Faculty"];
   const DEFAULT_ROLE = ROLES[0];
   const [roleType, setRoleType] = useState<string>(DEFAULT_ROLE);
@@ -32,23 +27,30 @@ export function RoleDropdown(): JSX.Element {
       id: 1,
       name: "Default Basic User",
       role: "Basic",
-      itinerary: [],
+      itinerary1: [],
+      itinerary2: [],
+      currItinerary: 1,
     },
     {
       id: 2,
       name: "Default Staff User",
       role: "Staff",
-      itinerary: [],
+      itinerary1: [],
+      itinerary2: [],
+      currItinerary: 1,
     },
     {
       id: 3,
       name: "Default Faculty User",
       role: "Faculty",
-      itinerary: [],
+      itinerary1: [],
+      itinerary2: [],
+      currItinerary: 1,
     },
   ]);
   const [currentUser, setCurrentUser] = useState<User>(users[0]);
 
+  // user functions
   function addNewUser(newUser: User) {
     if (!users.includes(newUser)) {
       const newUsers = [...users, newUser];
@@ -72,18 +74,22 @@ export function RoleDropdown(): JSX.Element {
     setUsers(newUsers);
   }
 
+  // function to set the current user's itinerary, passed as props to user list so it can modify user state here
   function setItinerary(newItinerary: Destination[]) {
     const newUsers = [...users];
     const index = newUsers.findIndex(
       (user: User) => user.name === currentUser.name
     );
-    newUsers[index].itinerary = newItinerary;
+    if (currentUser.currItinerary === 1) {
+      newUsers[index].itinerary1 = newItinerary;
+    } else {
+      newUsers[index].itinerary2 = newItinerary;
+    }
     setUsers(newUsers);
     setCurrentUser(newUsers[index]);
   }
 
   return (
-    // note role-dropdown was the old style and now we have users.
     <div className="role-dropdown">
       <div className="roleButton">
         <div className="dropdown-label">Choose your user:</div>
@@ -101,6 +107,7 @@ export function RoleDropdown(): JSX.Element {
         <h5>Current User: {currentUser.name}</h5>
       </div>
       <div className="addUser">
+        {/* add user form included here instead of in faculty list */}
         {roleType === "Faculty" && (
           <>
             <AddUserForm onSubmit={addNewUser} />
@@ -109,13 +116,18 @@ export function RoleDropdown(): JSX.Element {
         )}{" "}
       </div>
       <div className="list-container">
+        {/* display based on user type */}
         {roleType === "Basic" && (
           <UserList
             centralList={centralList}
             setCentralList={setCentralList}
-            itinerary={currentUser.itinerary}
+            itinerary1={currentUser.itinerary1}
+            itinerary2={currentUser.itinerary2}
             setItinerary={setItinerary}
             currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+            users={users}
+            setUsers={setUsers} 
           ></UserList>
         )}
         {roleType === "Staff" && (
@@ -134,6 +146,7 @@ export function RoleDropdown(): JSX.Element {
             setSharedList={setSharedList}
           ></SuperList>
         )}
+        {/* invalid role type - shouldnt ever occur */}
         {roleType !== "Basic" &&
           roleType !== "Staff" &&
           roleType !== "Faculty" && <div>Invalid role type</div>}

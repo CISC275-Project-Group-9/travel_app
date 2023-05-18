@@ -11,24 +11,42 @@ import { SortForm } from "./SortForm";
 import { Sort, priceFilter, SearchFilter } from "../interfaces/filterSort";
 import { SearchDescForm } from "./SearchDescForm";
 
+// encapsulates main functionality of the app when user role is basic 
 export function UserList({
   centralList,
-  itinerary,
+  itinerary1,
+  itinerary2,
   setItinerary,
   currentUser,
+  setCurrentUser,
+  users,
+  setUsers,
 }: UserListProps): JSX.Element {
+  // state hooks
   const [displayList, setDisplayList] = useState<Destination[]>(centralList);
   const [totalPrice, setPrice] = useState<number>(0);
   const [totalDays, setTotalDays] = useState<number>(0);
+  const [currItinerary, setCurrItinerary] = useState<number>(1);
 
+  // function to update the display values
   function updateDisplayVals() {
-    const newInitialPriceList = itinerary.map((dest) => dest.cost, 0);
+    let newInitialPriceList;
+    if (currentUser.currItinerary === 1) {
+      newInitialPriceList = itinerary1.map((dest) => dest.cost, 0);
+    } else {
+      newInitialPriceList = itinerary2.map((dest) => dest.cost, 0);
+    }
     const newInitialPrice = newInitialPriceList.reduce(
       (dest, cost) => dest + cost,
       0
     );
     setPrice(newInitialPrice);
-    const newTotalDaysList = itinerary.map((dest) => dest.days, 0);
+    let newTotalDaysList;
+    if (currentUser.currItinerary === 1) {
+      newTotalDaysList = itinerary1.map((dest) => dest.days, 0);
+    } else {
+      newTotalDaysList = itinerary2.map((dest) => dest.days, 0);
+    }
     const newTotalDays = newTotalDaysList.reduce(
       (dest, days) => dest + days,
       0
@@ -40,16 +58,28 @@ export function UserList({
     updateDisplayVals();
   });
 
+  // function to add a destination to the itinerary
   function addDestToItinerary(name: string) {
     console.log(name);
     const addedDest = centralList.filter(
       (dest: Destination) => name === dest.name
     );
-    setItinerary([...itinerary, addedDest[0]]);
-    const newItinerary = [...itinerary, addedDest[0]];
-    currentUser.itinerary = newItinerary;
+    if (currentUser.currItinerary === 1) {
+      setItinerary([...itinerary1, addedDest[0]]);
+    } else {
+      setItinerary([...itinerary2, addedDest[0]]);
+    }
+    let newItinerary;
+    if (currentUser.currItinerary === 1) {
+      newItinerary = [...itinerary1, addedDest[0]];
+      currentUser.itinerary1 = newItinerary;
+    } else {
+      newItinerary = [...itinerary2, addedDest[0]];
+      currentUser.itinerary2 = newItinerary;
+    }
   }
 
+  // drag and drop hook for itinerary
   const [{ isOver }, drop] = useDrop({
     accept: "destItem",
     drop: (item: Destination) => addDestToItinerary(item.name),
@@ -58,6 +88,7 @@ export function UserList({
     }),
   });
 
+  // drag and drop hook for display (central)
   const [{ isOverDisplay }, dropOnDisplay] = useDrop({
     accept: "destItem",
     drop: (item: Destination, monitor) => {
@@ -79,6 +110,7 @@ export function UserList({
     }),
   });
 
+  // function to reorder the display list for drag and drop
   const reorderDisplay = (
     draggedItem: Destination,
     draggedIndex: number,
@@ -95,6 +127,7 @@ export function UserList({
     setDisplayList(updatedCentralList);
   };
 
+  // function to filter the central list by price
   function filterByPrice(newPrices: priceFilter) {
     const newCentralList = [...centralList];
     setDisplayList(
@@ -105,6 +138,7 @@ export function UserList({
     );
   }
 
+  // function to filter the central list by location
   function filterByLoc(sq: SearchFilter) {
     const newCentralList = [...centralList];
     setDisplayList(
@@ -114,6 +148,7 @@ export function UserList({
     );
   }
 
+  // function to filter the central list by description
   function filterByDesc(sq: SearchFilter) {
     const newCentralList = [...centralList];
     setDisplayList(
@@ -123,6 +158,7 @@ export function UserList({
     );
   }
 
+  // function to sort the central list
   function handleSort(sort: Sort) {
     const newCentralList = [...centralList];
     if (sort.sortQuery === "State") {
@@ -135,38 +171,89 @@ export function UserList({
     setDisplayList(newCentralList);
   }
 
+  // function to set the days for a destination in the itinerary
   function setDays(event: React.ChangeEvent<HTMLInputElement>, destId: number) {
-    const newItinerary: Destination[] = [...itinerary];
-    const findTarget = itinerary.findIndex(
-      (destination: Destination): boolean => destination.id === destId
-    );
+    let newItinerary: Destination[];
+    let findTarget;
+    if (currentUser.currItinerary === 1) {
+      newItinerary = [...itinerary1];
+      findTarget = itinerary1.findIndex(
+        (destination: Destination): boolean => destination.id === destId
+      );
+    } else {
+      newItinerary = [...itinerary2];
+      findTarget = itinerary2.findIndex(
+        (destination: Destination): boolean => destination.id === destId
+      );
+    }
     const oldDest: Destination = { ...newItinerary[findTarget] };
     const newDest: Destination = {
       ...oldDest,
       days: event.target.valueAsNumber,
     };
     newItinerary.splice(findTarget, 1, newDest);
-    currentUser.itinerary = newItinerary;
+    if (currentUser.currItinerary === 1) {
+      currentUser.itinerary1 = newItinerary;
+    } else {
+      currentUser.itinerary2 = newItinerary;
+    }
     setItinerary(newItinerary);
   }
 
+  // function to reset the display list
   function reset() {
     setDisplayList(centralList);
   }
 
+  // function to remove a destination from the itinerary
   function removeDestination(id: number) {
-    const index = itinerary.findIndex((dest: Destination) => dest.id === id);
+    let index;
+    if (currentUser.currItinerary === 1) {
+      index = itinerary1.findIndex((dest: Destination) => dest.id === id);
+    } else {
+      index = itinerary2.findIndex((dest: Destination) => dest.id === id);
+    }
     if (index !== -1) {
-      const newItinerary = [...itinerary];
-      newItinerary.splice(index, 1);
-      currentUser.itinerary = newItinerary;
+      let newItinerary;
+      if (currentUser.currItinerary === 1) {
+        newItinerary = [...itinerary1];
+        newItinerary.splice(index, 1);
+        currentUser.itinerary1 = newItinerary;
+      } else {
+        newItinerary = [...itinerary2];
+        newItinerary.splice(index, 1);
+        currentUser.itinerary2 = newItinerary;
+      }
       setItinerary(newItinerary);
     }
   }
 
+  // function to clear the itinerary
   function clearItinerary() {
-    currentUser.itinerary = [];
+    if (currentUser.currItinerary === 1) {
+      currentUser.itinerary1 = [];
+    } else {
+      currentUser.itinerary2 = [];
+    }
     setItinerary([]);
+  }
+
+  // function to use itinerary 1
+  function useItinerary1() {
+    currentUser.currItinerary = 1;
+    setCurrItinerary(1);
+    setCurrentUser({ ...currentUser, currItinerary: 1 });
+    setUsers([...users, {...currentUser, currItinerary: 1}]);
+    setItinerary(currentUser.itinerary1);
+  }
+
+  // function to use itinerary 2
+  function useItinerary2() {
+    currentUser.currItinerary = 2;
+    setCurrItinerary(2);
+    setCurrentUser({ ...currentUser, currItinerary: 2 });
+    setUsers([...users, {...currentUser, currItinerary: 2}]);
+    setItinerary(currentUser.itinerary2);
   }
 
   return (
@@ -244,6 +331,10 @@ export function UserList({
           ) : null}
         </div>
       </div>
+      <div className="itinierary-select">
+        <Button style={{margin: 10}} onClick={useItinerary1}>Itinerary 1</Button>
+        <Button onClick={useItinerary2}>Itinerary 2</Button>
+      </div>
       <div className="column-right panel panel-default" ref={drop}>
         <h3>Itinerary:</h3>
         <div
@@ -262,7 +353,76 @@ export function UserList({
           <h5>Total Price: ${totalPrice} </h5>
           <h5>Total Days: {totalDays} </h5>
         </div>
-        {itinerary.length === 0 ? (
+        {currItinerary === 1 ? (
+          // itinerary 1:
+          itinerary1.length === 0 ? (
+            <p
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                backgroundColor: isOver ? "#6699CC" : "#BDBDBD",
+                borderRadius: "10px",
+                padding: "10px",
+                paddingTop: "100px",
+                paddingBottom: "100px",
+                background: "#BDBDBD",
+                width: "90%",
+                marginLeft: "auto",
+                marginRight: "auto",
+                marginTop: "20px",
+              }}
+            >
+              Drop a place here to get started
+            </p>
+          ) : (
+            itinerary1.map((dest: Destination, index) => {
+              return (
+                <div key={index} style={{ marginLeft: "30px" }}>
+                  <DestItem
+                    id={dest.id}
+                    key={dest.id}
+                    name={dest.name}
+                    description={dest.description}
+                    image={dest.image}
+                    location={dest.location}
+                    cost={dest.cost}
+                    days={dest.days}
+                    activities={dest.activities}
+                  ></DestItem>
+                  <FormGroup controlId="formChangeDuration">
+                    <Form.Label
+                      style={{
+                        display: "inline-block",
+                        float: "none",
+                        paddingRight: 10,
+                        backgroundColor: "BDBDBD",
+                      }}
+                    >
+                      Length of Stay:
+                    </Form.Label>
+                    <Form.Control
+                      style={{
+                        display: "inline-block",
+                        width: 75,
+                        height: 25,
+                        float: "none",
+                      }}
+                      type="number"
+                      defaultValue={dest.days}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        setDays(event, dest.id)
+                      }
+                    ></Form.Control>
+                    <button onClick={() => removeDestination(dest.id)}>
+                      ❌
+                    </button>
+                  </FormGroup>
+                </div>
+              );
+            })
+          )
+        ) : // itinerary2:
+        itinerary2.length === 0 ? (
           <p
             style={{
               display: "flex",
@@ -282,7 +442,7 @@ export function UserList({
             Drop a place here to get started
           </p>
         ) : (
-          itinerary.map((dest: Destination, index) => {
+          itinerary2.map((dest: Destination, index) => {
             return (
               <div key={index} style={{ marginLeft: "30px" }}>
                 <DestItem
@@ -326,9 +486,11 @@ export function UserList({
             );
           })
         )}
-        {itinerary.length !== 0 ? (
+        {currentUser.currItinerary === 1 ? (itinerary1.length !== 0 ? (
           <Button onClick={clearItinerary}>Remove All</Button>
-        ) : null}
+        ) : null) : (itinerary2.length !== 0 ? (
+          <Button onClick={clearItinerary}>Remove All</Button>
+        ) : null) }
       </div>
     </div>
   );
