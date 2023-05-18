@@ -46,6 +46,7 @@ export function SearchDescForm({
                             >
                                 <input
                                     type="text"
+                                    data-testid="formName"
                                     name="searchQuery"
                                     value={searchFilter.searchQuery}
                                     onChange={handleChange}
