@@ -5,7 +5,8 @@ import { DndProvider } from "react-dnd";
 import userEvent from "@testing-library/user-event";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DeleteUserForm } from "../DeleteUserForm";
-import { RoleDropdown, User } from "../RoleDropdown";
+import { RoleDropdown } from "../RoleDropdown";
+import { User } from "../../interfaces/user";
 
 const users = [
     {
