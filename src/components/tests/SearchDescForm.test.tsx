@@ -30,6 +30,28 @@ describe("SearchDescForm Component tests", () => {
         userEvent.type(wordBox, "park")
         expect(screen.getByRole("button", {name: "Search"})).toBeInTheDocument();
     });
+    test("more sample words of description", () => {
+        render(
+            <DndProvider backend={HTML5Backend}>
+                <SearchDescForm onSubmit={function (sq: SearchFilter): void {
+                    throw new Error("Function not implemented.");
+                } } />
+            </DndProvider>
+        );
+        const wordBox = screen.getByTestId("formName");
+        userEvent.type(wordBox, "hiking")
+        expect(screen.getByRole("button", {name: "Search"})).toBeInTheDocument();
+    });
+    test("Search button", () => {
+        render(
+            <DndProvider backend={HTML5Backend}>
+                <SearchDescForm onSubmit={function (sq: SearchFilter): void {
+                    throw new Error("Function not implemented.");
+                } } />
+            </DndProvider>
+        );
+        expect(screen.getByRole("button", {name: "Search"})).toBeInTheDocument();
+    });
     test("There is a Search button that submits", () => {
         const onSubmit = jest.fn();
         const { getByTestId } = render(<SearchDescForm onSubmit={onSubmit} />);

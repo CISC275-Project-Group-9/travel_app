@@ -30,6 +30,28 @@ describe("SearchForm Component tests", () => {
         userEvent.type(abbrevBox, "de")
         expect(screen.getByRole("button", {name: "Search"})).toBeInTheDocument();
     });
+    test("more sample state abbreviation", () => {
+        render(
+            <DndProvider backend={HTML5Backend}>
+                <SearchForm onSubmit={function (sq: SearchFilter): void {
+                    throw new Error("Function not implemented.");
+                } } />
+            </DndProvider>
+        );
+        const abbrevBox = screen.getByTestId("formName");
+        userEvent.type(abbrevBox, "MD")
+        expect(screen.getByRole("button", {name: "Search"})).toBeInTheDocument();
+    });
+    test("Search button", () => {
+        render(
+            <DndProvider backend={HTML5Backend}>
+                <SearchForm onSubmit={function (sq: SearchFilter): void {
+                    throw new Error("Function not implemented.");
+                } } />
+            </DndProvider>
+        );
+        expect(screen.getByRole("button", {name: "Search"})).toBeInTheDocument();
+    });
     test("There is a Search button that submits", () => {
         const onSubmit = jest.fn();
         const { getByTestId } = render(<SearchForm onSubmit={onSubmit} />);
