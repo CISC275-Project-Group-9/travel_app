@@ -8,7 +8,7 @@ import { FilterForm } from "./FilterForm";
 import { SearchForm } from "./SearchForm";
 import { UserListProps } from "../interfaces/props";
 import { SortForm } from "./SortForm";
-import { SortableContainer, SortableElement } from "react-sortable-hoc";
+// import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import { Sort, priceFilter, SearchFilter } from "../interfaces/filterSort";
 import { SearchDescForm } from "./SearchDescForm";
 
@@ -257,71 +257,71 @@ export function UserList({
     setItinerary(currentUser.itinerary2);
   }
 
-  const SortableItem = SortableElement(({ dest }: { dest: Destination }) => (
-    <div key={dest.id} style={{ marginLeft: "30px" }}>
-      <DestItem
-        id={dest.id}
-        key={dest.id}
-        name={dest.name}
-        description={dest.description}
-        image={dest.image}
-        location={dest.location}
-        cost={dest.cost}
-        days={dest.days}
-        activities={dest.activities}
-      ></DestItem>
-      <FormGroup controlId="formChangeDuration">
-        <Form.Label
-          style={{
-            display: "inline-block",
-            float: "none",
-            paddingRight: 10,
-            backgroundColor: "BDBDBD",
-          }}
-        >
-          Length of Stay:
-        </Form.Label>
-        <Form.Control
-          style={{
-            display: "inline-block",
-            width: 75,
-            height: 25,
-            float: "none",
-          }}
-          type="number"
-          defaultValue={dest.days}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setDays(event, dest.id)
-          }
-        ></Form.Control>
-        <button onClick={() => removeDestination(dest.id)}>❌</button>
-      </FormGroup>
-    </div>
-  ));
+  // const SortableItem = SortableElement(({ dest }: { dest: Destination }) => (
+  //   <div key={dest.id} style={{ marginLeft: "30px" }}>
+  //     <DestItem
+  //       id={dest.id}
+  //       key={dest.id}
+  //       name={dest.name}
+  //       description={dest.description}
+  //       image={dest.image}
+  //       location={dest.location}
+  //       cost={dest.cost}
+  //       days={dest.days}
+  //       activities={dest.activities}
+  //     ></DestItem>
+  //     <FormGroup controlId="formChangeDuration">
+  //       <Form.Label
+  //         style={{
+  //           display: "inline-block",
+  //           float: "none",
+  //           paddingRight: 10,
+  //           backgroundColor: "BDBDBD",
+  //         }}
+  //       >
+  //         Length of Stay:
+  //       </Form.Label>
+  //       <Form.Control
+  //         style={{
+  //           display: "inline-block",
+  //           width: 75,
+  //           height: 25,
+  //           float: "none",
+  //         }}
+  //         type="number"
+  //         defaultValue={dest.days}
+  //         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+  //           setDays(event, dest.id)
+  //         }
+  //       ></Form.Control>
+  //       <button onClick={() => removeDestination(dest.id)}>❌</button>
+  //     </FormGroup>
+  //   </div>
+  // ));
 
-  const SortableList = SortableContainer(
-    ({ itinerary }: { itinerary: Destination[] }) => {
-      return (
-        <div>
-          {itinerary.map((dest: Destination, index) => (
-            <SortableItem
-              key={dest.id}
-              index={index}
-              dest={dest}
-            ></SortableItem>
-          ))}
-        </div>
-      );
-    }
-  );
+  // const SortableList = SortableContainer(
+  //   ({ itinerary }: { itinerary: Destination[] }) => {
+  //     return (
+  //       <div>
+  //         {itinerary.map((dest: Destination, index) => (
+  //           <SortableItem
+  //             key={dest.id}
+  //             index={index}
+  //             dest={dest}
+  //           ></SortableItem>
+  //         ))}
+  //       </div>
+  //     );
+  //   }
+  // );
 
-  const onSortEnd = ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
-    const newItinerary = [...itinerary];
-    const [removed] = newItinerary.splice(oldIndex, 1);
-    newItinerary.splice(newIndex, 0, removed);
-    setItinerary(newItinerary);
-    currentUser.itinerary = newItinerary;
-  };
+  // const onSortEnd = ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
+  //   const newItinerary = [...itinerary];
+  //   const [removed] = newItinerary.splice(oldIndex, 1);
+  //   newItinerary.splice(newIndex, 0, removed);
+  //   setItinerary(newItinerary);
+  //   currentUser.itinerary = newItinerary;
+  // };
 
   return (
     <div>
@@ -554,13 +554,13 @@ export function UserList({
             );
           })
 
-            <SortableList
-            itinerary={itinerary}
-            onSortEnd={onSortEnd}
-            lockAxis="y"
-            lockToContainerEdges
-            helperClass="sortableHelper"
-          />
+          //   <SortableList
+          //   itinerary={itinerary}
+          //   onSortEnd={onSortEnd}
+          //   lockAxis="y"
+          //   lockToContainerEdges
+          //   helperClass="sortableHelper"
+          // />
 
         )}
         {currentUser.currItinerary === 1 ? (itinerary1.length !== 0 ? (
