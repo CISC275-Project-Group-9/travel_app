@@ -24,7 +24,7 @@ describe("AdminList Component tests", () => {
             id: 2,
             name: "Sample2",
             description: "Sample2",
-            location: "ZZ",
+            location: "XX",
             image: "panda.JPG",
             days: 0,
             cost: 32,
@@ -34,7 +34,7 @@ describe("AdminList Component tests", () => {
             id: 3,
             name: "Sample3",
             description: "Sample3",
-            location: "ZZ",
+            location: "YY",
             image: "panda.JPG",
             days: 0,
             cost: 46,
@@ -46,7 +46,7 @@ describe("AdminList Component tests", () => {
         id: 3,
         name: "Sample3",
         description: "Sample3",
-        location: "ZZ",
+        location: "YY",
         image: "panda.JPG",
         days: 0,
         cost: 46,
@@ -203,6 +203,92 @@ describe("AdminList Component tests", () => {
         );
         const button = screen.getByRole("button", {name: /push/i});
         userEvent.click(button)
-        expect(screen.queryAllByTestId(/shared/).length).toEqual(2);
+        expect(sampleSharedList.length).toEqual(0);
+    });
+    test("Filters by price", () => {
+        
+        render(
+            <DndProvider backend={HTML5Backend}>
+                <AdminList centralList={sampleCentralList} setCentralList={function (newCentralList: Destination[]): void {
+                    sampleCentralList = newCentralList;
+                } } sharedList={sampleSharedList} setSharedList={function (newSharedList: Destination[]): void {
+                    sampleSharedList = newSharedList;
+                } } />
+            </DndProvider>
+        );
+        const minBox = screen.getByTestId("formMin");
+        const maxBox = screen.getByTestId("formMax");
+        userEvent.clear(minBox);
+        userEvent.clear(maxBox);
+        userEvent.type(minBox, "20");
+        userEvent.type(maxBox, "30");
+        const button = screen.getByRole("button", {name: "Filter"});
+        userEvent.click(button)
+        expect(screen.getAllByTestId(/dest/i)).toHaveLength(1);
+    });
+    test("Filters by location", () => {
+        
+        render(
+            <DndProvider backend={HTML5Backend}>
+                <AdminList centralList={sampleCentralList} setCentralList={function (newCentralList: Destination[]): void {
+                    sampleCentralList = newCentralList;
+                } } sharedList={sampleSharedList} setSharedList={function (newSharedList: Destination[]): void {
+                    sampleSharedList = newSharedList;
+                } } />
+            </DndProvider>
+        );
+        const resetButton = screen.getByRole("button", {name: "Reset"})
+        userEvent.click(resetButton);
+        const abbrevBox = screen.getByTestId("abbrevBox");
+        userEvent.clear(abbrevBox)
+        userEvent.type(abbrevBox, "yy")
+        const button = screen.getByTestId("searchLoc")
+        userEvent.click(button)
+        expect(screen.getAllByTestId(/dest/i)).toHaveLength(1);
+    });
+    test("Filters by Description", () => {
+        
+        render(
+            <DndProvider backend={HTML5Backend}>
+                <AdminList centralList={sampleCentralList} setCentralList={function (newCentralList: Destination[]): void {
+                    sampleCentralList = newCentralList;
+                } } sharedList={sampleSharedList} setSharedList={function (newSharedList: Destination[]): void {
+                    sampleSharedList = newSharedList;
+                } } />
+            </DndProvider>
+        );
+        const resetButton = screen.getByRole("button", {name: "Reset"})
+        userEvent.click(resetButton);
+        const wordBox = screen.getByTestId("formName");
+        userEvent.clear(wordBox)
+        userEvent.type(wordBox, "2")
+        const button = screen.getByTestId("searchDesc")
+        userEvent.click(button)
+        expect(screen.getAllByTestId(/dest/i)).toHaveLength(1);
+    });
+    test("Sorts by all features", () => {
+        render(
+            <DndProvider backend={HTML5Backend}>
+                <AdminList centralList={sampleCentralList} setCentralList={function (newCentralList: Destination[]): void {
+                    sampleCentralList = newCentralList;
+                } } sharedList={sampleSharedList} setSharedList={function (newSharedList: Destination[]): void {
+                    sampleSharedList = newSharedList;
+                } } />
+            </DndProvider>
+        );
+        const resetButton = screen.getByRole("button", {name: "Reset"})
+        userEvent.click(resetButton);
+        const dropdown = screen.getByTestId("formQuery");
+        fireEvent.change(dropdown, {target: {value: 'HighCost'}})
+        const button = screen.getByRole("button", {name: "Sort"});
+        userEvent.click(button)
+        expect(screen.getAllByTestId(/cost/i)[0]).toHaveTextContent("Cost: $46")
+        fireEvent.change(dropdown, {target: {value: 'LowCost'}})
+        userEvent.click(button)
+        expect(screen.getAllByTestId(/cost/i)[0]).toHaveTextContent("Cost: $23")
+        fireEvent.change(dropdown, {target: {value: 'State'}})
+        userEvent.click(button)
+        expect(screen.getAllByTestId(/title/i)[0]).toHaveTextContent("Sample2, XX")
+        
     });
 })

@@ -53,8 +53,8 @@ export function SortForm({
                                 style={{ width: "70%", marginLeft: "10px", minWidth: "100px" }}
                             >
                                 <option value="State">State</option>
-                                <option value="Cost">Low Price</option>
-                                <option value="CostDesc">High Price</option>
+                                <option value="LowCost">Low Price</option>
+                                <option value="HighCost">High Price</option>
                             </select>
                             </Form.Label>
                         </Form.Group>
