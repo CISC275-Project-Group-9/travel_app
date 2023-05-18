@@ -5,7 +5,7 @@
 Browserslist: caniuse-lite is outdated. Please run:
   npx browserslist@latest --update-db
   Why you should do it regularly: https://github.com/browserslist/browserslist#browsers-data-updating
-PASS src/components/tests/SuperList.test.tsx
+PASS src/components/tests/SuperList.test.tsx (5.875 s)
   ● Console
 
     console.error
@@ -523,10 +523,10 @@ FAIL src/components/tests/AddUserForm.test.tsx
 
 PASS src/components/tests/DeleteUserForm.test.tsx
 PASS src/components/tests/SortForm.test.tsx
-PASS src/components/tests/FilterForm.test.tsx
-PASS src/App.test.tsx
 PASS src/components/tests/SearchDescForm.test.tsx
 PASS src/components/tests/SearchForm.test.tsx
+PASS src/components/tests/FilterForm.test.tsx
+PASS src/App.test.tsx
 FAIL src/components/tests/UserList.test.tsx
   ● Test suite failed to run
 
@@ -567,7 +567,7 @@ All files               |   47.44 |    27.71 |   49.38 |   49.02 |
   user.ts               |       0 |        0 |       0 |       0 |                                                                     
 ------------------------|---------|----------|---------|---------|---------------------------------------------------------------------
 Test Suites: 3 failed, 10 passed, 13 total
-Tests:       3 failed, 68 passed, 71 total
+Tests:       3 failed, 72 passed, 75 total
 Snapshots:   0 total
-Time:        18.686 s
+Time:        22.313 s
 Ran all test suites.
