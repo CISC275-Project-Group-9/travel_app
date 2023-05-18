@@ -38,7 +38,7 @@ describe("SearchForm Component tests", () => {
                 } } />
             </DndProvider>
         );
-        const abbrevBox = screen.getByTestId("formName");
+        const abbrevBox = screen.getByTestId("abbrevBox");
         userEvent.type(abbrevBox, "MD")
         expect(screen.getByRole("button", {name: "Search"})).toBeInTheDocument();
     });
