@@ -5,7 +5,64 @@
 Browserslist: caniuse-lite is outdated. Please run:
   npx browserslist@latest --update-db
   Why you should do it regularly: https://github.com/browserslist/browserslist#browsers-data-updating
-FAIL src/components/tests/RoleDropdown.test.tsx (9.764 s)
+PASS src/components/tests/SuperList.test.tsx
+  ● Console
+
+    console.error
+      Warning: Each child in a list should have a unique "key" prop.
+      
+      Check the render method of `SuperList`. See https://reactjs.org/link/warning-keys for more information.
+          at div
+          at SuperList (/home/runner/work/travel_app/travel_app/src/components/SuperList.tsx:17:3)
+          at DndProvider (/home/runner/work/travel_app/travel_app/node_modules/react-dnd/src/core/DndProvider.tsx:29:25)
+
+      245 |         </Button>
+      246 |         <h3>Shared List:</h3>
+    > 247 |         <div className="panel panel-default">
+          |         ^
+      248 |           {sharedList.map((dest: Destination) => {
+      249 |             return !editMode ? (
+      250 |               <div key={dest.id} data-testid="shared">
+
+      at printWarning (node_modules/react/cjs/react-jsx-dev-runtime.development.js:117:30)
+      at error (node_modules/react/cjs/react-jsx-dev-runtime.development.js:93:5)
+      at validateExplicitKey (node_modules/react/cjs/react-jsx-dev-runtime.development.js:986:5)
+      at validateChildKeys (node_modules/react/cjs/react-jsx-dev-runtime.development.js:1013:11)
+      at jsxWithValidation (node_modules/react/cjs/react-jsx-dev-runtime.development.js:1184:11)
+      at SuperList (src/components/SuperList.tsx:247:9)
+      at renderWithHooks (node_modules/react-dom/cjs/react-dom.development.js:14985:18)
+      at updateFunctionComponent (node_modules/react-dom/cjs/react-dom.development.js:17356:20)
+
+PASS src/components/tests/AdminList.test.tsx
+  ● Console
+
+    console.error
+      Warning: Each child in a list should have a unique "key" prop.
+      
+      Check the render method of `AdminList`. See https://reactjs.org/link/warning-keys for more information.
+          at div
+          at AdminList (/home/runner/work/travel_app/travel_app/src/components/AdminList.tsx:18:3)
+          at DndProvider (/home/runner/work/travel_app/travel_app/node_modules/react-dnd/src/core/DndProvider.tsx:29:25)
+
+      228 |         <Button onClick={onClick}>Push changes</Button>
+      229 |         <h3>Shared List:</h3>
+    > 230 |         <div className="panel panel-default">
+          |         ^
+      231 |           {sharedList.map((dest: Destination) => {
+      232 |             return !editMode ? (
+      233 |               <div key={dest.id} data-testid={"shared" + dest.id} >
+
+      at printWarning (node_modules/react/cjs/react-jsx-dev-runtime.development.js:117:30)
+      at error (node_modules/react/cjs/react-jsx-dev-runtime.development.js:93:5)
+      at validateExplicitKey (node_modules/react/cjs/react-jsx-dev-runtime.development.js:986:5)
+      at validateChildKeys (node_modules/react/cjs/react-jsx-dev-runtime.development.js:1013:11)
+      at jsxWithValidation (node_modules/react/cjs/react-jsx-dev-runtime.development.js:1184:11)
+      at AdminList (src/components/AdminList.tsx:230:9)
+      at renderWithHooks (node_modules/react-dom/cjs/react-dom.development.js:14985:18)
+      at updateFunctionComponent (node_modules/react-dom/cjs/react-dom.development.js:17356:20)
+
+PASS src/components/tests/AddForm.test.tsx
+FAIL src/components/tests/RoleDropdown.test.tsx
   ● RoleDropdown Component tests › Basic user has empty itinerary
 
     TestingLibraryElementError: Found multiple elements with the text: /itinerary/i
@@ -220,19 +277,37 @@ FAIL src/components/tests/RoleDropdown.test.tsx (9.764 s)
       at getByText (node_modules/@testing-library/dom/dist/query-helpers.js:111:19)
       at Object.<anonymous> (src/components/tests/RoleDropdown.test.tsx:94:23)
 
-PASS src/components/tests/AddUserForm.test.tsx
+PASS src/components/tests/DestItem.test.tsx
+FAIL src/components/tests/AddUserForm.test.tsx
+  ● AddUserForm Component tests › Create new Faculty user
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+      Object {
+    +   "currItinerary": 1,
+        "id": 0,
+    -   "itinerary": Array [],
+    +   "itinerary1": Array [],
+    +   "itinerary2": Array [],
+        "name": "Benita",
+        "role": "Faculty",
+      }
+
+      81 |         const button = screen.getByRole("button", {name: "Add User"})
+      82 |         userEvent.click(button)
+    > 83 |         expect(user).toEqual({id: 0, name: "Benita", role: "Faculty", itinerary: []});
+         |                      ^
+      84 |     });
+      85 |     
+      86 | })
+
+      at Object.<anonymous> (src/components/tests/AddUserForm.test.tsx:83:22)
+
+PASS src/components/tests/DeleteUserForm.test.tsx
 PASS src/App.test.tsx
-FAIL src/components/tests/DeleteUserForm.test.tsx
-  ● Test suite failed to run
-
-    Your test suite must contain at least one test.
-
-      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
-      at node_modules/@jest/core/build/TestScheduler.js:316:17
-      at node_modules/emittery/index.js:260:13
-          at Array.map (<anonymous>)
-      at Emittery.emit (node_modules/emittery/index.js:258:23)
-
 FAIL src/components/tests/SearchForm.test.tsx
   ● Test suite failed to run
 
@@ -244,51 +319,7 @@ FAIL src/components/tests/SearchForm.test.tsx
           at Array.map (<anonymous>)
       at Emittery.emit (node_modules/emittery/index.js:258:23)
 
-FAIL src/components/tests/SharedList.test.tsx
-  ● Test suite failed to run
-
-    Your test suite must contain at least one test.
-
-      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
-      at node_modules/@jest/core/build/TestScheduler.js:316:17
-      at node_modules/emittery/index.js:260:13
-          at Array.map (<anonymous>)
-      at Emittery.emit (node_modules/emittery/index.js:258:23)
-
 FAIL src/components/tests/FilterForm.test.tsx
-  ● Test suite failed to run
-
-    Your test suite must contain at least one test.
-
-      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
-      at node_modules/@jest/core/build/TestScheduler.js:316:17
-      at node_modules/emittery/index.js:260:13
-          at Array.map (<anonymous>)
-      at Emittery.emit (node_modules/emittery/index.js:258:23)
-
-FAIL src/components/tests/CentralList.test.tsx
-  ● Test suite failed to run
-
-    Your test suite must contain at least one test.
-
-      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
-      at node_modules/@jest/core/build/TestScheduler.js:316:17
-      at node_modules/emittery/index.js:260:13
-          at Array.map (<anonymous>)
-      at Emittery.emit (node_modules/emittery/index.js:258:23)
-
-FAIL src/components/tests/SuperList.test.tsx
-  ● Test suite failed to run
-
-    Your test suite must contain at least one test.
-
-      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
-      at node_modules/@jest/core/build/TestScheduler.js:316:17
-      at node_modules/emittery/index.js:260:13
-          at Array.map (<anonymous>)
-      at Emittery.emit (node_modules/emittery/index.js:258:23)
-
-FAIL src/components/tests/DestItem.test.tsx
   ● Test suite failed to run
 
     Your test suite must contain at least one test.
@@ -321,48 +352,24 @@ FAIL src/components/tests/SortForm.test.tsx
           at Array.map (<anonymous>)
       at Emittery.emit (node_modules/emittery/index.js:258:23)
 
-FAIL src/components/tests/AdminList.test.tsx
-  ● Test suite failed to run
-
-    Your test suite must contain at least one test.
-
-      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
-      at node_modules/@jest/core/build/TestScheduler.js:316:17
-      at node_modules/emittery/index.js:260:13
-          at Array.map (<anonymous>)
-      at Emittery.emit (node_modules/emittery/index.js:258:23)
-
-FAIL src/components/tests/AddForm.test.tsx
-  ● Test suite failed to run
-
-    Your test suite must contain at least one test.
-
-      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
-      at node_modules/@jest/core/build/TestScheduler.js:316:17
-      at node_modules/emittery/index.js:260:13
-          at Array.map (<anonymous>)
-      at Emittery.emit (node_modules/emittery/index.js:258:23)
-
 ------------------------|---------|----------|---------|---------|-------------------------------------------------------------
 File                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                                           
 ------------------------|---------|----------|---------|---------|-------------------------------------------------------------
-All files               |   26.44 |    15.58 |   23.41 |   27.52 |                                                             
+All files               |   45.92 |    29.87 |   46.75 |   47.53 |                                                             
  src                    |     100 |      100 |     100 |     100 |                                                             
   App.tsx               |     100 |      100 |     100 |     100 |                                                             
- src/components         |   26.91 |       16 |   23.37 |   27.97 |                                                             
-  AddForm.tsx           |   29.41 |        0 |      25 |   29.41 | 6-8,29-37,43-46                                             
+ src/components         |   46.95 |    30.66 |   47.33 |   48.53 |                                                             
+  AddForm.tsx           |     100 |      100 |     100 |     100 |                                                             
   AddUserForm.tsx       |     100 |      100 |     100 |     100 |                                                             
-  AdminList.tsx         |   10.81 |     3.33 |    9.09 |   11.42 | 30-63,69,76-80,85-143,225-342                               
-  CentralList.tsx       |       0 |      100 |       0 |       0 | 11-18                                                       
+  AdminList.tsx         |   54.79 |    36.66 |   57.57 |   56.52 | 84-142                                                      
   DeleteUserForm.tsx    |     100 |      100 |     100 |     100 |                                                             
   DestItem.tsx          |     100 |       50 |     100 |     100 | 44                                                          
   FilterForm.tsx        |      50 |      100 |   33.33 |      50 | 18,25-27                                                    
   RoleDropdown.tsx      |   73.33 |       75 |      80 |   72.41 | 79-89                                                       
   SearchDescForm.tsx    |      50 |      100 |   33.33 |      50 | 17,24-26                                                    
   SearchForm.tsx        |      50 |      100 |   33.33 |      50 | 17,24-26                                                    
-  SharedList.tsx        |       0 |      100 |       0 |       0 | 7-12                                                        
   SortForm.tsx          |      50 |      100 |   33.33 |      50 | 17,24-26                                                    
-  SuperList.tsx         |    8.53 |     3.57 |    8.33 |    9.09 | 29-66,71,78-138,190-361                                     
+  SuperList.tsx         |      50 |    32.14 |   52.77 |      52 | 85-136,188,228-241                                          
   UserList.tsx          |   17.64 |    12.85 |   13.63 |   18.89 | 38,41,49,52,63-78,85,95-105,119-256,260-296,303-306,325-336 
  src/hooks              |       0 |        0 |       0 |       0 |                                                             
   useSessionStorage.tsx |       0 |        0 |       0 |       0 | 4-19                                                        
@@ -372,8 +379,8 @@ All files               |   26.44 |    15.58 |   23.41 |   27.52 |
   props.ts              |       0 |        0 |       0 |       0 |                                                             
   user.ts               |       0 |        0 |       0 |       0 |                                                             
 ------------------------|---------|----------|---------|---------|-------------------------------------------------------------
-Test Suites: 12 failed, 2 passed, 14 total
-Tests:       1 failed, 20 passed, 21 total
+Test Suites: 6 failed, 6 passed, 12 total
+Tests:       2 failed, 52 passed, 54 total
 Snapshots:   0 total
-Time:        18.55 s
+Time:        17.134 s
 Ran all test suites.
