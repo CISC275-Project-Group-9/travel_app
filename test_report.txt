@@ -183,6 +183,7 @@ FAIL src/components/tests/RoleDropdown.test.tsx
                                 [33mstyle[39m=[32m"display: inline-block; float: left; padding-right: 10px;"[39m
                               [36m>[39m
                                 [36m<input[39m
+                                  [33mdata-testid[39m=[32m"formName"[39m
                                   [33mname[39m=[32m"searchQuery"[39m
                                   [33mstyle[39m=[32m"width: 100%; min-width: 100px;"[39m
                                   [33mtype[39m=[32m"text"[39m
@@ -237,6 +238,171 @@ FAIL src/components/tests/RoleDropdown.test.tsx
                                 [33mstyle[39m=[32m"display: inline-block; float: left; padding-right: 10px;"[39m
                               [36m>[39m
                                 [36m<input[39m
+                                  [33mdata-testid[39m=[32m"formName"[39m
+                                  [33mname[39m=[32m"searchQuery"[39m
+                                  [33mstyle[39m=[32m"width: 100%; min-width: 100px;"[39m
+                                  [33mtype[39m=[32m"text"[39m
+                                  [33mvalue[39m=[32m""[39m
+                                [36m/>[39m
+                              [36m</label>[39m
+                            [36m</div>[39m
+                          [36m</div>[39m
+                          [36m<div[39m
+                            [33mclass[39m=[32m"col"[39m
+                          [36m/>[39m
+                          [36m<div[39m
+                            [33mclass[39m=[32m"col"[39m
+                          [36m>[39m
+                            [36m<div[39m
+                              [33mstyle[39m=[32m"text-align: right; min-width: 50px;"[39m
+                            [36m>[39m
+                              [36m<button[39m
+                                [33mclass[39m=[32m"btn btn-primary"[39m
+                                [33mtype[39m=[32m"su...
+
+      92 |             </DndProvider>
+      93 |         );
+    > 94 |         expect(screen.getByText(/itinerary/i)).toBeInTheDocument();
+         |                       ^
+      95 |     })
+      96 |     
+      97 | })
+
+      at Object.getElementError (node_modules/@testing-library/dom/dist/config.js:38:19)
+      at getElementError (node_modules/@testing-library/dom/dist/query-helpers.js:25:35)
+      at getMultipleElementsFoundError (node_modules/@testing-library/dom/dist/query-helpers.js:29:10)
+      at node_modules/@testing-library/dom/dist/query-helpers.js:66:13
+      at getByText (node_modules/@testing-library/dom/dist/query-helpers.js:111:19)
+      at Object.<anonymous> (src/components/tests/RoleDropdown.test.tsx:94:23)
+
+PASS src/components/tests/DestItem.test.tsx
+FAIL src/components/tests/AddUserForm.test.tsx
+  ● AddUserForm Component tests › There is a name box
+
+    TestingLibraryElementError: Found multiple elements by: [data-testid="/name/i"]
+
+    Here are the matching elements:
+
+    Ignored nodes: comments, <script />, <style />
+    [36m<input[39m
+      [33mdata-testid[39m=[32m"formName"[39m
+      [33mname[39m=[32m"searchQuery"[39m
+      [33mstyle[39m=[32m"width: 100%; min-width: 100px;"[39m
+      [33mtype[39m=[32m"text"[39m
+      [33mvalue[39m=[32m""[39m
+    [36m/>[39m
+
+    Ignored nodes: comments, <script />, <style />
+    [36m<input[39m
+      [33mdata-testid[39m=[32m"formName"[39m
+      [33mname[39m=[32m"searchQuery"[39m
+      [33mstyle[39m=[32m"width: 100%; min-width: 100px;"[39m
+      [33mtype[39m=[32m"text"[39m
+      [33mvalue[39m=[32m""[39m
+    [36m/>[39m
+
+    Ignored nodes: comments, <script />, <style />
+    [36m<input[39m
+      [33mdata-testid[39m=[32m"newUserName"[39m
+      [33mname[39m=[32m"name"[39m
+      [33mstyle[39m=[32m"width: 100%; min-width: 100px;"[39m
+      [33mtype[39m=[32m"text"[39m
+      [33mvalue[39m=[32m""[39m
+    [36m/>[39m
+
+    (If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+    Ignored nodes: comments, <script />, <style />
+    [36m<body>[39m
+      [36m<div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"role-dropdown"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"roleButton"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"dropdown-label"[39m
+            [36m>[39m
+              [0mChoose your user:[0m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<select[39m
+                [33mclass[39m=[32m"form-select"[39m
+                [33mdata-testid[39m=[32m"changeUser"[39m
+                [33mid[39m=[32m"userSelect"[39m
+              [36m>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"Default Basic User"[39m
+                [36m>[39m
+                  [0mDefault Basic User[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"Default Staff User"[39m
+                [36m>[39m
+                  [0mDefault Staff User[0m
+                [36m</option>[39m
+                [36m<option[39m
+                  [33mvalue[39m=[32m"Default Faculty User"[39m
+                [36m>[39m
+                  [0mDefault Faculty User[0m
+                [36m</option>[39m
+              [36m</select>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"userLabel"[39m
+          [36m>[39m
+            [36m<h5>[39m
+              [0mCurrent User: [0m
+              [0mDefault Basic User[0m
+            [36m</h5>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"addUser"[39m
+          [36m>[39m
+            [0m [0m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"list-container"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"column-left"[39m
+              [36m>[39m
+                [36m<h3>[39m
+                  [0mDestinations:[0m
+                [36m</h3>[39m
+                [36m<br />[39m
+                [36m<div[39m
+                  [33mstyle[39m=[32m"display: flex; flex-direction: column; border-radius: 10px; padding: 10px; background: rgb(189, 189, 189);"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mstyle[39m=[32m"padding-bottom: 20px;"[39m
+                  [36m>[39m
+                    [36m<div>[39m
+                      [36m<form>[39m
+                        [36m<div[39m
+                          [33mclass[39m=[32m"row"[39m
+                        [36m>[39m
+                          [36m<div[39m
+                            [33mclass[39m=[32m"col"[39m
+                          [36m>[39m
+                            [36m<h5>[39m
+                              [0mSearch by State Abbreviation:[0m
+                            [36m</h5>[39m
+                          [36m</div>[39m
+                          [36m<div[39m
+                            [33mclass[39m=[32m"col"[39m
+                          [36m>[39m
+                            [36m<div>[39m
+                              [36m<label[39m
+                                [33mclass[39m=[32m"form-label"[39m
+                                [33mfor[39m=[32m"formName"[39m
+                                [33mstyle[39m=[32m"display: inline-block; float: left; padding-right: 10px;"[39m
+                              [36m>[39m
+                                [36m<input[39m
+                                  [33mdata-testid[39m=[32m"formName"[39m
                                   [33mname[39m=[32m"searchQuery"[39m
                                   [33mstyle[39m=[32m"width: 100%; min-width: 100px;"[39m
                                   [33mtype[39m=[32m"text"[39m
@@ -260,25 +426,74 @@ FAIL src/components/tests/RoleDropdown.test.tsx
                               [36m>[39m
                                 [0mSearch[0m
                               [36m</button>[39m
-            ...
+                            [36m</div>[39m
+                          [36m</div>[39m
+                        [36m</div>[39m
+                      [36m</form>[39m
+                    [36m</div>[39m
+                  [36m</div>[39m
+                  [36m<div[39m
+                    [33mstyle[39m=[32m"padding-bottom: 20px;"[39m
+                  [36m>[39m
+                    [36m<div>[39m
+                      [36m<form>[39m
+                        [36m<div[39m
+                          [33mclass[39m=[32m"row"[39m
+                        [36m>[39m
+                          [36m<div[39m
+                            [33mclass[39m=[32m"col"[39m
+                          [36m>[39m
+                            [36m<h5>[39m
+                              [0mFilter by Description contains word:[0m
+                            [36m</h5>[39m
+                          [36m</div>[39m
+                          [36m<div[39m
+                            [33mclass[39m=[32m"col"[39m
+                          [36m>[39m
+                            [36m<div>[39m
+                              [36m<label[39m
+                                [33mclass[39m=[32m"form-label"[39m
+                                [33mfor[39m=[32m"formName"[39m
+                                [33mstyle[39m=[32m"display: inline-block; float: left; padding-right: 10px;"[39m
+                              [36m>[39m
+                                [36m<input[39m
+                                  [33mdata-testid[39m=[32m"formName"[39m
+                                  [33mname[39m=[32m"searchQuery"[39m
+                                  [33mstyle[39m=[32m"width: 100%; min-width: 100px;"[39m
+                                  [33mtype[39m=[32m"text"[39m
+                                  [33mvalue[39m=[32m""[39m
+                                [36m/>[39m
+                              [36m</label>[39m
+                            [36m</div>[39m
+                          [36m</div>[39m
+                          [36m<div[39m
+                            [33mclass[39m=[32m"col"[39m
+                          [36m/>[39m
+                          [36m<div[39m
+                            [33mclass[39m=[32m"col"[39m
+                          [36m>[39m
+                            [36m<div[39m
+                              [33mstyle[39m=[32m"text-align: right; min-width: 50px;"[39m
+                            [36m>[39m
+                              [36m<button[39m
+                                [33mclass[39m=[32m"btn btn-primary"[39m
+                                [33mtype[39m=[32m"su...
 
-      92 |             </DndProvider>
-      93 |         );
-    > 94 |         expect(screen.getByText(/itinerary/i)).toBeInTheDocument();
+      30 |             </DndProvider>
+      31 |         );
+    > 32 |         expect(screen.getByTestId(/name/i)).toBeInTheDocument();
          |                       ^
-      95 |     })
-      96 |     
-      97 | })
+      33 |     });
+      34 |     test("There is a role label", () => {
+      35 |         render(
 
       at Object.getElementError (node_modules/@testing-library/dom/dist/config.js:38:19)
       at getElementError (node_modules/@testing-library/dom/dist/query-helpers.js:25:35)
       at getMultipleElementsFoundError (node_modules/@testing-library/dom/dist/query-helpers.js:29:10)
       at node_modules/@testing-library/dom/dist/query-helpers.js:66:13
-      at getByText (node_modules/@testing-library/dom/dist/query-helpers.js:111:19)
-      at Object.<anonymous> (src/components/tests/RoleDropdown.test.tsx:94:23)
+      at getByTestId (node_modules/@testing-library/dom/dist/query-helpers.js:111:19)
+      at Object.<anonymous> (src/components/tests/AddUserForm.test.tsx:32:23)
 
-PASS src/components/tests/DestItem.test.tsx
-FAIL src/components/tests/AddUserForm.test.tsx
   ● AddUserForm Component tests › Create new Faculty user
 
     expect(received).toEqual(expected) // deep equality
@@ -307,41 +522,12 @@ FAIL src/components/tests/AddUserForm.test.tsx
       at Object.<anonymous> (src/components/tests/AddUserForm.test.tsx:83:22)
 
 PASS src/components/tests/DeleteUserForm.test.tsx
+PASS src/components/tests/SortForm.test.tsx
+PASS src/components/tests/FilterForm.test.tsx
 PASS src/App.test.tsx
-FAIL src/components/tests/SearchForm.test.tsx
-  ● Test suite failed to run
-
-    Your test suite must contain at least one test.
-
-      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
-      at node_modules/@jest/core/build/TestScheduler.js:316:17
-      at node_modules/emittery/index.js:260:13
-          at Array.map (<anonymous>)
-      at Emittery.emit (node_modules/emittery/index.js:258:23)
-
-FAIL src/components/tests/FilterForm.test.tsx
-  ● Test suite failed to run
-
-    Your test suite must contain at least one test.
-
-      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
-      at node_modules/@jest/core/build/TestScheduler.js:316:17
-      at node_modules/emittery/index.js:260:13
-          at Array.map (<anonymous>)
-      at Emittery.emit (node_modules/emittery/index.js:258:23)
-
+PASS src/components/tests/SearchDescForm.test.tsx
+PASS src/components/tests/SearchForm.test.tsx
 FAIL src/components/tests/UserList.test.tsx
-  ● Test suite failed to run
-
-    Your test suite must contain at least one test.
-
-      at onResult (node_modules/@jest/core/build/TestScheduler.js:175:18)
-      at node_modules/@jest/core/build/TestScheduler.js:316:17
-      at node_modules/emittery/index.js:260:13
-          at Array.map (<anonymous>)
-      at Emittery.emit (node_modules/emittery/index.js:258:23)
-
-FAIL src/components/tests/SortForm.test.tsx
   ● Test suite failed to run
 
     Your test suite must contain at least one test.
@@ -355,20 +541,20 @@ FAIL src/components/tests/SortForm.test.tsx
 ------------------------|---------|----------|---------|---------|---------------------------------------------------------------------
 File                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                                                   
 ------------------------|---------|----------|---------|---------|---------------------------------------------------------------------
-All files               |   43.72 |    27.71 |   44.44 |   45.12 |                                                                     
+All files               |   47.44 |    27.71 |   49.38 |   49.02 |                                                                     
  src                    |     100 |      100 |     100 |     100 |                                                                     
   App.tsx               |     100 |      100 |     100 |     100 |                                                                     
- src/components         |   44.63 |    28.39 |   44.93 |      46 |                                                                     
+ src/components         |   48.44 |    28.39 |      50 |      50 |                                                                     
   AddForm.tsx           |     100 |      100 |     100 |     100 |                                                                     
   AddUserForm.tsx       |     100 |      100 |     100 |     100 |                                                                     
   AdminList.tsx         |   54.79 |    36.66 |   57.57 |   56.52 | 84-142                                                              
   DeleteUserForm.tsx    |     100 |      100 |     100 |     100 |                                                                     
   DestItem.tsx          |     100 |       50 |     100 |     100 | 44                                                                  
-  FilterForm.tsx        |      50 |      100 |   33.33 |      50 | 18,25-27                                                            
+  FilterForm.tsx        |     100 |      100 |     100 |     100 |                                                                     
   RoleDropdown.tsx      |   73.33 |       75 |      80 |   72.41 | 79-89                                                               
-  SearchDescForm.tsx    |      50 |      100 |   33.33 |      50 | 17,24-26                                                            
-  SearchForm.tsx        |      50 |      100 |   33.33 |      50 | 17,24-26                                                            
-  SortForm.tsx          |      50 |      100 |   33.33 |      50 | 17,24-26                                                            
+  SearchDescForm.tsx    |     100 |      100 |     100 |     100 |                                                                     
+  SearchForm.tsx        |     100 |      100 |     100 |     100 |                                                                     
+  SortForm.tsx          |     100 |      100 |     100 |     100 |                                                                     
   SuperList.tsx         |      50 |    32.14 |   52.77 |      52 | 85-136,188,228-241                                                  
   UserEdit.tsx          |      20 |      100 |       0 |      20 | 33-114                                                              
   UserList.tsx          |   16.02 |    10.97 |      12 |      17 | 40,43,51,54,65-80,87,97-107,121-258,262-298,305-308,327-375,485-561 
@@ -380,8 +566,8 @@ All files               |   43.72 |    27.71 |   44.44 |   45.12 |
   props.ts              |       0 |        0 |       0 |       0 |                                                                     
   user.ts               |       0 |        0 |       0 |       0 |                                                                     
 ------------------------|---------|----------|---------|---------|---------------------------------------------------------------------
-Test Suites: 6 failed, 6 passed, 12 total
-Tests:       2 failed, 52 passed, 54 total
+Test Suites: 3 failed, 10 passed, 13 total
+Tests:       3 failed, 68 passed, 71 total
 Snapshots:   0 total
-Time:        16.818 s
+Time:        18.686 s
 Ran all test suites.
