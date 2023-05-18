@@ -13,19 +13,25 @@ const users = [
       id: 1,
       name: "Default Basic User",
       role: "Basic",
-      itinerary: [],
+      itinerary1: [],
+      itinerary2: [],
+      currItinerary: 1,
     },
     {
       id: 2,
       name: "Default Staff User",
       role: "Staff",
-      itinerary: [],
+      itinerary1: [],
+      itinerary2: [],
+      currItinerary: 1,
     },
     {
       id: 3,
       name: "Default Faculty User",
       role: "Faculty",
-      itinerary: [],
+      itinerary1: [],
+      itinerary2: [],
+      currItinerary: 1,
     },
   ]
 
