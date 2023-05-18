@@ -4,5 +4,7 @@ export interface User {
     id: number;
     name: string;
     role: string;
-    itinerary: Destination[];
+    itinerary1: Destination[];
+    itinerary2: Destination[];
+    currItinerary: number;
   }

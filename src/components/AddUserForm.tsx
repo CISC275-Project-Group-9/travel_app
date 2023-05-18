@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { User } from "./RoleDropdown";
+import { User } from "../interfaces/user";
 
 export function AddUserForm({ onSubmit }: { onSubmit: (u: User) => void }) {
   const [user, setUser] = useState<User>({
     id: 0,
     name: "",
     role: "Basic",
-    itinerary: [],
+    itinerary1: [],
+    itinerary2: [],
+    currItinerary: 1,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +35,9 @@ export function AddUserForm({ onSubmit }: { onSubmit: (u: User) => void }) {
       id: 0,
       name: "",
       role: "",
-      itinerary: [],
+      itinerary1: [],
+      itinerary2: [],
+      currItinerary: 1,
     });
   };
 
@@ -75,9 +79,10 @@ export function AddUserForm({ onSubmit }: { onSubmit: (u: User) => void }) {
                   display: "inline-block",
                   float: "left",
                   paddingRight: 10,
-                    marginBottom: "0px"
+                  marginBottom: "0px",
                 }}
-              >Role:
+              >
+                Role:
               </Form.Label>
               <select
                 data-testid="role"

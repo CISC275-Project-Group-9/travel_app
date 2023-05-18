@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { User } from "./RoleDropdown";
+import { User } from "../interfaces/user";
 
 export function DeleteUserForm({
   onSubmit,
@@ -15,7 +15,9 @@ export function DeleteUserForm({
     id: 0,
     name: "Default Basic User",
     role: "Basic",
-    itinerary: [],
+    itinerary1: [],
+    itinerary2: [],
+    currItinerary: 1,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -23,7 +25,7 @@ export function DeleteUserForm({
       ...user,
       name: event.target.value,
     });
-  }    
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -32,7 +34,9 @@ export function DeleteUserForm({
       id: 0,
       name: "",
       role: "",
-      itinerary: [],
+      itinerary1: [],
+      itinerary2: [],
+      currItinerary: 1,
     });
   };
 
