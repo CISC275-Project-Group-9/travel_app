@@ -48,6 +48,7 @@ export function FilterForm({
                             >
                                 Min:  
                                 <input
+                                    data-testid="formMin"
                                     type="number"
                                     name="min"
                                     value={newPrices.min}
@@ -69,6 +70,7 @@ export function FilterForm({
                             >
                                 Max:
                                 <input
+                                    data-testid="formMax"
                                     type="number"
                                     name="max"
                                     value={newPrices.max}
