@@ -4,7 +4,6 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { DndProvider } from "react-dnd";
 import userEvent from "@testing-library/user-event";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { SharedList } from "../SharedList";
 import { SearchDescForm } from "../SearchDescForm";
 import { SearchFilter } from "../../interfaces/filterSort";
 
