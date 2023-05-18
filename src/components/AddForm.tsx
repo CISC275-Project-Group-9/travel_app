@@ -4,7 +4,6 @@ import { Destination } from "../interfaces/destination";
 
 function randomInt(min: number, max: number): number {
   let result: number = Math.floor(Math.random() * (max - min + 1)) + min
-  console.log(result)
   return result;
 }
 

@@ -46,7 +46,6 @@ export function AdminList({
     } else {
       newDest = { ...oldDest, [event.target.name]: event.target.value };
     }
-    console.log("here" + event.target.name + " value: " + event.target.value);
     newSharedList.splice(findTarget, 1, newDest);
     setSharedList(newSharedList);
   }
@@ -176,10 +175,10 @@ export function AdminList({
             </Button>
           </div>
         </div>
-        <div className="panel panel-default">
+        <div data-testid="displayList" className="panel panel-default">
         {displayList.map((dest: Destination) => {
             return (
-              <div key={dest.id}>
+              <div key={dest.id} data-testid={"dest" + dest.id} >
                 <DestItem
                   id={dest.id}
                   key={dest.id}
@@ -215,9 +214,10 @@ export function AdminList({
           ) : null}
         </div>
       </div>
-      <div className="column-right" ref={drop}>
+      <div data-testid="dropbox" className="column-right" ref={drop}>
         <p style={{ margin: 0 }}>Change Edit Mode</p>
         <Form.Check
+          data-testid="switch"
           type="switch"
           id="editModeSwitch"
           checked={editMode}
@@ -230,7 +230,7 @@ export function AdminList({
         <div className="panel panel-default">
           {sharedList.map((dest: Destination) => {
             return !editMode ? (
-              <div key={dest.id}>
+              <div key={dest.id} data-testid={"shared" + dest.id} >
                 <DestItem
                   id={dest.id}
                   key={dest.id}
@@ -243,7 +243,7 @@ export function AdminList({
                   activities={dest.activities}
                 ></DestItem>
                 <FormGroup controlId="formChangeDuration">
-                  <Button onClick={() => removeDestination(dest.id)}>❌</Button>
+                  <Button data-testid={"deleteButton"+dest.id} onClick={() => removeDestination(dest.id)}>❌</Button>
                 </FormGroup>
               </div>
             ) : (
@@ -271,12 +271,15 @@ export function AdminList({
                     Name
                   </Form.Label>
                   <Form.Control
+                    data-testid={"editName"+dest.id}
                     defaultValue={dest.name}
                     name="name"
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                       editDestination(event, dest.id)
                     }
                   />
+                </Form.Group>
+                <Form.Group>
                   <Form.Label
                     style={{
                       display: "inline-block",
@@ -287,12 +290,15 @@ export function AdminList({
                     Description
                   </Form.Label>
                   <Form.Control
+                    data-testid={"editDescription"+dest.id}
                     defaultValue={dest.description}
                     name="description"
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                       editDestination(event, dest.id)
                     }
                   />
+                </Form.Group>
+                <Form.Group>
                   <Form.Label
                     style={{
                       display: "inline-block",
@@ -303,12 +309,15 @@ export function AdminList({
                     Location
                   </Form.Label>
                   <Form.Control
+                    data-testid={"editLocation"+dest.id}
                     defaultValue={dest.location}
                     name="location"
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                       editDestination(event, dest.id)
                     }
                   />
+                </Form.Group>
+                <Form.Group>
                   <Form.Label
                     style={{
                       display: "inline-block",
@@ -319,6 +328,7 @@ export function AdminList({
                     Cost
                   </Form.Label>
                   <Form.Control
+                    data-testid={"editCost"+dest.id}
                     defaultValue={dest.cost}
                     name="cost"
                     type="number"
@@ -326,6 +336,8 @@ export function AdminList({
                       editDestination(event, dest.id)
                     }
                   />
+                </Form.Group>
+                <Form.Group>
                   <Form.Label
                     style={{
                       display: "inline-block",
@@ -336,6 +348,7 @@ export function AdminList({
                     Activities
                   </Form.Label>
                   <Form.Control
+                    data-testid={"editActivities"+dest.id}
                     defaultValue={dest.activities}
                     name="activities"
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) =>

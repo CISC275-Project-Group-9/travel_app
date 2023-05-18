@@ -65,11 +65,12 @@ describe("AddUserForm Component tests", () => {
         expect(screen.getByRole("button", {name: "Add User"})).toBeInTheDocument();
     });
     test("Create new Faculty user", () => {
+        let user = {} as User
         render(
             <DndProvider backend={HTML5Backend}>
                 <RoleDropdown />
                 <AddUserForm onSubmit={function (u: User): void {
-                    throw new Error("Function not implemented.");
+                    user = u;
                 } } />
             </DndProvider>
         );
@@ -77,7 +78,9 @@ describe("AddUserForm Component tests", () => {
         const roleDropdown = screen.getByTestId("role");
         userEvent.type(nameBox, "Benita")
         fireEvent.change(roleDropdown, {target: {value: 'Faculty'}})
-        expect(screen.getByRole("button", {name: "Add User"})).toBeInTheDocument();
+        const button = screen.getByRole("button", {name: "Add User"})
+        userEvent.click(button)
+        expect(user).toEqual({id: 0, name: "Benita", role: "Faculty", itinerary: []});
     });
     
 })
