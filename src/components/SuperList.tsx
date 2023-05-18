@@ -45,7 +45,6 @@ export function SuperList({
     } else {
       newDest = { ...oldDest, [event.target.name]: event.target.value };
     }
-    console.log("here" + event.target.name + " value: " + event.target.value);
     newSharedList.splice(findTarget, 1, newDest);
     setSharedList(newSharedList);
   }
@@ -58,7 +57,6 @@ export function SuperList({
   }
 
   function addDestToShared(name: string) {
-    console.log(name);
     const addedDest = centralList.filter(
       (dest: Destination) => name === dest.name
     );
@@ -172,7 +170,7 @@ export function SuperList({
         <div>
           {displayList.map((dest: Destination) => {
             return (
-              <div key={dest.id}>
+              <div key={dest.id} data-testid="dest">
                 <DestItem
                   id={dest.id}
                   key={dest.id}
@@ -213,7 +211,7 @@ export function SuperList({
           ) : null}
         </div>
       </div>
-      <div className="column-right" ref={drop}>
+      <div data-testid="dropbox" className="column-right" ref={drop}>
         <p style={{ margin: 0 }}>Change Edit Mode</p>
         <Form.Check
           type="switch"
@@ -246,7 +244,7 @@ export function SuperList({
         <div className="panel panel-default">
           {sharedList.map((dest: Destination) => {
             return !editMode ? (
-              <div key={dest.id}>
+              <div key={dest.id} data-testid="shared">
                 <DestItem
                   id={dest.id}
                   key={dest.id}
@@ -259,7 +257,7 @@ export function SuperList({
                   activities={dest.activities}
                 ></DestItem>
                 <FormGroup controlId="formChangeDuration">
-                  <Button onClick={() => removeDestination(dest.id)}>❌</Button>
+                  <Button data-testid={"deleteButton"+dest.id} onClick={() => removeDestination(dest.id)}>❌</Button>
                 </FormGroup>
               </div>
             ) : (
@@ -287,12 +285,15 @@ export function SuperList({
                     Name
                   </Form.Label>
                   <Form.Control
+                    data-testid={"editName"+dest.id}
                     defaultValue={dest.name}
                     name="name"
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                       editDestination(event, dest.id)
                     }
                   />
+                </Form.Group>
+                <Form.Group>
                   <Form.Label
                     style={{
                       display: "inline-block",
@@ -303,12 +304,15 @@ export function SuperList({
                     Description
                   </Form.Label>
                   <Form.Control
+                    data-testid={"editDescription"+dest.id}
                     defaultValue={dest.description}
                     name="description"
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                       editDestination(event, dest.id)
                     }
                   />
+                </Form.Group>
+                <Form.Group>
                   <Form.Label
                     style={{
                       display: "inline-block",
@@ -319,12 +323,15 @@ export function SuperList({
                     Location
                   </Form.Label>
                   <Form.Control
+                    data-testid={"editLocation"+dest.id}
                     defaultValue={dest.location}
                     name="location"
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                       editDestination(event, dest.id)
                     }
                   />
+                </Form.Group>
+                <Form.Group>
                   <Form.Label
                     style={{
                       display: "inline-block",
@@ -335,6 +342,7 @@ export function SuperList({
                     Cost
                   </Form.Label>
                   <Form.Control
+                    data-testid={"editCost"+dest.id}
                     defaultValue={dest.cost}
                     name="cost"
                     type="number"
@@ -342,6 +350,8 @@ export function SuperList({
                       editDestination(event, dest.id)
                     }
                   />
+                </Form.Group>
+                <Form.Group>
                   <Form.Label
                     style={{
                       display: "inline-block",
@@ -352,6 +362,7 @@ export function SuperList({
                     Activities
                   </Form.Label>
                   <Form.Control
+                    data-testid={"editActivities"+dest.id}
                     defaultValue={dest.activities}
                     name="activities"
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
