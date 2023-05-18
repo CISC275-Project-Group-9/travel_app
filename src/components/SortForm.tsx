@@ -47,6 +47,7 @@ export function SortForm({
                                 Sort By:
                                 <select
                                 name="sortQuery"
+                                data-testid={"formQuery"}
                                 value={sort.sortQuery}
                                 onChange={handleChange}
                                 style={{ width: "70%", marginLeft: "10px", minWidth: "100px" }}
