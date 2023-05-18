@@ -97,10 +97,6 @@ describe("AdminList Component tests", () => {
         const editMode = screen.getByRole("checkbox");
         userEvent.click(editMode);
         const nameTextbox = screen.getByTestId("editName3")
-        const descTextbox = screen.getByTestId("editDescription3")
-        const locTextbox = screen.getByTestId("editLocation3")
-        const costTextbox = screen.getByTestId("editCost3")
-        const activitiesTextbox = screen.getByTestId("editActivities3")
         userEvent.type(nameTextbox, "+NewName")
         expect(sampleSharedList[0].name).toEqual("Sample3+NewName");
     });
