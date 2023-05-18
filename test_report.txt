@@ -5,7 +5,7 @@
 Browserslist: caniuse-lite is outdated. Please run:
   npx browserslist@latest --update-db
   Why you should do it regularly: https://github.com/browserslist/browserslist#browsers-data-updating
-PASS src/components/tests/SuperList.test.tsx (5.875 s)
+PASS src/components/tests/SuperList.test.tsx (5.532 s)
   ● Console
 
     console.error
@@ -61,470 +61,90 @@ PASS src/components/tests/AdminList.test.tsx
       at renderWithHooks (node_modules/react-dom/cjs/react-dom.development.js:14985:18)
       at updateFunctionComponent (node_modules/react-dom/cjs/react-dom.development.js:17356:20)
 
+PASS src/components/tests/RoleDropdown.test.tsx
 PASS src/components/tests/AddForm.test.tsx
-FAIL src/components/tests/RoleDropdown.test.tsx
-  ● RoleDropdown Component tests › Basic user has empty itinerary
-
-    TestingLibraryElementError: Found multiple elements with the text: /itinerary/i
-
-    Here are the matching elements:
-
-    Ignored nodes: comments, <script />, <style />
-    [36m<button[39m
-      [33mclass[39m=[32m"btn btn-primary"[39m
-      [33mstyle[39m=[32m"margin: 10px;"[39m
-      [33mtype[39m=[32m"button"[39m
-    [36m>[39m
-      [0mItinerary 1[0m
-    [36m</button>[39m
-
-    Ignored nodes: comments, <script />, <style />
-    [36m<button[39m
-      [33mclass[39m=[32m"btn btn-primary"[39m
-      [33mtype[39m=[32m"button"[39m
-    [36m>[39m
-      [0mItinerary 2[0m
-    [36m</button>[39m
-
-    Ignored nodes: comments, <script />, <style />
-    [36m<h3>[39m
-      [0mItinerary:[0m
-    [36m</h3>[39m
-
-    (If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
-
-    Ignored nodes: comments, <script />, <style />
-    [36m<body>[39m
-      [36m<div>[39m
-        [36m<div[39m
-          [33mclass[39m=[32m"role-dropdown"[39m
-        [36m>[39m
-          [36m<div[39m
-            [33mclass[39m=[32m"roleButton"[39m
-          [36m>[39m
-            [36m<div[39m
-              [33mclass[39m=[32m"dropdown-label"[39m
-            [36m>[39m
-              [0mChoose your user:[0m
-            [36m</div>[39m
-            [36m<div>[39m
-              [36m<select[39m
-                [33mclass[39m=[32m"form-select"[39m
-                [33mdata-testid[39m=[32m"changeUser"[39m
-                [33mid[39m=[32m"userSelect"[39m
-              [36m>[39m
-                [36m<option[39m
-                  [33mvalue[39m=[32m"Default Basic User"[39m
-                [36m>[39m
-                  [0mDefault Basic User[0m
-                [36m</option>[39m
-                [36m<option[39m
-                  [33mvalue[39m=[32m"Default Staff User"[39m
-                [36m>[39m
-                  [0mDefault Staff User[0m
-                [36m</option>[39m
-                [36m<option[39m
-                  [33mvalue[39m=[32m"Default Faculty User"[39m
-                [36m>[39m
-                  [0mDefault Faculty User[0m
-                [36m</option>[39m
-              [36m</select>[39m
-            [36m</div>[39m
-          [36m</div>[39m
-          [36m<div[39m
-            [33mclass[39m=[32m"userLabel"[39m
-          [36m>[39m
-            [36m<h5>[39m
-              [0mCurrent User: [0m
-              [0mDefault Basic User[0m
-            [36m</h5>[39m
-          [36m</div>[39m
-          [36m<div[39m
-            [33mclass[39m=[32m"addUser"[39m
-          [36m>[39m
-            [0m [0m
-          [36m</div>[39m
-          [36m<div[39m
-            [33mclass[39m=[32m"list-container"[39m
-          [36m>[39m
-            [36m<div>[39m
-              [36m<div[39m
-                [33mclass[39m=[32m"column-left"[39m
-              [36m>[39m
-                [36m<h3>[39m
-                  [0mDestinations:[0m
-                [36m</h3>[39m
-                [36m<br />[39m
-                [36m<div[39m
-                  [33mstyle[39m=[32m"display: flex; flex-direction: column; border-radius: 10px; padding: 10px; background: rgb(189, 189, 189);"[39m
-                [36m>[39m
-                  [36m<div[39m
-                    [33mstyle[39m=[32m"padding-bottom: 20px;"[39m
-                  [36m>[39m
-                    [36m<div>[39m
-                      [36m<form>[39m
-                        [36m<div[39m
-                          [33mclass[39m=[32m"row"[39m
-                        [36m>[39m
-                          [36m<div[39m
-                            [33mclass[39m=[32m"col"[39m
-                          [36m>[39m
-                            [36m<h5>[39m
-                              [0mSearch by State Abbreviation:[0m
-                            [36m</h5>[39m
-                          [36m</div>[39m
-                          [36m<div[39m
-                            [33mclass[39m=[32m"col"[39m
-                          [36m>[39m
-                            [36m<div>[39m
-                              [36m<label[39m
-                                [33mclass[39m=[32m"form-label"[39m
-                                [33mfor[39m=[32m"formName"[39m
-                                [33mstyle[39m=[32m"display: inline-block; float: left; padding-right: 10px;"[39m
-                              [36m>[39m
-                                [36m<input[39m
-                                  [33mdata-testid[39m=[32m"formName"[39m
-                                  [33mname[39m=[32m"searchQuery"[39m
-                                  [33mstyle[39m=[32m"width: 100%; min-width: 100px;"[39m
-                                  [33mtype[39m=[32m"text"[39m
-                                  [33mvalue[39m=[32m""[39m
-                                [36m/>[39m
-                              [36m</label>[39m
-                            [36m</div>[39m
-                          [36m</div>[39m
-                          [36m<div[39m
-                            [33mclass[39m=[32m"col"[39m
-                          [36m/>[39m
-                          [36m<div[39m
-                            [33mclass[39m=[32m"col"[39m
-                          [36m>[39m
-                            [36m<div[39m
-                              [33mstyle[39m=[32m"text-align: right; min-width: 50px;"[39m
-                            [36m>[39m
-                              [36m<button[39m
-                                [33mclass[39m=[32m"btn btn-primary"[39m
-                                [33mtype[39m=[32m"submit"[39m
-                              [36m>[39m
-                                [0mSearch[0m
-                              [36m</button>[39m
-                            [36m</div>[39m
-                          [36m</div>[39m
-                        [36m</div>[39m
-                      [36m</form>[39m
-                    [36m</div>[39m
-                  [36m</div>[39m
-                  [36m<div[39m
-                    [33mstyle[39m=[32m"padding-bottom: 20px;"[39m
-                  [36m>[39m
-                    [36m<div>[39m
-                      [36m<form>[39m
-                        [36m<div[39m
-                          [33mclass[39m=[32m"row"[39m
-                        [36m>[39m
-                          [36m<div[39m
-                            [33mclass[39m=[32m"col"[39m
-                          [36m>[39m
-                            [36m<h5>[39m
-                              [0mFilter by Description contains word:[0m
-                            [36m</h5>[39m
-                          [36m</div>[39m
-                          [36m<div[39m
-                            [33mclass[39m=[32m"col"[39m
-                          [36m>[39m
-                            [36m<div>[39m
-                              [36m<label[39m
-                                [33mclass[39m=[32m"form-label"[39m
-                                [33mfor[39m=[32m"formName"[39m
-                                [33mstyle[39m=[32m"display: inline-block; float: left; padding-right: 10px;"[39m
-                              [36m>[39m
-                                [36m<input[39m
-                                  [33mdata-testid[39m=[32m"formName"[39m
-                                  [33mname[39m=[32m"searchQuery"[39m
-                                  [33mstyle[39m=[32m"width: 100%; min-width: 100px;"[39m
-                                  [33mtype[39m=[32m"text"[39m
-                                  [33mvalue[39m=[32m""[39m
-                                [36m/>[39m
-                              [36m</label>[39m
-                            [36m</div>[39m
-                          [36m</div>[39m
-                          [36m<div[39m
-                            [33mclass[39m=[32m"col"[39m
-                          [36m/>[39m
-                          [36m<div[39m
-                            [33mclass[39m=[32m"col"[39m
-                          [36m>[39m
-                            [36m<div[39m
-                              [33mstyle[39m=[32m"text-align: right; min-width: 50px;"[39m
-                            [36m>[39m
-                              [36m<button[39m
-                                [33mclass[39m=[32m"btn btn-primary"[39m
-                                [33mtype[39m=[32m"su...
-
-      92 |             </DndProvider>
-      93 |         );
-    > 94 |         expect(screen.getByText(/itinerary/i)).toBeInTheDocument();
-         |                       ^
-      95 |     })
-      96 |     
-      97 | })
-
-      at Object.getElementError (node_modules/@testing-library/dom/dist/config.js:38:19)
-      at getElementError (node_modules/@testing-library/dom/dist/query-helpers.js:25:35)
-      at getMultipleElementsFoundError (node_modules/@testing-library/dom/dist/query-helpers.js:29:10)
-      at node_modules/@testing-library/dom/dist/query-helpers.js:66:13
-      at getByText (node_modules/@testing-library/dom/dist/query-helpers.js:111:19)
-      at Object.<anonymous> (src/components/tests/RoleDropdown.test.tsx:94:23)
-
+PASS src/components/tests/AddUserForm.test.tsx
 PASS src/components/tests/DestItem.test.tsx
-FAIL src/components/tests/AddUserForm.test.tsx
-  ● AddUserForm Component tests › There is a name box
-
-    TestingLibraryElementError: Found multiple elements by: [data-testid="/name/i"]
-
-    Here are the matching elements:
-
-    Ignored nodes: comments, <script />, <style />
-    [36m<input[39m
-      [33mdata-testid[39m=[32m"formName"[39m
-      [33mname[39m=[32m"searchQuery"[39m
-      [33mstyle[39m=[32m"width: 100%; min-width: 100px;"[39m
-      [33mtype[39m=[32m"text"[39m
-      [33mvalue[39m=[32m""[39m
-    [36m/>[39m
-
-    Ignored nodes: comments, <script />, <style />
-    [36m<input[39m
-      [33mdata-testid[39m=[32m"formName"[39m
-      [33mname[39m=[32m"searchQuery"[39m
-      [33mstyle[39m=[32m"width: 100%; min-width: 100px;"[39m
-      [33mtype[39m=[32m"text"[39m
-      [33mvalue[39m=[32m""[39m
-    [36m/>[39m
-
-    Ignored nodes: comments, <script />, <style />
-    [36m<input[39m
-      [33mdata-testid[39m=[32m"newUserName"[39m
-      [33mname[39m=[32m"name"[39m
-      [33mstyle[39m=[32m"width: 100%; min-width: 100px;"[39m
-      [33mtype[39m=[32m"text"[39m
-      [33mvalue[39m=[32m""[39m
-    [36m/>[39m
-
-    (If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
-
-    Ignored nodes: comments, <script />, <style />
-    [36m<body>[39m
-      [36m<div>[39m
-        [36m<div[39m
-          [33mclass[39m=[32m"role-dropdown"[39m
-        [36m>[39m
-          [36m<div[39m
-            [33mclass[39m=[32m"roleButton"[39m
-          [36m>[39m
-            [36m<div[39m
-              [33mclass[39m=[32m"dropdown-label"[39m
-            [36m>[39m
-              [0mChoose your user:[0m
-            [36m</div>[39m
-            [36m<div>[39m
-              [36m<select[39m
-                [33mclass[39m=[32m"form-select"[39m
-                [33mdata-testid[39m=[32m"changeUser"[39m
-                [33mid[39m=[32m"userSelect"[39m
-              [36m>[39m
-                [36m<option[39m
-                  [33mvalue[39m=[32m"Default Basic User"[39m
-                [36m>[39m
-                  [0mDefault Basic User[0m
-                [36m</option>[39m
-                [36m<option[39m
-                  [33mvalue[39m=[32m"Default Staff User"[39m
-                [36m>[39m
-                  [0mDefault Staff User[0m
-                [36m</option>[39m
-                [36m<option[39m
-                  [33mvalue[39m=[32m"Default Faculty User"[39m
-                [36m>[39m
-                  [0mDefault Faculty User[0m
-                [36m</option>[39m
-              [36m</select>[39m
-            [36m</div>[39m
-          [36m</div>[39m
-          [36m<div[39m
-            [33mclass[39m=[32m"userLabel"[39m
-          [36m>[39m
-            [36m<h5>[39m
-              [0mCurrent User: [0m
-              [0mDefault Basic User[0m
-            [36m</h5>[39m
-          [36m</div>[39m
-          [36m<div[39m
-            [33mclass[39m=[32m"addUser"[39m
-          [36m>[39m
-            [0m [0m
-          [36m</div>[39m
-          [36m<div[39m
-            [33mclass[39m=[32m"list-container"[39m
-          [36m>[39m
-            [36m<div>[39m
-              [36m<div[39m
-                [33mclass[39m=[32m"column-left"[39m
-              [36m>[39m
-                [36m<h3>[39m
-                  [0mDestinations:[0m
-                [36m</h3>[39m
-                [36m<br />[39m
-                [36m<div[39m
-                  [33mstyle[39m=[32m"display: flex; flex-direction: column; border-radius: 10px; padding: 10px; background: rgb(189, 189, 189);"[39m
-                [36m>[39m
-                  [36m<div[39m
-                    [33mstyle[39m=[32m"padding-bottom: 20px;"[39m
-                  [36m>[39m
-                    [36m<div>[39m
-                      [36m<form>[39m
-                        [36m<div[39m
-                          [33mclass[39m=[32m"row"[39m
-                        [36m>[39m
-                          [36m<div[39m
-                            [33mclass[39m=[32m"col"[39m
-                          [36m>[39m
-                            [36m<h5>[39m
-                              [0mSearch by State Abbreviation:[0m
-                            [36m</h5>[39m
-                          [36m</div>[39m
-                          [36m<div[39m
-                            [33mclass[39m=[32m"col"[39m
-                          [36m>[39m
-                            [36m<div>[39m
-                              [36m<label[39m
-                                [33mclass[39m=[32m"form-label"[39m
-                                [33mfor[39m=[32m"formName"[39m
-                                [33mstyle[39m=[32m"display: inline-block; float: left; padding-right: 10px;"[39m
-                              [36m>[39m
-                                [36m<input[39m
-                                  [33mdata-testid[39m=[32m"formName"[39m
-                                  [33mname[39m=[32m"searchQuery"[39m
-                                  [33mstyle[39m=[32m"width: 100%; min-width: 100px;"[39m
-                                  [33mtype[39m=[32m"text"[39m
-                                  [33mvalue[39m=[32m""[39m
-                                [36m/>[39m
-                              [36m</label>[39m
-                            [36m</div>[39m
-                          [36m</div>[39m
-                          [36m<div[39m
-                            [33mclass[39m=[32m"col"[39m
-                          [36m/>[39m
-                          [36m<div[39m
-                            [33mclass[39m=[32m"col"[39m
-                          [36m>[39m
-                            [36m<div[39m
-                              [33mstyle[39m=[32m"text-align: right; min-width: 50px;"[39m
-                            [36m>[39m
-                              [36m<button[39m
-                                [33mclass[39m=[32m"btn btn-primary"[39m
-                                [33mtype[39m=[32m"submit"[39m
-                              [36m>[39m
-                                [0mSearch[0m
-                              [36m</button>[39m
-                            [36m</div>[39m
-                          [36m</div>[39m
-                        [36m</div>[39m
-                      [36m</form>[39m
-                    [36m</div>[39m
-                  [36m</div>[39m
-                  [36m<div[39m
-                    [33mstyle[39m=[32m"padding-bottom: 20px;"[39m
-                  [36m>[39m
-                    [36m<div>[39m
-                      [36m<form>[39m
-                        [36m<div[39m
-                          [33mclass[39m=[32m"row"[39m
-                        [36m>[39m
-                          [36m<div[39m
-                            [33mclass[39m=[32m"col"[39m
-                          [36m>[39m
-                            [36m<h5>[39m
-                              [0mFilter by Description contains word:[0m
-                            [36m</h5>[39m
-                          [36m</div>[39m
-                          [36m<div[39m
-                            [33mclass[39m=[32m"col"[39m
-                          [36m>[39m
-                            [36m<div>[39m
-                              [36m<label[39m
-                                [33mclass[39m=[32m"form-label"[39m
-                                [33mfor[39m=[32m"formName"[39m
-                                [33mstyle[39m=[32m"display: inline-block; float: left; padding-right: 10px;"[39m
-                              [36m>[39m
-                                [36m<input[39m
-                                  [33mdata-testid[39m=[32m"formName"[39m
-                                  [33mname[39m=[32m"searchQuery"[39m
-                                  [33mstyle[39m=[32m"width: 100%; min-width: 100px;"[39m
-                                  [33mtype[39m=[32m"text"[39m
-                                  [33mvalue[39m=[32m""[39m
-                                [36m/>[39m
-                              [36m</label>[39m
-                            [36m</div>[39m
-                          [36m</div>[39m
-                          [36m<div[39m
-                            [33mclass[39m=[32m"col"[39m
-                          [36m/>[39m
-                          [36m<div[39m
-                            [33mclass[39m=[32m"col"[39m
-                          [36m>[39m
-                            [36m<div[39m
-                              [33mstyle[39m=[32m"text-align: right; min-width: 50px;"[39m
-                            [36m>[39m
-                              [36m<button[39m
-                                [33mclass[39m=[32m"btn btn-primary"[39m
-                                [33mtype[39m=[32m"su...
-
-      30 |             </DndProvider>
-      31 |         );
-    > 32 |         expect(screen.getByTestId(/name/i)).toBeInTheDocument();
-         |                       ^
-      33 |     });
-      34 |     test("There is a role label", () => {
-      35 |         render(
-
-      at Object.getElementError (node_modules/@testing-library/dom/dist/config.js:38:19)
-      at getElementError (node_modules/@testing-library/dom/dist/query-helpers.js:25:35)
-      at getMultipleElementsFoundError (node_modules/@testing-library/dom/dist/query-helpers.js:29:10)
-      at node_modules/@testing-library/dom/dist/query-helpers.js:66:13
-      at getByTestId (node_modules/@testing-library/dom/dist/query-helpers.js:111:19)
-      at Object.<anonymous> (src/components/tests/AddUserForm.test.tsx:32:23)
-
-  ● AddUserForm Component tests › Create new Faculty user
-
-    expect(received).toEqual(expected) // deep equality
-
-    - Expected  - 1
-    + Received  + 3
-
-      Object {
-    +   "currItinerary": 1,
-        "id": 0,
-    -   "itinerary": Array [],
-    +   "itinerary1": Array [],
-    +   "itinerary2": Array [],
-        "name": "Benita",
-        "role": "Faculty",
-      }
-
-      81 |         const button = screen.getByRole("button", {name: "Add User"})
-      82 |         userEvent.click(button)
-    > 83 |         expect(user).toEqual({id: 0, name: "Benita", role: "Faculty", itinerary: []});
-         |                      ^
-      84 |     });
-      85 |     
-      86 | })
-
-      at Object.<anonymous> (src/components/tests/AddUserForm.test.tsx:83:22)
-
 PASS src/components/tests/DeleteUserForm.test.tsx
 PASS src/components/tests/SortForm.test.tsx
 PASS src/components/tests/SearchDescForm.test.tsx
-PASS src/components/tests/SearchForm.test.tsx
+FAIL src/components/tests/SearchForm.test.tsx
+  ● SearchForm Component tests › more sample state abbreviation
+
+    TestingLibraryElementError: Unable to find an element by: [data-testid="formName"]
+
+    Ignored nodes: comments, <script />, <style />
+    [36m<body>[39m
+      [36m<div>[39m
+        [36m<div>[39m
+          [36m<form>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"row"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"col"[39m
+              [36m>[39m
+                [36m<h5>[39m
+                  [0mSearch by State Abbreviation:[0m
+                [36m</h5>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"col"[39m
+              [36m>[39m
+                [36m<div>[39m
+                  [36m<label[39m
+                    [33mclass[39m=[32m"form-label"[39m
+                    [33mfor[39m=[32m"formName"[39m
+                    [33mstyle[39m=[32m"display: inline-block; float: left; padding-right: 10px;"[39m
+                  [36m>[39m
+                    [36m<input[39m
+                      [33mdata-testid[39m=[32m"abbrevBox"[39m
+                      [33mname[39m=[32m"searchQuery"[39m
+                      [33mstyle[39m=[32m"width: 100%; min-width: 100px;"[39m
+                      [33mtype[39m=[32m"text"[39m
+                      [33mvalue[39m=[32m""[39m
+                    [36m/>[39m
+                  [36m</label>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"col"[39m
+              [36m/>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"col"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mstyle[39m=[32m"text-align: right; min-width: 50px;"[39m
+                [36m>[39m
+                  [36m<button[39m
+                    [33mclass[39m=[32m"btn btn-primary"[39m
+                    [33mdata-testid[39m=[32m"searchLoc"[39m
+                    [33mtype[39m=[32m"submit"[39m
+                  [36m>[39m
+                    [0mSearch[0m
+                  [36m</button>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</body>[39m
+
+      39 |             </DndProvider>
+      40 |         );
+    > 41 |         const abbrevBox = screen.getByTestId("formName");
+         |                                  ^
+      42 |         userEvent.type(abbrevBox, "MD")
+      43 |         expect(screen.getByRole("button", {name: "Search"})).toBeInTheDocument();
+      44 |     });
+
+      at Object.getElementError (node_modules/@testing-library/dom/dist/config.js:38:19)
+      at node_modules/@testing-library/dom/dist/query-helpers.js:90:38
+      at node_modules/@testing-library/dom/dist/query-helpers.js:62:17
+      at getByTestId (node_modules/@testing-library/dom/dist/query-helpers.js:111:19)
+      at Object.<anonymous> (src/components/tests/SearchForm.test.tsx:41:34)
+
 PASS src/components/tests/FilterForm.test.tsx
 PASS src/App.test.tsx
 FAIL src/components/tests/UserList.test.tsx
@@ -538,36 +158,36 @@ FAIL src/components/tests/UserList.test.tsx
           at Array.map (<anonymous>)
       at Emittery.emit (node_modules/emittery/index.js:258:23)
 
-------------------------|---------|----------|---------|---------|---------------------------------------------------------------------
-File                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                                                   
-------------------------|---------|----------|---------|---------|---------------------------------------------------------------------
-All files               |   47.44 |    27.71 |   49.38 |   49.02 |                                                                     
- src                    |     100 |      100 |     100 |     100 |                                                                     
-  App.tsx               |     100 |      100 |     100 |     100 |                                                                     
- src/components         |   48.44 |    28.39 |      50 |      50 |                                                                     
-  AddForm.tsx           |     100 |      100 |     100 |     100 |                                                                     
-  AddUserForm.tsx       |     100 |      100 |     100 |     100 |                                                                     
-  AdminList.tsx         |   54.79 |    36.66 |   57.57 |   56.52 | 84-142                                                              
-  DeleteUserForm.tsx    |     100 |      100 |     100 |     100 |                                                                     
-  DestItem.tsx          |     100 |       50 |     100 |     100 | 44                                                                  
-  FilterForm.tsx        |     100 |      100 |     100 |     100 |                                                                     
-  RoleDropdown.tsx      |   73.33 |       75 |      80 |   72.41 | 79-89                                                               
-  SearchDescForm.tsx    |     100 |      100 |     100 |     100 |                                                                     
-  SearchForm.tsx        |     100 |      100 |     100 |     100 |                                                                     
-  SortForm.tsx          |     100 |      100 |     100 |     100 |                                                                     
-  SuperList.tsx         |      50 |    32.14 |   52.77 |      52 | 85-136,188,228-241                                                  
-  UserEdit.tsx          |      20 |      100 |       0 |      20 | 33-114                                                              
-  UserList.tsx          |   16.02 |    10.97 |      12 |      17 | 40,43,51,54,65-80,87,97-107,121-258,262-298,305-308,327-375,485-561 
- src/hooks              |       0 |        0 |       0 |       0 |                                                                     
-  useSessionStorage.tsx |       0 |        0 |       0 |       0 | 4-19                                                                
- src/interfaces         |       0 |        0 |       0 |       0 |                                                                     
-  destination.ts        |       0 |        0 |       0 |       0 |                                                                     
-  filterSort.ts         |       0 |        0 |       0 |       0 |                                                                     
-  props.ts              |       0 |        0 |       0 |       0 |                                                                     
-  user.ts               |       0 |        0 |       0 |       0 |                                                                     
-------------------------|---------|----------|---------|---------|---------------------------------------------------------------------
-Test Suites: 3 failed, 10 passed, 13 total
-Tests:       3 failed, 72 passed, 75 total
+------------------------|---------|----------|---------|---------|---------------------------------------------------------------
+File                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                                             
+------------------------|---------|----------|---------|---------|---------------------------------------------------------------
+All files               |   69.06 |     49.4 |   70.98 |      70 |                                                               
+ src                    |     100 |      100 |     100 |     100 |                                                               
+  App.tsx               |     100 |      100 |     100 |     100 |                                                               
+ src/components         |   70.64 |     50.6 |   72.15 |    71.5 |                                                               
+  AddForm.tsx           |     100 |      100 |     100 |     100 |                                                               
+  AddUserForm.tsx       |     100 |      100 |     100 |     100 |                                                               
+  AdminList.tsx         |     100 |    76.66 |     100 |     100 | 57,76-90,134-196                                              
+  DeleteUserForm.tsx    |     100 |      100 |     100 |     100 |                                                               
+  DestItem.tsx          |     100 |       50 |     100 |     100 | 44                                                            
+  FilterForm.tsx        |     100 |      100 |     100 |     100 |                                                               
+  RoleDropdown.tsx      |     100 |     87.5 |     100 |     100 | 55,150                                                        
+  SearchDescForm.tsx    |     100 |      100 |     100 |     100 |                                                               
+  SearchForm.tsx        |     100 |      100 |     100 |     100 |                                                               
+  SortForm.tsx          |     100 |      100 |     100 |     100 |                                                               
+  SuperList.tsx         |     100 |    82.14 |     100 |     100 | 53-86,129,195                                                 
+  UserEdit.tsx          |      20 |      100 |       0 |      20 | 33-114                                                        
+  UserList.tsx          |   23.71 |    21.42 |      16 |   25.17 | 43,54,65-80,87,97-107,121-240,262-298,305-308,327-375,485-561 
+ src/hooks              |       0 |        0 |       0 |       0 |                                                               
+  useSessionStorage.tsx |       0 |        0 |       0 |       0 | 4-19                                                          
+ src/interfaces         |       0 |        0 |       0 |       0 |                                                               
+  destination.ts        |       0 |        0 |       0 |       0 |                                                               
+  filterSort.ts         |       0 |        0 |       0 |       0 |                                                               
+  props.ts              |       0 |        0 |       0 |       0 |                                                               
+  user.ts               |       0 |        0 |       0 |       0 |                                                               
+------------------------|---------|----------|---------|---------|---------------------------------------------------------------
+Test Suites: 2 failed, 11 passed, 13 total
+Tests:       1 failed, 86 passed, 87 total
 Snapshots:   0 total
-Time:        22.313 s
+Time:        19.859 s
 Ran all test suites.
