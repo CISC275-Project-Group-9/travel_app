@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { Destination } from "../interfaces/destination";
-import { useDrag } from "react-dnd";
-import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import destinationsData from "../data/destinations.json";
-import { Button, Form, FormGroup } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 export const { DESTINATIONS }: Record<string, Destination[]> =
   // Typecast the test data that we imported to be a record matching
@@ -56,13 +54,7 @@ export function UserEdit({
     activities,
   });
 
-  const [{ isDragging }, drag] = useDrag({
-    type: "destItem",
-    item: { name: dest.name },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  });
+
 
   return (
     <div
