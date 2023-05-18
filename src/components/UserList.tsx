@@ -459,7 +459,7 @@ export function UserList({
         <Button onClick={useItinerary2}>Itinerary 2</Button>
       </div>
       <div className="column-right panel panel-default" ref={drop}>
-        <h3>Itinerary:</h3>
+        <h3>Itinerary {currItinerary === 1 ? <span>1</span> : <span>2</span>}:</h3>
         <div
           style={{
             display: "flex",
