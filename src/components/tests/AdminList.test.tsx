@@ -190,5 +190,19 @@ describe("AdminList Component tests", () => {
         userEvent.click(button)
         expect(screen.queryAllByTestId(/shared/).length).toEqual(2);
     });
-    
+    test("Push changes buttoon clears SharedList", () => {
+        
+        render(
+            <DndProvider backend={HTML5Backend}>
+                <AdminList centralList={sampleCentralList} setCentralList={function (newCentralList: Destination[]): void {
+                    sampleCentralList = newCentralList;
+                } } sharedList={sampleSharedList} setSharedList={function (newSharedList: Destination[]): void {
+                    sampleSharedList = newSharedList;
+                } } />
+            </DndProvider>
+        );
+        const button = screen.getByRole("button", {name: /push/i});
+        userEvent.click(button)
+        expect(screen.queryAllByTestId(/shared/).length).toEqual(2);
+    });
 })

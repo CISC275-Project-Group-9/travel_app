@@ -91,7 +91,7 @@ describe("RoleDropdown Component tests", () => {
                 <RoleDropdown />
             </DndProvider>
         );
-        expect(screen.getByText(/itinerary/i)).toBeInTheDocument();
+        expect(screen.getAllByText(/itinerary/i)).toHaveLength(3);
     })
     
 })
