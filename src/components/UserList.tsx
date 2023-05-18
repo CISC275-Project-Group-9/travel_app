@@ -28,6 +28,7 @@ export function UserList({
   const [totalPrice, setPrice] = useState<number>(0);
   const [totalDays, setTotalDays] = useState<number>(0);
   const [currItinerary, setCurrItinerary] = useState<number>(1);
+  const [editMode, setEditMode] = useState<boolean>(false);
 
   // function to update the display values
   function updateDisplayVals() {
@@ -435,6 +436,16 @@ export function UserList({
         >
           <h5>Total Price: ${totalPrice} </h5>
           <h5>Total Days: {totalDays} </h5>
+          <h5>Edit List</h5>
+          <Form.Check
+          data-testid="switch"
+          type="switch"
+          id="editModeSwitch"
+          checked={editMode}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setEditMode(event.target.checked)
+          }
+        />
         </div>
         {currItinerary === 1 ? (
           // itinerary 1:
