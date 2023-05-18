@@ -165,9 +165,9 @@ export function UserList({
     const newCentralList = [...centralList];
     if (sort.sortQuery === "State") {
       newCentralList.sort((a, b) => (a.location > b.location ? 1 : -1));
-    } else if (sort.sortQuery === "Cost") {
+    } else if (sort.sortQuery === "LowCost") {
       newCentralList.sort((a, b) => (a.cost > b.cost ? 1 : -1));
-    } else if (sort.sortQuery === "CostDesc") {
+    } else if (sort.sortQuery === "HighCost") {
       newCentralList.sort((a, b) => (a.cost < b.cost ? 1 : -1));
     }
     setDisplayList(newCentralList);
