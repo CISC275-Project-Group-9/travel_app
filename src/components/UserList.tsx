@@ -62,7 +62,6 @@ export function UserList({
 
   // function to add a destination to the itinerary
   function addDestToItinerary(name: string) {
-    console.log(name);
     const addedDest = centralList.filter(
       (dest: Destination) => name === dest.name
     );
@@ -283,6 +282,7 @@ export function UserList({
           Length of Stay:
         </Form.Label>
         <Form.Control
+          data-testid={"lengthstay"+dest.id}
           style={{
             display: "inline-block",
             width: 75,
@@ -510,7 +510,7 @@ export function UserList({
           ) : editMode ? ( 
             itinerary1.map((dest: Destination) => {
               return (
-                <div key={dest.id}>
+                <div key={dest.id} data-testid="it1">
                   <UserEdit
                     id={dest.id}
                     key={dest.id}
