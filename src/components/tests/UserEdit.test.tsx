@@ -9,7 +9,7 @@ import { Destination } from "../../interfaces/destination";
 import { User } from "../../interfaces/user";
 
 
-describe("UserList Component tests", () => {
+describe("UserEdit Component tests", () => {
     let sampleCentralList = [
         {
             id: 1,
@@ -81,11 +81,14 @@ describe("UserList Component tests", () => {
                 } } />
             </DndProvider>
         );
-        expect(screen.getAllByText(/itinerary/i)).toHaveLength(3);
-        expect(screen.getByText(/Drop a place here to get started/i)).toBeInTheDocument();
+        expect(screen.getByText(/Edit list items/i)).toBeInTheDocument();
+        expect(screen.getByText(/Total days/i)).toBeInTheDocument();
+        expect(screen.getByText(/Total price/i)).toBeInTheDocument();
+
+
     });
 
-    test("Drop an item into itinerary 1", () => {
+    test("Drop an item into itinerary 1 and edit", () => {
         render(
             <DndProvider backend={HTML5Backend}>
                 <UserList centralList={sampleCentralList} setCentralList={function (newCentralList: Destination[]): void {
@@ -98,32 +101,12 @@ describe("UserList Component tests", () => {
             </DndProvider>
         );
         expect(testi1.length).toEqual(0);
-        let dragItem = screen.getByTestId("box2");
+        let dragItem = screen.getByTestId("box1");
         const dropBox = screen.getByTestId("dropbox");
         fireEvent.dragStart(dragItem);
         fireEvent.drop(dropBox);
         expect(testi1.length).toEqual(1);
-    });
-
-    test("Drop an item into itinerary 2", () => {
-        render(
-            <DndProvider backend={HTML5Backend}>
-                <UserList centralList={sampleCentralList} setCentralList={function (newCentralList: Destination[]): void {
-                    sampleCentralList = newCentralList;
-                } } itinerary1={[]} itinerary2={testi2} setItinerary={function (newItinerary: Destination[]): void {
-                    testi2 = newItinerary
-                } } currentUser={testuser} setCurrentUser={function (newUser: User): void {
-                } } users={[]} setUsers={function (newUsers: User[]): void {
-                } } />
-            </DndProvider>
-        );
-        expect(testi2.length).toEqual(0);
-        const ibutton = screen.getByText("Itinerary 2");
-        fireEvent.click(ibutton);
-        let dragItem = screen.getByTestId("box3");
-        const dropBox = screen.getByTestId("dropbox");
-        fireEvent.dragStart(dragItem);
-        fireEvent.drop(dropBox);
-        expect(testi2.length).toEqual(1);
+        const swi = screen.getByTestId(/switch/);
+        fireEvent.click(swi);
     });
 })
