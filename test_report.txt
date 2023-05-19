@@ -2,7 +2,7 @@
 > react-typescript-starter@0.1.0 test
 > react-scripts test --coverage
 
-PASS src/components/tests/SuperList.test.tsx (5.501 s)
+PASS src/components/tests/SuperList.test.tsx (5.117 s)
   ● Console
 
     console.error
@@ -101,12 +101,6 @@ PASS src/components/tests/AdminList.test.tsx
 PASS src/components/tests/UserList.test.tsx
   ● Console
 
-    console.log
-      Sample2
-
-      at addDestToItinerary (src/components/UserList.tsx:65:13)
-          at Array.forEach (<anonymous>)
-
     console.error
       Warning: Updating a style property during rerender (backgroundColor) when a conflicting property is set (background) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
           at p
@@ -115,13 +109,13 @@ PASS src/components/tests/UserList.test.tsx
           at UserList (/home/runner/work/travel_app/travel_app/src/components/UserList.tsx:18:3)
           at DndProvider (/home/runner/work/travel_app/travel_app/node_modules/react-dnd/src/core/DndProvider.tsx:29:25)
 
-      102 |         const dropBox = screen.getByTestId("dropbox");
-      103 |         fireEvent.dragStart(dragItem);
-    > 104 |         fireEvent.drop(dropBox);
+      125 |         const dropBox = screen.getByTestId("dropbox");
+      126 |         fireEvent.dragStart(dragItem);
+    > 127 |         fireEvent.drop(dropBox);
           |                   ^
-      105 |         expect(testi1.length).toEqual(1);
-      106 |     });
-      107 |
+      128 |         expect(testi1.length).toEqual(1);
+      129 |     });
+      130 |
 
       at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
       at error (node_modules/react-dom/cjs/react-dom.development.js:43:5)
@@ -146,7 +140,7 @@ PASS src/components/tests/UserList.test.tsx
       at fireEvent (node_modules/@testing-library/dom/dist/events.js:12:35)
       at Function.fireEvent.<computed> [as drop] (node_modules/@testing-library/dom/dist/events.js:110:36)
       at Function.drop (node_modules/@testing-library/react/dist/fire-event.js:18:52)
-      at Object.<anonymous> (src/components/tests/UserList.test.tsx:104:19)
+      at Object.<anonymous> (src/components/tests/UserList.test.tsx:127:19)
 
     console.error
       Warning: Updating a style property during rerender (backgroundColor) when a conflicting property is set (background) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
@@ -156,13 +150,13 @@ PASS src/components/tests/UserList.test.tsx
           at UserList (/home/runner/work/travel_app/travel_app/src/components/UserList.tsx:18:3)
           at DndProvider (/home/runner/work/travel_app/travel_app/node_modules/react-dnd/src/core/DndProvider.tsx:29:25)
 
-      102 |         const dropBox = screen.getByTestId("dropbox");
-      103 |         fireEvent.dragStart(dragItem);
-    > 104 |         fireEvent.drop(dropBox);
+      125 |         const dropBox = screen.getByTestId("dropbox");
+      126 |         fireEvent.dragStart(dragItem);
+    > 127 |         fireEvent.drop(dropBox);
           |                   ^
-      105 |         expect(testi1.length).toEqual(1);
-      106 |     });
-      107 |
+      128 |         expect(testi1.length).toEqual(1);
+      129 |     });
+      130 |
 
       at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
       at error (node_modules/react-dom/cjs/react-dom.development.js:43:5)
@@ -187,13 +181,7 @@ PASS src/components/tests/UserList.test.tsx
       at fireEvent (node_modules/@testing-library/dom/dist/events.js:12:35)
       at Function.fireEvent.<computed> [as drop] (node_modules/@testing-library/dom/dist/events.js:110:36)
       at Function.drop (node_modules/@testing-library/react/dist/fire-event.js:18:52)
-      at Object.<anonymous> (src/components/tests/UserList.test.tsx:104:19)
-
-    console.log
-      Sample3
-
-      at addDestToItinerary (src/components/UserList.tsx:65:13)
-          at Array.forEach (<anonymous>)
+      at Object.<anonymous> (src/components/tests/UserList.test.tsx:127:19)
 
     console.error
       Warning: Updating a style property during rerender (backgroundColor) when a conflicting property is set (background) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
@@ -203,13 +191,13 @@ PASS src/components/tests/UserList.test.tsx
           at UserList (/home/runner/work/travel_app/travel_app/src/components/UserList.tsx:18:3)
           at DndProvider (/home/runner/work/travel_app/travel_app/node_modules/react-dnd/src/core/DndProvider.tsx:29:25)
 
-      124 |         const dropBox = screen.getByTestId("dropbox");
-      125 |         fireEvent.dragStart(dragItem);
-    > 126 |         fireEvent.drop(dropBox);
+      147 |         const dropBox = screen.getByTestId("dropbox");
+      148 |         fireEvent.dragStart(dragItem);
+    > 149 |         fireEvent.drop(dropBox);
           |                   ^
-      127 |         expect(testi2.length).toEqual(1);
-      128 |     });
-      129 | })
+      150 |         expect(testi2.length).toEqual(1);
+      151 |     });
+      152 |
 
       at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
       at error (node_modules/react-dom/cjs/react-dom.development.js:43:5)
@@ -234,7 +222,7 @@ PASS src/components/tests/UserList.test.tsx
       at fireEvent (node_modules/@testing-library/dom/dist/events.js:12:35)
       at Function.fireEvent.<computed> [as drop] (node_modules/@testing-library/dom/dist/events.js:110:36)
       at Function.drop (node_modules/@testing-library/react/dist/fire-event.js:18:52)
-      at Object.<anonymous> (src/components/tests/UserList.test.tsx:126:19)
+      at Object.<anonymous> (src/components/tests/UserList.test.tsx:149:19)
 
     console.error
       Warning: Updating a style property during rerender (backgroundColor) when a conflicting property is set (background) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
@@ -244,13 +232,13 @@ PASS src/components/tests/UserList.test.tsx
           at UserList (/home/runner/work/travel_app/travel_app/src/components/UserList.tsx:18:3)
           at DndProvider (/home/runner/work/travel_app/travel_app/node_modules/react-dnd/src/core/DndProvider.tsx:29:25)
 
-      124 |         const dropBox = screen.getByTestId("dropbox");
-      125 |         fireEvent.dragStart(dragItem);
-    > 126 |         fireEvent.drop(dropBox);
+      147 |         const dropBox = screen.getByTestId("dropbox");
+      148 |         fireEvent.dragStart(dragItem);
+    > 149 |         fireEvent.drop(dropBox);
           |                   ^
-      127 |         expect(testi2.length).toEqual(1);
-      128 |     });
-      129 | })
+      150 |         expect(testi2.length).toEqual(1);
+      151 |     });
+      152 |
 
       at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
       at error (node_modules/react-dom/cjs/react-dom.development.js:43:5)
@@ -275,101 +263,11 @@ PASS src/components/tests/UserList.test.tsx
       at fireEvent (node_modules/@testing-library/dom/dist/events.js:12:35)
       at Function.fireEvent.<computed> [as drop] (node_modules/@testing-library/dom/dist/events.js:110:36)
       at Function.drop (node_modules/@testing-library/react/dist/fire-event.js:18:52)
-      at Object.<anonymous> (src/components/tests/UserList.test.tsx:126:19)
+      at Object.<anonymous> (src/components/tests/UserList.test.tsx:149:19)
 
+PASS src/components/tests/UserEdit.test.tsx
 PASS src/components/tests/RoleDropdown.test.tsx
 PASS src/components/tests/AddForm.test.tsx
-PASS src/components/tests/UserEdit.test.tsx
-  ● Console
-
-    console.log
-      Sample1
-
-      at addDestToItinerary (src/components/UserList.tsx:65:13)
-          at Array.forEach (<anonymous>)
-
-    console.error
-      Warning: Updating a style property during rerender (backgroundColor) when a conflicting property is set (background) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
-          at p
-          at div
-          at div
-          at UserList (/home/runner/work/travel_app/travel_app/src/components/UserList.tsx:18:3)
-          at DndProvider (/home/runner/work/travel_app/travel_app/node_modules/react-dnd/src/core/DndProvider.tsx:29:25)
-
-      105 |         const dropBox = screen.getByTestId("dropbox");
-      106 |         fireEvent.dragStart(dragItem);
-    > 107 |         fireEvent.drop(dropBox);
-          |                   ^
-      108 |         expect(testi1.length).toEqual(1);
-      109 |         const swi = screen.getByTestId(/switch/);
-      110 |         fireEvent.click(swi);
-
-      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
-      at error (node_modules/react-dom/cjs/react-dom.development.js:43:5)
-      at validateShorthandPropertyCollisionInDev (node_modules/react-dom/cjs/react-dom.development.js:2648:9)
-      at diffProperties (node_modules/react-dom/cjs/react-dom.development.js:9348:7)
-      at prepareUpdate (node_modules/react-dom/cjs/react-dom.development.js:10215:10)
-      at updateHostComponent$1 (node_modules/react-dom/cjs/react-dom.development.js:19265:25)
-      at completeWork (node_modules/react-dom/cjs/react-dom.development.js:19431:11)
-      at completeUnitOfWork (node_modules/react-dom/cjs/react-dom.development.js:22812:16)
-      at performUnitOfWork (node_modules/react-dom/cjs/react-dom.development.js:22787:5)
-      at workLoopSync (node_modules/react-dom/cjs/react-dom.development.js:22707:5)
-      at renderRootSync (node_modules/react-dom/cjs/react-dom.development.js:22670:7)
-      at performSyncWorkOnRoot (node_modules/react-dom/cjs/react-dom.development.js:22293:18)
-      at node_modules/react-dom/cjs/react-dom.development.js:11327:26
-      at unstable_runWithPriority (node_modules/scheduler/cjs/scheduler.development.js:468:12)
-      at runWithPriority$1 (node_modules/react-dom/cjs/react-dom.development.js:11276:10)
-      at flushSyncCallbackQueueImpl (node_modules/react-dom/cjs/react-dom.development.js:11322:9)
-      at flushSyncCallbackQueue (node_modules/react-dom/cjs/react-dom.development.js:11309:3)
-      at batchedUpdates$1 (node_modules/react-dom/cjs/react-dom.development.js:22387:7)
-      at act (node_modules/react-dom/cjs/react-dom-test-utils.development.js:1042:14)
-      at Object.eventWrapper (node_modules/@testing-library/react/dist/pure.js:65:28)
-      at fireEvent (node_modules/@testing-library/dom/dist/events.js:12:35)
-      at Function.fireEvent.<computed> [as drop] (node_modules/@testing-library/dom/dist/events.js:110:36)
-      at Function.drop (node_modules/@testing-library/react/dist/fire-event.js:18:52)
-      at Object.<anonymous> (src/components/tests/UserEdit.test.tsx:107:19)
-
-    console.error
-      Warning: Updating a style property during rerender (backgroundColor) when a conflicting property is set (background) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
-          at p
-          at div
-          at div
-          at UserList (/home/runner/work/travel_app/travel_app/src/components/UserList.tsx:18:3)
-          at DndProvider (/home/runner/work/travel_app/travel_app/node_modules/react-dnd/src/core/DndProvider.tsx:29:25)
-
-      105 |         const dropBox = screen.getByTestId("dropbox");
-      106 |         fireEvent.dragStart(dragItem);
-    > 107 |         fireEvent.drop(dropBox);
-          |                   ^
-      108 |         expect(testi1.length).toEqual(1);
-      109 |         const swi = screen.getByTestId(/switch/);
-      110 |         fireEvent.click(swi);
-
-      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
-      at error (node_modules/react-dom/cjs/react-dom.development.js:43:5)
-      at validateShorthandPropertyCollisionInDev (node_modules/react-dom/cjs/react-dom.development.js:2648:9)
-      at diffProperties (node_modules/react-dom/cjs/react-dom.development.js:9348:7)
-      at prepareUpdate (node_modules/react-dom/cjs/react-dom.development.js:10215:10)
-      at updateHostComponent$1 (node_modules/react-dom/cjs/react-dom.development.js:19265:25)
-      at completeWork (node_modules/react-dom/cjs/react-dom.development.js:19431:11)
-      at completeUnitOfWork (node_modules/react-dom/cjs/react-dom.development.js:22812:16)
-      at performUnitOfWork (node_modules/react-dom/cjs/react-dom.development.js:22787:5)
-      at workLoopSync (node_modules/react-dom/cjs/react-dom.development.js:22707:5)
-      at renderRootSync (node_modules/react-dom/cjs/react-dom.development.js:22670:7)
-      at performSyncWorkOnRoot (node_modules/react-dom/cjs/react-dom.development.js:22293:18)
-      at node_modules/react-dom/cjs/react-dom.development.js:11327:26
-      at unstable_runWithPriority (node_modules/scheduler/cjs/scheduler.development.js:468:12)
-      at runWithPriority$1 (node_modules/react-dom/cjs/react-dom.development.js:11276:10)
-      at flushSyncCallbackQueueImpl (node_modules/react-dom/cjs/react-dom.development.js:11322:9)
-      at flushSyncCallbackQueue (node_modules/react-dom/cjs/react-dom.development.js:11309:3)
-      at batchedUpdates$1 (node_modules/react-dom/cjs/react-dom.development.js:22387:7)
-      at act (node_modules/react-dom/cjs/react-dom-test-utils.development.js:1042:14)
-      at Object.eventWrapper (node_modules/@testing-library/react/dist/pure.js:65:28)
-      at fireEvent (node_modules/@testing-library/dom/dist/events.js:12:35)
-      at Function.fireEvent.<computed> [as drop] (node_modules/@testing-library/dom/dist/events.js:110:36)
-      at Function.drop (node_modules/@testing-library/react/dist/fire-event.js:18:52)
-      at Object.<anonymous> (src/components/tests/UserEdit.test.tsx:107:19)
-
 PASS src/components/tests/AddUserForm.test.tsx
 PASS src/components/tests/DestItem.test.tsx
 PASS src/components/tests/DeleteUserForm.test.tsx
@@ -378,37 +276,37 @@ PASS src/components/tests/SearchDescForm.test.tsx
 PASS src/components/tests/SearchForm.test.tsx
 PASS src/components/tests/FilterForm.test.tsx
 PASS src/App.test.tsx
-------------------------|---------|----------|---------|---------|------------------------------------------------------
-File                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                                    
-------------------------|---------|----------|---------|---------|------------------------------------------------------
-All files               |   72.09 |    54.16 |   73.45 |   73.17 |                                                      
- src                    |     100 |      100 |     100 |     100 |                                                      
-  App.tsx               |     100 |      100 |     100 |     100 |                                                      
- src/components         |   73.74 |    55.48 |   74.68 |   74.75 |                                                      
-  AddForm.tsx           |     100 |      100 |     100 |     100 |                                                      
-  AddUserForm.tsx       |     100 |      100 |     100 |     100 |                                                      
-  AdminList.tsx         |     100 |    76.66 |     100 |     100 | 57,76-90,134-196                                     
-  DeleteUserForm.tsx    |     100 |      100 |     100 |     100 |                                                      
-  DestItem.tsx          |     100 |       50 |     100 |     100 | 44                                                   
-  FilterForm.tsx        |     100 |      100 |     100 |     100 |                                                      
-  RoleDropdown.tsx      |     100 |     87.5 |     100 |     100 | 55,150                                               
-  SearchDescForm.tsx    |     100 |      100 |     100 |     100 |                                                      
-  SearchForm.tsx        |     100 |      100 |     100 |     100 |                                                      
-  SortForm.tsx          |     100 |      100 |     100 |     100 |                                                      
-  SuperList.tsx         |     100 |    82.14 |     100 |     100 | 53-86,129,195                                        
-  UserEdit.tsx          |      20 |      100 |       0 |      20 | 33-114                                               
-  UserList.tsx          |   32.05 |    30.95 |      24 |   34.01 | 43,54,97-107,121-240,262-298,305-308,327-375,512-561 
- src/hooks              |       0 |        0 |       0 |       0 |                                                      
-  useSessionStorage.tsx |       0 |        0 |       0 |       0 | 4-19                                                 
- src/interfaces         |       0 |        0 |       0 |       0 |                                                      
-  destination.ts        |       0 |        0 |       0 |       0 |                                                      
-  filterSort.ts         |       0 |        0 |       0 |       0 |                                                      
-  props.ts              |       0 |        0 |       0 |       0 |                                                      
-  user.ts               |       0 |        0 |       0 |       0 |                                                      
-------------------------|---------|----------|---------|---------|------------------------------------------------------
+------------------------|---------|----------|---------|---------|----------------------------------------------------
+File                    | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                                  
+------------------------|---------|----------|---------|---------|----------------------------------------------------
+All files               |   82.75 |    66.07 |    89.5 |   82.64 |                                                    
+ src                    |     100 |      100 |     100 |     100 |                                                    
+  App.tsx               |     100 |      100 |     100 |     100 |                                                    
+ src/components         |   84.68 |    67.68 |   91.13 |   84.46 |                                                    
+  AddForm.tsx           |     100 |      100 |     100 |     100 |                                                    
+  AddUserForm.tsx       |     100 |      100 |     100 |     100 |                                                    
+  AdminList.tsx         |     100 |    76.66 |     100 |     100 | 57,76-90,134-196                                   
+  DeleteUserForm.tsx    |     100 |      100 |     100 |     100 |                                                    
+  DestItem.tsx          |     100 |       50 |     100 |     100 | 44                                                 
+  FilterForm.tsx        |     100 |      100 |     100 |     100 |                                                    
+  RoleDropdown.tsx      |     100 |     87.5 |     100 |     100 | 55,150                                             
+  SearchDescForm.tsx    |     100 |      100 |     100 |     100 |                                                    
+  SearchForm.tsx        |     100 |      100 |     100 |     100 |                                                    
+  SortForm.tsx          |     100 |      100 |     100 |     100 |                                                    
+  SuperList.tsx         |     100 |    82.14 |     100 |     100 | 53-86,129,195                                      
+  UserEdit.tsx          |     100 |      100 |     100 |     100 |                                                    
+  UserList.tsx          |    58.7 |    54.76 |      72 |   57.53 | 96-106,120-128,180-182,197,212-239,298,327-375,561 
+ src/hooks              |       0 |        0 |       0 |       0 |                                                    
+  useSessionStorage.tsx |       0 |        0 |       0 |       0 | 4-19                                               
+ src/interfaces         |       0 |        0 |       0 |       0 |                                                    
+  destination.ts        |       0 |        0 |       0 |       0 |                                                    
+  filterSort.ts         |       0 |        0 |       0 |       0 |                                                    
+  props.ts              |       0 |        0 |       0 |       0 |                                                    
+  user.ts               |       0 |        0 |       0 |       0 |                                                    
+------------------------|---------|----------|---------|---------|----------------------------------------------------
 
 Test Suites: 14 passed, 14 total
-Tests:       92 passed, 92 total
+Tests:       100 passed, 100 total
 Snapshots:   0 total
-Time:        21.362 s
+Time:        21.668 s
 Ran all test suites.
