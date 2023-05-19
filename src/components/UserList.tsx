@@ -415,7 +415,7 @@ export function UserList({
         <div className="panel panel-default" ref={dropOnDisplay}>
           {displayList.map((dest: Destination) => {
             return (
-              <div key={dest.id}>
+              <div key={dest.id} data-testid="userlistdests">
                 <DestItem
                   id={dest.id}
                   key={dest.id}
@@ -456,9 +456,9 @@ export function UserList({
         <Button disabled={currItinerary === 1}style={{ margin: 10 }} onClick={useItinerary1}>
           Itinerary 1
         </Button>
-        <Button disabled={currItinerary === 2}onClick={useItinerary2}>Itinerary 2</Button>
+        <Button data-testid="it2b" disabled={currItinerary === 2}onClick={useItinerary2}>Itinerary 2</Button>
       </div>
-      <div className="column-right panel panel-default" ref={drop}>
+      <div data-testid="dropbox" className="column-right panel panel-default" ref={drop}>
         <h3>Itinerary {currItinerary === 1 ? <span>1</span> : <span>2</span>}:</h3>
         <div
           style={{
@@ -533,7 +533,7 @@ export function UserList({
               lockAxis="y"
               lockToContainerEdges
               helperClass="sortableHelper"
-            />
+              />
           )
         ) : // itinerary2:
         itinerary2.length === 0 ? (
